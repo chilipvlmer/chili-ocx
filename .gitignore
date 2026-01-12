@@ -11,6 +11,9 @@ TESTING.md
 SETUP.md
 QUICKSTART.md
 
+# Agent documentation (local only - contains workflow details for AI)
+AGENTS.md
+
 # Dependencies
 node_modules/
 
