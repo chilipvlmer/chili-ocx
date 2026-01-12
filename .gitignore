@@ -5,6 +5,12 @@ dist-*/
 # Archived profiles and builds
 .archived/
 
+# Testing infrastructure (local only)
+scripts/
+TESTING.md
+SETUP.md
+QUICKSTART.md
+
 # Dependencies
 node_modules/
 
