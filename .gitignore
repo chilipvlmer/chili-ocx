@@ -1,5 +1,9 @@
 # Build output
 dist/
+dist-*/
+
+# Archived profiles and builds
+.archived/
 
 # Dependencies
 node_modules/
