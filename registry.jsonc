@@ -28,6 +28,81 @@
 			"type": "ocx:skill",
 			"description": "An example skill to get you started",
 			"files": ["skill/hello-world/SKILL.md"]
+		},
+		{
+			"name": "mcp-shadcn",
+			"type": "ocx:bundle",
+			"description": "shadcn/ui MCP server for browsing and installing UI components",
+			"files": [],
+			"opencode": {
+				"mcp": {
+					"shadcn": {
+						"type": "local",
+						"command": ["npx", "-y", "shadcn@latest", "mcp"],
+						"enabled": true
+					}
+				}
+			}
+		},
+		{
+			"name": "mcp-exa",
+			"type": "ocx:bundle",
+			"description": "Exa web search MCP server for AI-powered search (requires EXA_API_KEY)",
+			"files": [],
+			"opencode": {
+				"mcp": {
+					"exa": {
+						"type": "remote",
+						"url": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+						"headers": {
+							"x-api-key": "{env:EXA_API_KEY}"
+						},
+						"enabled": true
+					}
+				}
+			}
+		},
+		{
+			"name": "mcp-context7",
+			"type": "ocx:bundle",
+			"description": "Context7 MCP server for library documentation and code examples",
+			"files": [],
+			"opencode": {
+				"mcp": {
+					"context7": {
+						"type": "remote",
+						"url": "https://mcp.context7.com/mcp",
+						"enabled": true
+					}
+				}
+			}
+		},
+		{
+			"name": "mcp-gh-grep",
+			"type": "ocx:bundle",
+			"description": "GitHub code search via grep.app MCP server",
+			"files": [],
+			"opencode": {
+				"mcp": {
+					"gh_grep": {
+						"type": "remote",
+						"url": "https://mcp.grep.app",
+						"enabled": true
+					}
+				}
+			}
+		},
+		{
+			"name": "total",
+			"type": "ocx:bundle",
+			"description": "Complete chili-ocx bundle - installs all MCP servers with one command",
+			"files": [],
+			"dependencies": [
+				"mcp-shadcn",
+				"mcp-exa",
+				"mcp-context7",
+				"mcp-gh-grep"
+			]
 		}
 	]
 }

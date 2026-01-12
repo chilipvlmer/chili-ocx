@@ -22,6 +22,40 @@ ocx add chili-ocx/hello-world
 
 ## 📦 Available Components
 
+### MCP Bundles
+
+Install all MCP servers at once or pick individual ones:
+
+```bash
+# Install everything
+ocx add chili-ocx/total
+
+# Or install individual MCP servers
+ocx add chili-ocx/mcp-shadcn
+ocx add chili-ocx/mcp-exa
+ocx add chili-ocx/mcp-context7
+ocx add chili-ocx/mcp-gh-grep
+```
+
+| Name | Description | API Key Required |
+|------|-------------|------------------|
+| **total** | Meta bundle - installs all MCP servers | See individual MCPs |
+| **mcp-shadcn** | shadcn/ui component browser and installer | ❌ No |
+| **mcp-exa** | AI-powered web search via Exa | ✅ Yes ([Get key](https://exa.ai)) |
+| **mcp-context7** | Library documentation and code examples | ❌ No |
+| **mcp-gh-grep** | GitHub code search via grep.app | ❌ No |
+
+#### 🔑 API Key Setup
+
+If you install `mcp-exa` (or `total` bundle), you need to set an environment variable:
+
+```bash
+# Add to ~/.zshrc, ~/.bashrc, or .env
+export EXA_API_KEY="your-api-key-here"
+
+# Get your API key from: https://exa.ai
+```
+
 ### Skills
 
 | Name | Description | Version |
