@@ -1,0 +1,41 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  # Auto-deploy when pushing to main
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  
+  # Manual trigger option
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Registry
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+      
+      - name: Build registry
+        run: bun run build
+      
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: chili-ocx
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

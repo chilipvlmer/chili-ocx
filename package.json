@@ -1,0 +1,13 @@
+{
+	"name": "chili-ocx",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Chili's OCX component registry for OpenCode",
+	"scripts": {
+		"build": "bunx ocx build . --out dist",
+		"dev": "bunx ocx build . --out dist && wrangler pages dev dist"
+	},
+	"devDependencies": {
+		"wrangler": "^4.14.0"
+	}
+}
