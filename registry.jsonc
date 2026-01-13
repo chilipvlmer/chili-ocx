@@ -103,6 +103,119 @@
 				"mcp-context7",
 				"mcp-gh-grep"
 			]
-		}
+		},
+		// Daedalus Bundle - PRD/RFC workflow components
+		{
+			"name": "prd-methodology",
+			"type": "ocx:skill",
+			"description": "10-phase PRD creation workflow",
+			"files": ["skill/prd-methodology/SKILL.md"],
+			"dependencies": []
+		},
+		{
+			"name": "rfc-generation",
+			"type": "ocx:skill",
+			"description": "12-section RFC structure and templates",
+			"files": ["skill/rfc-generation/SKILL.md"],
+			"dependencies": []
+		},
+		{
+			"name": "architecture-dialogue",
+			"type": "ocx:skill",
+			"description": "Technology decision and trade-off framework",
+			"files": ["skill/architecture-dialogue/SKILL.md"],
+			"dependencies": []
+		},
+		{
+			"name": "prd-versioning",
+			"type": "ocx:skill",
+			"description": "PRD/RFC versioning and status tracking",
+			"files": ["skill/prd-versioning/SKILL.md"],
+			"dependencies": []
+		},
+	{
+		"name": "daedalus",
+		"type": "ocx:agent",
+		"description": "PRD/RFC Architect - creates and manages specifications",
+		"files": ["agent/daedalus.md"],
+		"dependencies": ["prd-methodology", "rfc-generation", "architecture-dialogue", "prd-versioning", "theseus"]
+	},
+	{
+		"name": "theseus",
+		"type": "ocx:agent",
+		"description": "PRD/RFC Spec Reviewer - validates specification quality",
+		"files": ["agent/theseus.md"],
+		"dependencies": ["prd-methodology", "rfc-generation"]
+	},
+	{
+		"name": "daedalus-specs-only",
+		"type": "ocx:plugin",
+		"description": "Enforces .sisyphus/specs/ path restriction for Daedalus/Theseus",
+		"files": ["hook/daedalus-specs-only/index.ts", "hook/daedalus-specs-only/constants.ts"],
+		"dependencies": []
+	},
+		{
+			"name": "create-prd",
+			"type": "ocx:command",
+			"description": "Create a new PRD",
+			"files": ["command/create-prd.md"],
+			"dependencies": ["daedalus"]
+		},
+		{
+			"name": "review-prd",
+			"type": "ocx:command",
+			"description": "Review an existing PRD",
+			"files": ["command/review-prd.md"],
+			"dependencies": ["daedalus"]
+		},
+		{
+			"name": "prd-to-rfc",
+			"type": "ocx:command",
+			"description": "Convert PRD to RFCs",
+			"files": ["command/prd-to-rfc.md"],
+			"dependencies": ["daedalus"]
+		},
+		{
+			"name": "review-rfc",
+			"type": "ocx:command",
+			"description": "Review an existing RFC",
+			"files": ["command/review-rfc.md"],
+			"dependencies": ["daedalus"]
+		},
+		{
+			"name": "plan-from-rfc",
+			"type": "ocx:command",
+			"description": "Generate work plan from RFCs",
+			"files": ["command/plan-from-rfc.md"],
+			"dependencies": ["daedalus"]
+		},
+		{
+			"name": "resume-prd",
+			"type": "ocx:command",
+			"description": "Resume interrupted PRD workflow",
+			"files": ["command/resume-prd.md"],
+			"dependencies": ["daedalus"]
+		},
+	{
+		"name": "daedalus-bundle",
+		"type": "ocx:bundle",
+		"description": "Complete PRD/RFC workflow with Prometheus integration",
+		"files": [],
+		"dependencies": [
+			"prd-methodology",
+			"rfc-generation",
+			"architecture-dialogue",
+			"prd-versioning",
+			"daedalus",
+			"theseus",
+			"daedalus-specs-only",
+			"create-prd",
+			"review-prd",
+			"prd-to-rfc",
+			"review-rfc",
+			"plan-from-rfc",
+			"resume-prd"
+		]
+	}
 	]
 }
