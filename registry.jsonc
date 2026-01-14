@@ -8,7 +8,7 @@
 	"$schema": "https://ocx.kdco.dev/schemas/registry.json",
 	"name": "Chili OCX Registry",
 	"namespace": "chili-ocx",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"author": "chilipvlmer",
 
 	// Compatibility versions
@@ -16,18 +16,291 @@
 	"ocx": "1.0.16", // Minimum OCX CLI version required
 
 	"components": [
-		// Add your components here
-		// Supported types:
-		//   - ocx:skill     - Knowledge modules (markdown files)
-		//   - ocx:agent     - AI personas with custom prompts
-		//   - ocx:plugin    - TypeScript plugins that extend functionality
-		//   - ocx:command   - User-invokable commands
-		//   - ocx:bundle    - Collections of related components
+		// ============================================================
+		// === SKILLS ===
+		// ============================================================
+
 		{
-			"name": "hello-world",
+			"name": "prd-methodology",
 			"type": "ocx:skill",
-			"description": "An example skill to get you started",
-			"files": ["skill/hello-world/SKILL.md"]
+			"description": "10-phase PRD creation workflow",
+			"files": ["skill/prd-methodology/SKILL.md"]
+		},
+		{
+			"name": "prd-versioning",
+			"type": "ocx:skill",
+			"description": "PRD/RFC versioning and status tracking with SemVer",
+			"files": ["skill/prd-versioning/SKILL.md"]
+		},
+		{
+			"name": "rfc-generation",
+			"type": "ocx:skill",
+			"description": "12-section RFC structure and templates",
+			"files": ["skill/rfc-generation/SKILL.md"]
+		},
+		{
+			"name": "architecture-dialogue",
+			"type": "ocx:skill",
+			"description": "Technology decision and trade-off framework",
+			"files": ["skill/architecture-dialogue/SKILL.md"]
+		},
+		{
+			"name": "pepper-protocol",
+			"type": "ocx:skill",
+			"description": "Orchestration protocol for Scoville - state management, delegation patterns, and workflow",
+			"files": ["skill/pepper-protocol/SKILL.md"]
+		},
+		{
+			"name": "prd-format",
+			"type": "ocx:skill",
+			"description": "PRD document structure, SemVer naming, and quality checklist for Seed",
+			"files": ["skill/prd-format/SKILL.md"]
+		},
+		{
+			"name": "rfc-format",
+			"type": "ocx:skill",
+			"description": "RFC document structure with PRD version namespacing",
+			"files": ["skill/rfc-format/SKILL.md"]
+		},
+		{
+			"name": "planning-workflow",
+			"type": "ocx:skill",
+			"description": "Execution plan creation from PRDs/RFCs for Sprout",
+			"files": ["skill/planning-workflow/SKILL.md"]
+		},
+		{
+			"name": "code-philosophy",
+			"type": "ocx:skill",
+			"description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
+			"files": ["skill/code-philosophy/SKILL.md"]
+		},
+		{
+			"name": "docs-style",
+			"type": "ocx:skill",
+			"description": "Documentation writing standards for Chipotle",
+			"files": ["skill/docs-style/SKILL.md"]
+		},
+		{
+			"name": "code-review",
+			"type": "ocx:skill",
+			"description": "KDCO-style 4-layer review methodology with severity classification for Habanero",
+			"files": ["skill/code-review/SKILL.md"]
+		},
+		{
+			"name": "exploration-protocol",
+			"type": "ocx:skill",
+			"description": "Research and codebase exploration methodology for Ghost",
+			"files": ["skill/exploration-protocol/SKILL.md"]
+		},
+
+		// ============================================================
+		// === PLUGINS ===
+		// ============================================================
+
+		{
+			"name": "state-management",
+			"type": "ocx:plugin",
+			"description": "Manages .pepper/ state, context compaction recovery, and notepad integration",
+			"files": ["plugin/state-management.ts"]
+		},
+		{
+			"name": "agents-md-loader",
+			"type": "ocx:plugin",
+			"description": "Loads AGENTS.md from project root and injects into agent context",
+			"files": ["plugin/agents-md-loader.ts"]
+		},
+		{
+			"name": "worktree-manager",
+			"type": "ocx:plugin",
+			"description": "Git worktree isolation for parallel session development",
+			"files": ["plugin/worktree-manager.ts"]
+		},
+		{
+			"name": "toast-status",
+			"type": "ocx:plugin",
+			"description": "Dynamic toast notifications for background delegation status",
+			"files": ["plugin/toast-status.ts"]
+		},
+
+		// ============================================================
+		// === AGENTS ===
+		// ============================================================
+
+		{
+			"name": "scoville",
+			"type": "ocx:agent",
+			"description": "Orchestrator - coordinates work, delegates to specialized agents",
+			"files": ["agent/scoville/AGENT.md"]
+		},
+		{
+			"name": "sprout",
+			"type": "ocx:agent",
+			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
+			"files": ["agent/sprout/AGENT.md"]
+		},
+		{
+			"name": "seed",
+			"type": "ocx:agent",
+			"description": "Artifact Planner - creates and refines PRD and RFC documents",
+			"files": ["agent/seed/AGENT.md"]
+		},
+		{
+			"name": "jalapeno",
+			"type": "ocx:agent",
+			"description": "Coder - implements features, fixes bugs, writes tests",
+			"files": ["agent/jalapeno/AGENT.md"]
+		},
+		{
+			"name": "chipotle",
+			"type": "ocx:agent",
+			"description": "Scribe - creates and maintains documentation, README files, and code comments",
+			"files": ["agent/chipotle/AGENT.md"]
+		},
+		{
+			"name": "ghost",
+			"type": "ocx:agent",
+			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
+			"files": ["agent/ghost/AGENT.md"]
+		},
+		{
+			"name": "habanero",
+			"type": "ocx:agent",
+			"description": "Reviewer - reviews code for correctness, security, performance, and style",
+			"files": ["agent/habanero/AGENT.md"]
+		},
+
+		// ============================================================
+		// === COMMANDS ===
+		// ============================================================
+
+		{
+			"name": "pepper-init",
+			"type": "ocx:command",
+			"description": "Initialize .pepper/ directory structure",
+			"files": ["command/pepper-init/COMMAND.md"]
+		},
+		{
+			"name": "prd",
+			"type": "ocx:command",
+			"description": "Create a new Product Requirements Document",
+			"files": ["command/prd/COMMAND.md"]
+		},
+		{
+			"name": "prd-refine",
+			"type": "ocx:command",
+			"description": "Refine an existing PRD",
+			"files": ["command/prd-refine/COMMAND.md"]
+		},
+		{
+			"name": "prd-review",
+			"type": "ocx:command",
+			"description": "Review PRD for completeness and quality",
+			"files": ["command/prd-review/COMMAND.md"]
+		},
+		{
+			"name": "rfc",
+			"type": "ocx:command",
+			"description": "Create a new Request for Comments (technical design)",
+			"files": ["command/rfc/COMMAND.md"]
+		},
+		{
+			"name": "rfc-refine",
+			"type": "ocx:command",
+			"description": "Refine an existing RFC",
+			"files": ["command/rfc-refine/COMMAND.md"]
+		},
+		{
+			"name": "rfc-review",
+			"type": "ocx:command",
+			"description": "Review RFC for technical completeness",
+			"files": ["command/rfc-review/COMMAND.md"]
+		},
+		{
+			"name": "plan",
+			"type": "ocx:command",
+			"description": "Generate execution plan from specs",
+			"files": ["command/plan/COMMAND.md"]
+		},
+		{
+			"name": "work",
+			"type": "ocx:command",
+			"description": "Start or resume execution of current plan",
+			"files": ["command/work/COMMAND.md"]
+		},
+		{
+			"name": "review",
+			"type": "ocx:command",
+			"description": "Review code changes",
+			"files": ["command/review/COMMAND.md"]
+		},
+		{
+			"name": "status",
+			"type": "ocx:command",
+			"description": "Show current plan progress and state",
+			"files": ["command/status/COMMAND.md"]
+		},
+		{
+			"name": "notepad",
+			"type": "ocx:command",
+			"description": "View or add to notepad",
+			"files": ["command/notepad/COMMAND.md"]
+		},
+		{
+			"name": "resume",
+			"type": "ocx:command",
+			"description": "Resume work after context compaction",
+			"files": ["command/resume/COMMAND.md"]
+		},
+		{
+			"name": "auto-continue",
+			"type": "ocx:command",
+			"description": "Toggle auto-continue between tasks",
+			"files": ["command/auto-continue/COMMAND.md"]
 		}
+
+		// ============================================================
+		// === NEW SKILLS (Phase 2 - to be created) ===
+		// ============================================================
+		// code-philosophy    - ✓ DONE
+		// docs-style         - ✓ DONE
+		// code-review        - ✓ DONE
+		// exploration-protocol - ✓ DONE
+
+		// ============================================================
+		// === AGENTS (Phase 3/4 - to be created) ===
+		// ============================================================
+		// Scoville   - Orchestrator (meta-reasoning, delegation)
+		// Seed       - Artifact Planner (PRD/RFC creation)
+		// Sprout     - Execution Planner (plan generation)
+		// Jalapeño   - Coder (implementation)
+		// Chipotle   - Scribe (documentation)
+		// Habanero   - Reviewer (code review)
+		// Ghost      - Explorer (research)
+
+		// ============================================================
+		// === PLUGINS (Phase 1 - to be created) ===
+		// ============================================================
+		// state-management   - .pepper/ state persistence
+		// agents-md-loader   - Dynamic agent loading from AGENTS.md
+		// worktree-manager   - Git worktree isolation
+		// toast-status       - Progress notifications
+
+		// ============================================================
+		// === COMMANDS (Phase 5 - to be created) ===
+		// ============================================================
+		// pepper-init    - Initialize .pepper/ structure
+		// prd            - Create new PRD
+		// prd-refine     - Iterate on PRD
+		// prd-review     - Review PRD quality
+		// rfc            - Generate RFC from PRD
+		// rfc-refine     - Iterate on RFC
+		// rfc-review     - Review RFC quality
+		// plan           - Create execution plan
+		// work           - Execute plan tasks
+		// review         - Code review workflow
+		// status         - Show harness state
+		// notepad        - Access persistent memory
+		// resume         - Continue interrupted work
+		// auto-continue  - Toggle auto-continuation
 	]
 }

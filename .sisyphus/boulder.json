@@ -1,0 +1,14 @@
+{
+  "active_plan": "/private/var/folders/d_/wh31y1w9375chrn4kyl3yzkc0000gn/T/ocx-ghost-f7ab5ed8/.sisyphus/plans/daedalus-bundle.md",
+  "started_at": "2026-01-13T09:29:33.020Z",
+  "completed_at": "2026-01-13T10:50:00.000Z",
+  "session_ids": [
+    "ses_4494f97b9ffeMqJtWn4sAw5bSj",
+    "ses_448995b64ffeobFb4yGEBzkodp"
+  ],
+  "plan_name": "daedalus-bundle",
+  "status": "complete",
+  "completion_rate": "100%",
+  "tasks_completed": 26,
+  "tasks_total": 26
+}
