@@ -84,7 +84,7 @@ ocx registry add --name chili-ocx https://chili-ocx.pages.dev
 ### 3. Install the Bundle
 
 ```bash
-ocx add chili-ocx/total
+ocx add chili-ocx/pepper-harness
 ```
 
 Or install specific components:
