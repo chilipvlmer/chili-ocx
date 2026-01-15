@@ -28,15 +28,9 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Install OpenCode CLI
-        run: bun install -g @opencode-ai/cli
-
-      - name: Build registry
-        run: bun run build
-      
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=chili-ocx --branch=main
+          command: pages deploy . --project-name=chili-ocx --branch=main

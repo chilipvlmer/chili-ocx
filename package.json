@@ -1,7 +1,4 @@
 {
-  "scripts": {
-    "build": "ocx build . --out dist"
-  },
   "dependencies": {
     "@opencode-ai/plugin": "1.1.10",
     "zod": "^3.24.1"
