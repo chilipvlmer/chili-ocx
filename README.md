@@ -75,23 +75,50 @@ A **bundle** — a curated collection of components that work together:
 
 See the [OCX repository](https://github.com/kdcokenny/ocx) for installation instructions.
 
-### 2. Add the Chili-OCX Registry
+### 2. Add and Install Components
+
+You can add the Chili-OCX components to either your global/project configuration or a specific Ghost Mode profile.
+
+#### A) Global / Project Installation
+
+Run these commands within your project directory (after `ocx init` if it's a new project) or globally:
 
 ```bash
-ocx registry add --name chili-ocx https://chili-ocx.pages.dev
-```
-
-### 3. Install the Bundle
-
-```bash
+ocx registry add https://chili-ocx.pages.dev --name chili-ocx
 ocx add chili-ocx/pepper-harness
 ```
 
-Or install specific components:
+This installs the `pepper-harness` bundle and its dependencies into the current project's `.opencode` directory or your global OCX config.
+
+#### B) Ghost Mode Profile Installation
+
+To install into a specific Ghost Mode profile (e.g., `my-profile`):
 
 ```bash
-ocx add chili-ocx/scoville      # Orchestrator agent
-ocx add chili-ocx/pepper-protocol  # Orchestration skill
+# If the profile doesn't exist, create it:
+ocx ghost profile add my-profile
+
+# Add the registry to the profile:
+ocx ghost registry add https://chili-ocx.pages.dev --name chili-ocx --profile my-profile
+
+# Add the bundle to the profile:
+ocx ghost add chili-ocx/pepper-harness --profile my-profile
+```
+
+If you want to add it to your currently active profile, you can omit `--profile my-profile`.
+
+#### Installing Individual Components
+
+Instead of the `pepper-harness` bundle, you can install individual components:
+
+```bash
+# Global/Project
+ocx add chili-ocx/scoville
+ocx add chili-ocx/pepper-protocol
+
+# Ghost Mode (active profile)
+ocx ghost add chili-ocx/scoville
+ocx ghost add chili-ocx/pepper-protocol
 ```
 
 ## Workflow
