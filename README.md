@@ -73,7 +73,7 @@ A **bundle** — a curated collection of components that work together:
 
 ### 1. Install OCX
 
-See the [OpenCode CLI repository](https://github.com/sst/opencode) for installation instructions.
+See the [OCX repository](https://github.com/kdcokenny/ocx) for installation instructions.
 
 ### 2. Add the Chili-OCX Registry
 
