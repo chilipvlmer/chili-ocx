@@ -12,13 +12,13 @@ A pepper-themed AI coding harness for OpenCode. Orchestrate your development wor
 
 ## Installation
 
-Add the registry using the Cloudflare Pages URL:
+Add the registry to your OpenCode configuration:
 
 ```bash
-ocx add https://chili-ocx.pages.dev
+ocx registry add --name chili-ocx https://chili-ocx.pages.dev
 ```
 
-Or add specific components:
+Or install specific components directly:
 
 ```bash
 ocx add https://chili-ocx.pages.dev/scoville      # Orchestrator agent
