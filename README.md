@@ -12,15 +12,17 @@ A pepper-themed AI coding harness for OpenCode. Orchestrate your development wor
 
 ## Installation
 
+Add the registry using the Cloudflare Pages URL:
+
 ```bash
-npx ocx add @chili-ocx/total
+ocx add https://chili-ocx.pages.dev
 ```
 
-Or install specific components:
+Or add specific components:
 
 ```bash
-npx ocx add @chili-ocx/scoville      # Orchestrator agent
-npx ocx add @chili-ocx/pepper-protocol  # Orchestration skill
+ocx add https://chili-ocx.pages.dev/scoville      # Orchestrator agent
+ocx add https://chili-ocx.pages.dev/pepper-protocol  # Orchestration skill
 ```
 
 ## Agents
