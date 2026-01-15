@@ -13,29 +13,7 @@ A **bundle** — a curated collection of components that work together:
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    SCOVILLE (Orchestrator)              │
-│              Coordinates all specialist agents          │
-└─────────────────────────────────────────────────────────┘
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-          ▼                ▼                ▼
-    ┌─────────┐     ┌──────────┐     ┌─────────┐
-    │  SEED   │     │  SPROUT  │     │ GHOST   │
-    │ Planner │     │  Planner │     │Research │
-    └─────────┘     └──────────┘     └─────────┘
-          │                │                │
-          ▼                ▼                ▼
-    ┌─────────────────────────────────────────────┐
-    │              SPECIALISTS                    │
-    │  ┌──────────┐ ┌─────────┐ ┌─────────┐      │
-    │  │ Jalapeño │ │ Chipotle│ │Habanero │ ...  │
-    │  │  Coder   │ │  Scribe │ │ Reviewer│      │
-    │  └──────────┘ └─────────┘ └─────────┘      │
-    └─────────────────────────────────────────────┘
-```
+(Diagram to be added)
 
 ## Components
 
