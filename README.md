@@ -1,52 +1,60 @@
 # 🌶️ Chili-OCX
 
-A pepper-themed AI coding harness for OpenCode. Orchestrate your development workflow with specialized agents, structured planning, and persistent state management.
+A pepper-themed AI coding harness for OpenCode. Specialized agents, structured planning, and persistent state management.
 
-## Features
+## What This Is
 
-- **Pepper-themed Agents** — Specialized agents for different tasks
-- **Structured Planning** — PRD → RFC → Execution Plan workflow
-- **Persistent State** — `.pepper/` directory tracks progress across sessions
-- **Delegation-based Architecture** — Token-efficient orchestration
-- **Context Recovery** — Resume work after context compaction
+A **bundle** — a curated collection of components that work together:
 
-## Installation
+- 7 agents (Scoville, Seed, Sprout, Jalapeño, Chipotle, Habanero, Ghost)
+- 12 skills (orchestration, planning, review protocols)
+- 5 plugins (state management, worktrees, notifications)
+- 14 commands (PRD, RFC, planning, execution workflow)
 
-Add the registry to your OpenCode configuration:
+## Architecture
 
-```bash
-ocx registry add --name chili-ocx https://chili-ocx.pages.dev
+```
+┌─────────────────────────────────────────────────────────┐
+│                    SCOVILLE (Orchestrator)              │
+│              Coordinates all specialist agents          │
+└─────────────────────────────────────────────────────────┘
+                          │
+         ┌────────────────┼────────────────┐
+         ▼                ▼                ▼
+    ┌─────────┐     ┌──────────┐     ┌─────────┐
+    │  SEED   │     │  SPROUT  │     │ GHOST   │
+    │ Planner │     │  Planner │     │Research │
+    └─────────┘     └──────────┘     └─────────┘
+         │                │                │
+         ▼                ▼                ▼
+    ┌─────────────────────────────────────────────┐
+│              SPECIALISTS                         │
+│  ┌──────────┐ ┌─────────┐ ┌─────────┐ ┌───────┐ │
+│  │ Jalapeño │ │ Chipotle│ │Habanero │ │  ...  │ │
+│  │  Coder   │ │  Scribe │ │ Reviewer│ │       │ │
+│  └──────────┘ └─────────┘ └─────────┘ └───────┘ │
+└─────────────────────────────────────────────────────┘
 ```
 
-Or install specific components directly:
+## Components
 
-```bash
-ocx add https://chili-ocx.pages.dev/scoville      # Orchestrator agent
-ocx add https://chili-ocx.pages.dev/pepper-protocol  # Orchestration skill
-```
-
-## Agents
+### Agents
 
 | Agent | Role | Description |
 |-------|------|-------------|
-| 🌶️ **Scoville** | Orchestrator | Coordinates work, delegates to specialists |
-| 🌱 **Seed** | Artifact Planner | Creates PRDs and RFCs |
-| 🌿 **Sprout** | Execution Planner | Creates task plans from specs |
-| 🫑 **Jalapeño** | Coder | Implements features and fixes |
-| 🌮 **Chipotle** | Scribe | Documentation specialist |
-| 🔥 **Habanero** | Reviewer | Code review and quality |
-| 👻 **Ghost** | Explorer | Research and codebase navigation |
+| 🌶️ Scoville | Orchestrator | Coordinates work, delegates to specialists |
+| 🌱 Seed | Artifact Planner | Creates PRDs and RFCs |
+| 🌿 Sprout | Execution Planner | Creates task plans from specs |
+| 🫑 Jalapeño | Coder | Implements features and fixes |
+| 🌮 Chipotle | Scribe | Documentation specialist |
+| 🔥 Habanero | Reviewer | Code review and quality |
+| 👻 Ghost | Explorer | Research and codebase navigation |
 
-## Commands
+### Commands
 
-### Setup
 | Command | Description |
 |---------|-------------|
 | `/pepper-init` | Initialize `.pepper/` structure |
-
-### Planning
-| Command | Description |
-|---------|-------------|
 | `/prd` | Create new PRD |
 | `/prd-refine` | Refine existing PRD |
 | `/prd-review` | Review PRD quality |
@@ -54,41 +62,36 @@ ocx add https://chili-ocx.pages.dev/pepper-protocol  # Orchestration skill
 | `/rfc-refine` | Refine existing RFC |
 | `/rfc-review` | Review RFC quality |
 | `/plan` | Generate execution plan |
-
-### Execution
-| Command | Description |
-|---------|-------------|
 | `/work` | Start/resume execution |
 | `/review` | Review code changes |
 | `/status` | Show current progress |
 | `/resume` | Resume after compaction |
+| `/notepad` | View/add to persistent notepad |
 | `/auto-continue` | Toggle auto-continue |
 
-### Notepad
-| Command | Description |
-|---------|-------------|
-| `/notepad` | View/add to persistent notepad |
+## Installation
 
-## .pepper/ Directory Structure
+### 1. Install OCX
 
+See the [OpenCode CLI repository](https://github.com/sst/opencode) for installation instructions.
+
+### 2. Add the Chili-OCX Registry
+
+```bash
+ocx registry add --name chili-ocx https://chili-ocx.pages.dev
 ```
-.pepper/
-├── specs/
-│   ├── prd/           # Product Requirements Documents
-│   │   └── {project}-v{X.Y.Z}.md
-│   └── rfc/           # Request for Comments
-│       └── v{X.Y.Z}/
-│           └── RFC-{NNN}-{slug}.md
-├── tracking/
-│   └── rfc-status.json
-├── plans/             # Historical plans
-├── plan.md            # Active execution plan
-├── state.json         # Session state
-├── notepad/           # Persistent memory
-│   ├── learnings.json
-│   ├── issues.json
-│   └── decisions.json
-└── drafts/            # Work in progress
+
+### 3. Install the Bundle
+
+```bash
+ocx add chili-ocx/total
+```
+
+Or install specific components:
+
+```bash
+ocx add chili-ocx/scoville      # Orchestrator agent
+ocx add chili-ocx/pepper-protocol  # Orchestration skill
 ```
 
 ## Workflow
@@ -102,18 +105,35 @@ ocx add https://chili-ocx.pages.dev/pepper-protocol  # Orchestration skill
 6. /review          → Quality check
 ```
 
+## .pepper/ Directory
+
+```
+.pepper/
+├── specs/
+│   ├── prd/           # Product Requirements Documents
+│   └── rfc/           # Request for Comments
+├── plans/             # Historical plans
+├── plan.md            # Active execution plan
+├── state.json         # Session state
+├── notepad/           # Persistent memory
+│   ├── learnings.json
+│   ├── issues.json
+│   └── decisions.json
+└── drafts/            # Work in progress
+```
+
 ## Skills
 
-| Skill | Used By | Purpose |
-|-------|---------|---------|
-| pepper-protocol | Scoville | Orchestration rules |
-| prd-format | Seed | PRD structure |
-| rfc-format | Seed | RFC structure |
-| planning-workflow | Sprout | Plan creation |
-| code-philosophy | Jalapeño | 5 Laws of coding |
-| docs-style | Chipotle | Documentation style |
-| code-review | Habanero | Review methodology |
-| exploration-protocol | Ghost | Research methodology |
+| Skill | Purpose |
+|-------|---------|
+| pepper-protocol | Orchestration rules |
+| prd-format | PRD structure |
+| rfc-format | RFC structure |
+| planning-workflow | Plan creation |
+| code-philosophy | 5 Laws of coding |
+| docs-style | Documentation style |
+| code-review | Review methodology |
+| exploration-protocol | Research methodology |
 
 ## Plugins
 
@@ -123,15 +143,6 @@ ocx add https://chili-ocx.pages.dev/pepper-protocol  # Orchestration skill
 | agents-md-loader | Loads AGENTS.md for project context |
 | worktree-manager | Git worktree isolation for parallel work |
 | toast-status | Dynamic delegation status display |
-
-## Versioning
-
-PRDs use Semantic Versioning:
-- **MAJOR**: Breaking changes
-- **MINOR**: New features
-- **PATCH**: Clarifications
-
-RFCs are namespaced under their parent PRD version.
 
 ## License
 
