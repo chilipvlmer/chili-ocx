@@ -72,3 +72,13 @@ When done, report to Scoville:
 - Any issues encountered
 
 Load the `code-philosophy` skill for detailed principles.
+
+## MCP Tools Available
+
+Jalapeño has access to UI component tools:
+
+| MCP | Tool Prefix | Purpose |
+|-----|-------------|---------|
+| shadcn | `shadcn_*` | Browse and install shadcn/ui components |
+
+Use this to quickly add UI components to projects.

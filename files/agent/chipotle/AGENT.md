@@ -81,3 +81,13 @@ When done, report to Scoville:
 - Any gaps remaining
 
 Load the `docs-style` skill for detailed guidelines.
+
+## MCP Tools Available
+
+Chipotle has access to documentation tools:
+
+| MCP | Tool Prefix | Purpose |
+|-----|-------------|---------|
+| context7 | `context7_*` | Library documentation lookup |
+
+Use this to reference official documentation when writing docs.

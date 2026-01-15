@@ -148,13 +148,43 @@
 			"name": "jalapeno",
 			"type": "ocx:agent",
 			"description": "Coder - implements features, fixes bugs, writes tests",
-			"files": ["agent/jalapeno/AGENT.md"]
+			"files": ["agent/jalapeno/AGENT.md"],
+			"opencode": {
+				"mcp": {
+					"shadcn": "https://mcp.shadcn.com"
+				},
+				"permission": {
+					"shadcn_*": "deny"
+				},
+				"agent": {
+					"jalapeno": {
+						"permission": {
+							"shadcn_*": "allow"
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "chipotle",
 			"type": "ocx:agent",
 			"description": "Scribe - creates and maintains documentation, README files, and code comments",
-			"files": ["agent/chipotle/AGENT.md"]
+			"files": ["agent/chipotle/AGENT.md"],
+			"opencode": {
+				"mcp": {
+					"context7": "https://mcp.context7.com/mcp"
+				},
+				"permission": {
+					"context7_*": "deny"
+				},
+				"agent": {
+					"chipotle": {
+						"permission": {
+							"context7_*": "allow"
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "ghost",
