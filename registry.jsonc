@@ -160,7 +160,28 @@
 			"name": "ghost",
 			"type": "ocx:agent",
 			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
-			"files": ["agent/ghost/AGENT.md"]
+			"files": ["agent/ghost/AGENT.md"],
+			"opencode": {
+				"mcp": {
+					"context7": "https://mcp.context7.com/mcp",
+					"exa": "https://mcp.exa.ai/mcp",
+					"gh_grep": "https://mcp.grep.app"
+				},
+				"permission": {
+					"context7_*": "deny",
+					"exa_*": "deny",
+					"gh_grep_*": "deny"
+				},
+				"agent": {
+					"ghost": {
+						"permission": {
+							"context7_*": "allow",
+							"exa_*": "allow",
+							"gh_grep_*": "allow"
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "habanero",
@@ -256,51 +277,59 @@
 			"type": "ocx:command",
 			"description": "Toggle auto-continue between tasks",
 			"files": ["command/auto-continue/COMMAND.md"]
+		},
+
+		// ============================================================
+		// === BUNDLES ===
+		// ============================================================
+
+		{
+			"name": "pepper-harness",
+			"type": "ocx:bundle",
+			"description": "Complete Pepper harness - all agents, skills, plugins, and commands",
+			"files": [],
+			"components": [
+				// Plugins (core functionality)
+				"@chili-ocx/state-management",
+				"@chili-ocx/agents-md-loader",
+				"@chili-ocx/worktree-manager",
+				"@chili-ocx/toast-status",
+
+				// Skills (agent knowledge)
+				"@chili-ocx/pepper-protocol",
+				"@chili-ocx/prd-format",
+				"@chili-ocx/rfc-format",
+				"@chili-ocx/planning-workflow",
+				"@chili-ocx/code-philosophy",
+				"@chili-ocx/docs-style",
+				"@chili-ocx/code-review",
+				"@chili-ocx/exploration-protocol",
+
+				// Agents
+				"@chili-ocx/scoville",
+				"@chili-ocx/seed",
+				"@chili-ocx/sprout",
+				"@chili-ocx/jalapeno",
+				"@chili-ocx/chipotle",
+				"@chili-ocx/habanero",
+				"@chili-ocx/ghost",
+
+				// Commands
+				"@chili-ocx/pepper-init",
+				"@chili-ocx/prd",
+				"@chili-ocx/prd-refine",
+				"@chili-ocx/prd-review",
+				"@chili-ocx/rfc",
+				"@chili-ocx/rfc-refine",
+				"@chili-ocx/rfc-review",
+				"@chili-ocx/plan",
+				"@chili-ocx/work",
+				"@chili-ocx/review",
+				"@chili-ocx/status",
+				"@chili-ocx/notepad",
+				"@chili-ocx/resume",
+				"@chili-ocx/auto-continue"
+			]
 		}
-
-		// ============================================================
-		// === NEW SKILLS (Phase 2 - to be created) ===
-		// ============================================================
-		// code-philosophy    - ✓ DONE
-		// docs-style         - ✓ DONE
-		// code-review        - ✓ DONE
-		// exploration-protocol - ✓ DONE
-
-		// ============================================================
-		// === AGENTS (Phase 3/4 - to be created) ===
-		// ============================================================
-		// Scoville   - Orchestrator (meta-reasoning, delegation)
-		// Seed       - Artifact Planner (PRD/RFC creation)
-		// Sprout     - Execution Planner (plan generation)
-		// Jalapeño   - Coder (implementation)
-		// Chipotle   - Scribe (documentation)
-		// Habanero   - Reviewer (code review)
-		// Ghost      - Explorer (research)
-
-		// ============================================================
-		// === PLUGINS (Phase 1 - to be created) ===
-		// ============================================================
-		// state-management   - .pepper/ state persistence
-		// agents-md-loader   - Dynamic agent loading from AGENTS.md
-		// worktree-manager   - Git worktree isolation
-		// toast-status       - Progress notifications
-
-		// ============================================================
-		// === COMMANDS (Phase 5 - to be created) ===
-		// ============================================================
-		// pepper-init    - Initialize .pepper/ structure
-		// prd            - Create new PRD
-		// prd-refine     - Iterate on PRD
-		// prd-review     - Review PRD quality
-		// rfc            - Generate RFC from PRD
-		// rfc-refine     - Iterate on RFC
-		// rfc-review     - Review RFC quality
-		// plan           - Create execution plan
-		// work           - Execute plan tasks
-		// review         - Code review workflow
-		// status         - Show harness state
-		// notepad        - Access persistent memory
-		// resume         - Continue interrupted work
-		// auto-continue  - Toggle auto-continuation
 	]
 }

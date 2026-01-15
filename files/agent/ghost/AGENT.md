@@ -115,3 +115,15 @@ Add discoveries to `.pepper/notepad/learnings.json`:
 - Architectural insights
 
 Load the `exploration-protocol` skill for detailed methodology.
+
+## MCP Tools Available
+
+Ghost has access to external research tools:
+
+| MCP | Tool Prefix | Purpose |
+|-----|-------------|---------|
+| context7 | `context7_*` | Library documentation lookup |
+| exa | `exa_*` | Web search with AI |
+| gh_grep | `gh_grep_*` | GitHub code search |
+
+Use these for external research beyond the local codebase.
