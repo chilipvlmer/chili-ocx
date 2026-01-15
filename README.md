@@ -97,6 +97,7 @@ To install into a specific Ghost Mode profile (e.g., `my-profile`):
 ```bash
 # If the profile doesn't exist, create it:
 ocx ghost profile add my-profile
+ocx ghost profile use my-profile
 
 # Add the registry to the profile:
 ocx ghost registry add https://chili-ocx.pages.dev --name chili-ocx --profile my-profile
