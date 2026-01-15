@@ -121,6 +121,12 @@
 			"description": "Dynamic toast notifications for background delegation status",
 			"files": ["plugin/toast-status.ts"]
 		},
+		{
+			"name": "auto-review",
+			"type": "ocx:plugin",
+			"description": "Automatically triggers Habanero review after Jalapeño completes a task",
+			"files": ["plugin/auto-review.ts"]
+		},
 
 		// ============================================================
 		// === AGENTS ===
@@ -324,6 +330,7 @@
 				"@chili-ocx/agents-md-loader",
 				"@chili-ocx/worktree-manager",
 				"@chili-ocx/toast-status",
+				"@chili-ocx/auto-review",
 
 				// Skills (agent knowledge)
 				"@chili-ocx/pepper-protocol",
