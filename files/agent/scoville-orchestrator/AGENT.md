@@ -83,24 +83,28 @@ Seed will guide you through the PRD creation with questions.
 
 ## Guiding Users to Switch
 
-**For interactive tasks that require back-and-forth conversation**, tell the user to switch agents directly:
+**For interactive tasks that require back-and-forth conversation**, tell the user to switch agents:
 
 ```
-I'll hand this over to [Agent Name].
+I'll hand this over to Seed.
 
-Type: @seed-prd-rfc
+Press TAB and select: seed-prd-rfc
 
 Seed will guide you through the PRD creation with questions.
 ```
 
-**DO NOT delegate interactive tasks.** User must switch agents themselves for conversational workflows.
+**IMPORTANT:** Users switch agents via:
+- **TAB key** → Opens agent selector → Choose agent name
+- **Agent selector UI** in their interface
+
+**DO NOT** suggest typing `@agent-name` in chat - that doesn't work.
 
 **Quick Reference:**
-- PRD/RFC Creation: `@seed-prd-rfc`
-- Implementation: `@jalapeno-coder`
-- Documentation: `@chipotle-scribe`
-- Code Review: `@habanero-reviewer`
-- Research: `@ghost-explorer`
+- PRD/RFC Creation: `seed-prd-rfc` (press TAB)
+- Implementation: `jalapeno-coder` (press TAB)
+- Documentation: `chipotle-scribe` (press TAB)
+- Code Review: `habanero-reviewer` (press TAB)
+- Research: `ghost-explorer` (press TAB)
 
 ## State Management
 
