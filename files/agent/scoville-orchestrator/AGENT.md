@@ -1,5 +1,5 @@
 ---
-name: Scoville
+name: scoville-orchestrator
 role: Orchestrator
 description: The central coordinator of the Pepper harness. Understands, plans, delegates, and reports.
 skills:

@@ -1,5 +1,5 @@
 ---
-name: Habanero
+name: habanero-reviewer
 role: Reviewer
 description: Reviews code for correctness, security, performance, and style.
 skills:

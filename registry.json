@@ -133,28 +133,28 @@
 		// ============================================================
 
 		{
-			"name": "scoville",
+			"name": "scoville-orchestrator",
 			"type": "ocx:agent",
 			"description": "Orchestrator - coordinates work, delegates to specialized agents",
-			"files": ["agent/scoville/AGENT.md"]
+			"files": ["agent/scoville-orchestrator/AGENT.md"]
 		},
 		{
-			"name": "sprout",
+			"name": "sprout-execution-planner",
 			"type": "ocx:agent",
 			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
-			"files": ["agent/sprout/AGENT.md"]
+			"files": ["agent/sprout-execution-planner/AGENT.md"]
 		},
 		{
-			"name": "seed",
+			"name": "seed-prd-rfc",
 			"type": "ocx:agent",
 			"description": "Artifact Planner - creates and refines PRD and RFC documents",
-			"files": ["agent/seed/AGENT.md"]
+			"files": ["agent/seed-prd-rfc/AGENT.md"]
 		},
 		{
-			"name": "jalapeno",
+			"name": "jalapeno-coder",
 			"type": "ocx:agent",
 			"description": "Coder - implements features, fixes bugs, writes tests",
-			"files": ["agent/jalapeno/AGENT.md"],
+			"files": ["agent/jalapeno-coder/AGENT.md"],
 			"opencode": {
 				"mcp": {
 					"shadcn": "https://mcp.shadcn.com"
@@ -163,7 +163,7 @@
 					"shadcn_*": "deny"
 				},
 				"agent": {
-					"jalapeno": {
+					"jalapeno-coder": {
 						"permission": {
 							"shadcn_*": "allow"
 						}
@@ -172,10 +172,10 @@
 			}
 		},
 		{
-			"name": "chipotle",
+			"name": "chipotle-scribe",
 			"type": "ocx:agent",
 			"description": "Scribe - creates and maintains documentation, README files, and code comments",
-			"files": ["agent/chipotle/AGENT.md"],
+			"files": ["agent/chipotle-scribe/AGENT.md"],
 			"opencode": {
 				"mcp": {
 					"context7": "https://mcp.context7.com/mcp"
@@ -184,7 +184,7 @@
 					"context7_*": "deny"
 				},
 				"agent": {
-					"chipotle": {
+					"chipotle-scribe": {
 						"permission": {
 							"context7_*": "allow"
 						}
@@ -193,10 +193,10 @@
 			}
 		},
 		{
-			"name": "ghost",
+			"name": "ghost-explorer",
 			"type": "ocx:agent",
 			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
-			"files": ["agent/ghost/AGENT.md"],
+			"files": ["agent/ghost-explorer/AGENT.md"],
 			"opencode": {
 				"mcp": {
 					"context7": "https://mcp.context7.com/mcp",
@@ -209,7 +209,7 @@
 					"gh_grep_*": "deny"
 				},
 				"agent": {
-					"ghost": {
+					"ghost-explorer": {
 						"permission": {
 							"context7_*": "allow",
 							"exa_*": "allow",
@@ -220,10 +220,10 @@
 			}
 		},
 		{
-			"name": "habanero",
+			"name": "habanero-reviewer",
 			"type": "ocx:agent",
 			"description": "Reviewer - reviews code for correctness, security, performance, and style",
-			"files": ["agent/habanero/AGENT.md"]
+			"files": ["agent/habanero-reviewer/AGENT.md"]
 		},
 
 		// ============================================================
@@ -343,13 +343,13 @@
 				"exploration-protocol",
 
 				// Agents
-				"scoville",
-				"seed",
-				"sprout",
-				"jalapeno",
-				"chipotle",
-				"habanero",
-				"ghost",
+				"scoville-orchestrator",
+				"seed-prd-rfc",
+				"sprout-execution-planner",
+				"jalapeno-coder",
+				"chipotle-scribe",
+				"habanero-reviewer",
+				"ghost-explorer",
 
 				// Commands
 				"pepper-init",

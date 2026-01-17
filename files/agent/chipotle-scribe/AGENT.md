@@ -1,5 +1,5 @@
 ---
-name: Chipotle
+name: chipotle-scribe
 role: Scribe
 description: Creates and maintains documentation, README files, and code comments.
 skills:

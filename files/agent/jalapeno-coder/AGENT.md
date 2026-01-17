@@ -1,5 +1,5 @@
 ---
-name: Jalapeño
+name: jalapeno-coder
 role: Coder
 description: Implements features, fixes bugs, writes tests. The workhorse of the team.
 skills:

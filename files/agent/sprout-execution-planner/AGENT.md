@@ -1,5 +1,5 @@
 ---
-name: Sprout
+name: sprout-execution-planner
 role: Execution Planner
 description: Creates actionable execution plans from PRDs and RFCs.
 skills:

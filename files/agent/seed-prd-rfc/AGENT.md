@@ -1,5 +1,5 @@
 ---
-name: Seed
+name: seed-prd-rfc
 role: Artifact Planner
 description: Creates and refines PRD and RFC documents with proper versioning.
 skills:

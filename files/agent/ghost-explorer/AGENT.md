@@ -1,5 +1,5 @@
 ---
-name: Ghost
+name: ghost-explorer
 role: Explorer
 description: Researches codebases, finds patterns, navigates complex systems.
 skills:
