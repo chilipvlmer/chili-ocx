@@ -136,19 +136,68 @@
 			"name": "scoville-orchestrator",
 			"type": "ocx:agent",
 			"description": "Orchestrator - coordinates work, delegates to specialized agents",
-			"files": ["agent/scoville-orchestrator/AGENT.md"]
+			"files": ["agent/scoville-orchestrator/AGENT.md"],
+			"opencode": {
+				"agent": {
+					"scoville-orchestrator": {
+						"tools": {
+							"edit": false,
+							"write": false,
+							"bash": false,
+							"question": true
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "sprout-execution-planner",
 			"type": "ocx:agent",
 			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
-			"files": ["agent/sprout-execution-planner/AGENT.md"]
+			"files": ["agent/sprout-execution-planner/AGENT.md"],
+			"opencode": {
+				"agent": {
+					"sprout-execution-planner": {
+						"tools": {
+							"bash": false,
+							"question": true
+						},
+						"permission": {
+							"edit": {
+								".pepper/**": "allow",
+								"*": "deny"
+							},
+							"write": {
+								".pepper/**": "allow",
+								"*": "deny"
+							}
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "seed-prd-rfc",
 			"type": "ocx:agent",
 			"description": "Artifact Planner - creates and refines PRD and RFC documents",
-			"files": ["agent/seed-prd-rfc/AGENT.md"]
+			"files": ["agent/seed-prd-rfc/AGENT.md"],
+			"opencode": {
+				"agent": {
+					"seed-prd-rfc": {
+						"tools": {
+							"bash": false,
+							"question": true
+						},
+						"permission": {
+							"edit": "deny",
+							"write": {
+								".pepper/**": "allow",
+								"*": "deny"
+							}
+						}
+					}
+				}
+			}
 		},
 		{
 			"name": "jalapeno-coder",
@@ -164,6 +213,9 @@
 				},
 				"agent": {
 					"jalapeno-coder": {
+						"tools": {
+							"question": true
+						},
 						"permission": {
 							"shadcn_*": "allow"
 						}
@@ -185,6 +237,9 @@
 				},
 				"agent": {
 					"chipotle-scribe": {
+						"tools": {
+							"question": true
+						},
 						"permission": {
 							"context7_*": "allow"
 						}
@@ -210,7 +265,22 @@
 				},
 				"agent": {
 					"ghost-explorer": {
+						"tools": {
+							"edit": false,
+							"write": false
+						},
 						"permission": {
+							"bash": {
+								"find*": "allow",
+								"grep*": "allow",
+								"rg*": "allow",
+								"cat*": "allow",
+								"head*": "allow",
+								"tail*": "allow",
+								"wc*": "allow",
+								"ls*": "allow",
+								"*": "deny"
+							},
 							"context7_*": "allow",
 							"exa_*": "allow",
 							"gh_grep_*": "allow"
@@ -223,7 +293,25 @@
 			"name": "habanero-reviewer",
 			"type": "ocx:agent",
 			"description": "Reviewer - reviews code for correctness, security, performance, and style",
-			"files": ["agent/habanero-reviewer/AGENT.md"]
+			"files": ["agent/habanero-reviewer/AGENT.md"],
+			"opencode": {
+				"agent": {
+					"habanero-reviewer": {
+						"tools": {
+							"edit": false,
+							"write": false
+						},
+						"permission": {
+							"bash": {
+								"git diff*": "allow",
+								"git log*": "allow",
+								"git status": "allow",
+								"*": "deny"
+							}
+						}
+					}
+				}
+			}
 		},
 
 		// ============================================================
