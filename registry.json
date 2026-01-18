@@ -421,32 +421,19 @@
 		{
 			"name": "pepper-harness",
 			"type": "ocx:bundle",
-			"description": "Complete Pepper harness - all agents, skills, plugins, and commands",
+			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
 			"files": [],
 			"dependencies": [
-				// Plugins (core functionality)
-				"state-management",
-				"agents-md-loader",
-				"worktree-manager",
-				"toast-status",
-				"auto-review",
-
 				// Skills (agent knowledge)
-				"pepper-protocol",
+				"prd-methodology",
 				"prd-format",
-				"rfc-format",
-				"planning-workflow",
-				"code-philosophy",
-				"docs-style",
-				"code-review",
-				"exploration-protocol",
+				"pepper-protocol",
 
 				// Agents
 				"scoville-orchestrator",
 				"seed-prd-rfc",
 				"sprout-execution-planner",
 				"jalapeno-coder",
-				"chipotle-scribe",
 				"habanero-reviewer",
 				"ghost-explorer",
 
@@ -454,10 +441,8 @@
 				"pepper-init",
 				"prd",
 				"prd-refine",
-				"prd-review",
 				"rfc",
 				"rfc-refine",
-				"rfc-review",
 				"plan",
 				"work",
 				"review",
