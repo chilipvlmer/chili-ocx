@@ -4,71 +4,31 @@ description: Initialize .pepper/ directory structure in the current project
 agent: scoville
 ---
 
-# /pepper-init
+# Initialize Pepper Structure
 
-Initialize the Pepper harness structure in the current project.
+The user wants to initialize the Pepper harness in this project.
 
-## Usage
+**Your task:** Call the `pepper_init` tool to create the `.pepper/` directory structure.
+
+After the tool completes successfully:
+1. Confirm the initialization was successful
+2. Use the `question` tool to ask what they'd like to do next:
+   - "Create a PRD" - Define project vision
+   - "Quick coding task" - Jump straight to implementation
+   - "Explore codebase" - Understand existing code
+
+## Tool to Call
 
 ```
-/pepper-init
+pepper_init
 ```
 
-## What It Does
+This tool will create:
+- `.pepper/specs/` (for PRDs and RFCs)
+- `.pepper/plans/` (for execution plans)
+- `.pepper/notepad/` (for learnings, issues, decisions)
+- `.pepper/tracking/` (for RFC status)
+- `.pepper/state.json` (session state)
+- `.pepper/plan.md` (execution plan template)
 
-1. Creates `.pepper/` directory structure:
-   ```
-   .pepper/
-   ├── specs/
-   │   ├── prd/
-   │   └── rfc/
-   ├── plans/
-   ├── tracking/
-   ├── notepad/
-   │   ├── learnings.json
-   │   ├── issues.json
-   │   └── decisions.json
-   ├── drafts/
-   ├── state.json
-   └── plan.md (empty template)
-   ```
-
-2. Creates initial `state.json`:
-   ```json
-   {
-     "version": "1.0.0",
-     "session_ids": [],
-     "auto_continue": false
-   }
-   ```
-
-3. Creates empty notepad files with structure:
-   ```json
-   {
-     "version": "1.0.0",
-     "entries": []
-   }
-   ```
-
-4. Creates `tracking/rfc-status.json`:
-   ```json
-   {}
-   ```
-
-## Behavior
-
-- If `.pepper/` already exists, reports status and skips
-- Creates all directories recursively
-- Safe to run multiple times (idempotent)
-
-## After Initialization
-
-Scoville will:
-1. Confirm successful initialization
-2. Ask if user wants to create a PRD
-3. Explain next steps
-
-## Related Commands
-
-- `/prd` — Create a new PRD
-- `/status` — Check current state
+The tool handles idempotency - safe to run if `.pepper/` already exists.

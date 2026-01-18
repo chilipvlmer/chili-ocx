@@ -4,39 +4,45 @@ description: Create a new Product Requirements Document
 agent: seed
 ---
 
-# /prd
+# Create PRD
 
-Create a new Product Requirements Document.
+The user wants to create a new Product Requirements Document.
 
-## Usage
+**Your task (Seed):**
 
-```
-/prd [project-name]
-```
+1. Check if `.pepper/` exists:
+   - If not: Suggest running `/pepper-init` first
+   
+2. Use the `prd-methodology` skill for the 10-phase interview process
 
-## Arguments
+3. Create the PRD at `.pepper/specs/prd/{name}-v1.0.0.md`
 
-| Arg | Required | Description |
-|-----|----------|-------------|
-| project-name | No | Name for the PRD (prompted if not provided) |
+4. Update `.pepper/state.json`:
+   ```json
+   {
+     "active_spec": {
+       "type": "prd",
+       "name": "{name}",
+       "version": "1.0.0",
+       "path": ".pepper/specs/prd/{name}-v1.0.0.md"
+     }
+   }
+   ```
 
-## What It Does
+5. After completion, tell user to switch back to Scoville (TAB → scoville-orchestrator) to decide next steps
 
-1. Delegates to **Seed** agent
-2. Seed uses `prd-format` skill
-3. Creates PRD at `.pepper/specs/prd/{name}-v1.0.0.md`
-4. Updates `.pepper/state.json` with `active_spec`
+## Interview Process
 
-## Workflow
+Follow the 10-phase methodology from the `prd-methodology` skill:
+1. Vision & Problem
+2. Success Metrics  
+3. User Personas
+4. Core Features
+5. User Flows
+6. Technical Constraints
+7. Risks & Mitigations
+8. Timeline & Milestones
+9. Dependencies
+10. Review & Finalize
 
-1. Scoville checks if `.pepper/` exists (inits if needed)
-2. Delegates to Seed with project context
-3. Seed interviews user about requirements
-4. Creates PRD with proper structure
-5. Reports completion
-
-## Related Commands
-
-- `/prd-refine` — Refine existing PRD
-- `/prd-review` — Review PRD quality
-- `/rfc` — Create RFC from PRD
+Use the `question` tool for each phase to gather structured input.
