@@ -148,12 +148,34 @@ Run completeness check, ask probing "what about" questions, use finalization che
 
 **ALWAYS use the `question` tool. NEVER ask questions in plain text.**
 
-Example questions structure:
+**CRITICAL: The `header` field has a 12 character maximum!**
+
+### Header Examples (12 chars max)
+
+✅ Good headers (≤12 chars):
+- `"Type"`
+- `"Scope"`
+- `"Users"`
+- `"Features"`
+- `"Tech Stack"`
+- `"Performance"`
+- `"Security"`
+- `"Timeline"`
+- `"MVP Scope"`
+- `"Core Flow"`
+
+❌ Bad headers (>12 chars):
+- `"Project Type"` (13 chars)
+- `"Success Metrics"` (16 chars)
+- `"User Personas"` (14 chars)
+
+### Example Question Structure
+
 ```json
 {
   "questions": [
     {
-      "header": "Project Type",
+      "header": "Type",
       "question": "What type of project is this?",
       "options": [
         {"label": "Web application", "description": "Frontend and/or fullstack web app"},
@@ -166,6 +188,19 @@ Example questions structure:
   ]
 }
 ```
+
+### Quick Reference: Short Headers by Phase
+
+- **Phase 1**: `Type`, `Scope`, `Audience`
+- **Phase 2**: `Problem`, `Goal`, `Boundary`
+- **Phase 3**: `Users`, `Flows`, `Priority`
+- **Phase 4**: `Features`, `Data`, `Logic`
+- **Phase 5**: `Tests`, `Success`, `Edge Cases`
+- **Phase 6**: `Tech`, `Integrations`, `Data Model`
+- **Phase 7**: `UX`, `Workflows`, `Feedback`
+- **Phase 8**: `Performance`, `Security`, `Scale`
+- **Phase 9**: `Risks`, `Deps`, `Assumptions`
+- **Phase 10**: `Review`, `Complete?`, `Sign-off`
 
 ## Handling Vague Answers
 
