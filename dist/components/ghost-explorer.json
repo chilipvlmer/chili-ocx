@@ -1,0 +1,53 @@
+{
+  "name": "ghost-explorer",
+  "versions": {
+    "0.1.0": {
+      "name": "ghost-explorer",
+      "type": "ocx:agent",
+      "description": "Explorer - researches codebases, finds patterns, navigates complex systems",
+      "files": [
+        "agent/ghost-explorer/AGENT.md"
+      ],
+      "dependencies": [],
+      "opencode": {
+        "mcp": {
+          "context7": "https://mcp.context7.com/mcp",
+          "exa": "https://mcp.exa.ai/mcp",
+          "gh_grep": "https://mcp.grep.app"
+        },
+        "agent": {
+          "ghost-explorer": {
+            "tools": {
+              "edit": false,
+              "write": false
+            },
+            "permission": {
+              "bash": {
+                "find*": "allow",
+                "grep*": "allow",
+                "rg*": "allow",
+                "cat*": "allow",
+                "head*": "allow",
+                "tail*": "allow",
+                "wc*": "allow",
+                "ls*": "allow",
+                "*": "deny"
+              },
+              "context7_*": "allow",
+              "exa_*": "allow",
+              "gh_grep_*": "allow"
+            }
+          }
+        },
+        "permission": {
+          "context7_*": "deny",
+          "exa_*": "deny",
+          "gh_grep_*": "deny"
+        }
+      }
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

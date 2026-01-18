@@ -1,0 +1,17 @@
+{
+  "name": "prd-refine",
+  "versions": {
+    "0.1.0": {
+      "name": "prd-refine",
+      "type": "ocx:command",
+      "description": "Refine an existing PRD",
+      "files": [
+        "command/prd-refine/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "seed-prd-rfc",
+  "versions": {
+    "0.1.0": {
+      "name": "seed-prd-rfc",
+      "type": "ocx:agent",
+      "description": "Artifact Planner - creates and refines PRD and RFC documents",
+      "files": [
+        "agent/seed-prd-rfc/AGENT.md"
+      ],
+      "dependencies": [],
+      "opencode": {
+        "agent": {
+          "seed-prd-rfc": {
+            "tools": {
+              "bash": false,
+              "question": true
+            },
+            "permission": {
+              "edit": "deny",
+              "write": {
+                ".pepper/**": "allow",
+                "*": "deny"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

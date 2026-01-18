@@ -1,0 +1,35 @@
+{
+  "name": "jalapeno-coder",
+  "versions": {
+    "0.1.0": {
+      "name": "jalapeno-coder",
+      "type": "ocx:agent",
+      "description": "Coder - implements features, fixes bugs, writes tests",
+      "files": [
+        "agent/jalapeno-coder/AGENT.md"
+      ],
+      "dependencies": [],
+      "opencode": {
+        "mcp": {
+          "shadcn": "https://mcp.shadcn.com"
+        },
+        "agent": {
+          "jalapeno-coder": {
+            "tools": {
+              "question": true
+            },
+            "permission": {
+              "shadcn_*": "allow"
+            }
+          }
+        },
+        "permission": {
+          "shadcn_*": "deny"
+        }
+      }
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

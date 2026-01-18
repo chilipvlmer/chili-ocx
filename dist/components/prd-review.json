@@ -1,0 +1,17 @@
+{
+  "name": "prd-review",
+  "versions": {
+    "0.1.0": {
+      "name": "prd-review",
+      "type": "ocx:command",
+      "description": "Review PRD for completeness and quality",
+      "files": [
+        "command/prd-review/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

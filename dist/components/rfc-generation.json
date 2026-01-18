@@ -1,0 +1,17 @@
+{
+  "name": "rfc-generation",
+  "versions": {
+    "0.1.0": {
+      "name": "rfc-generation",
+      "type": "ocx:skill",
+      "description": "12-section RFC structure and templates",
+      "files": [
+        "skill/rfc-generation/SKILL.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "prd-versioning",
+  "versions": {
+    "0.1.0": {
+      "name": "prd-versioning",
+      "type": "ocx:skill",
+      "description": "PRD/RFC versioning and status tracking with SemVer",
+      "files": [
+        "skill/prd-versioning/SKILL.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "agents-md-loader",
+  "versions": {
+    "0.1.0": {
+      "name": "agents-md-loader",
+      "type": "ocx:plugin",
+      "description": "Loads AGENTS.md from project root and injects into agent context",
+      "files": [
+        "plugin/agents-md-loader.ts"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

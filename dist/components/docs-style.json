@@ -1,0 +1,17 @@
+{
+  "name": "docs-style",
+  "versions": {
+    "0.1.0": {
+      "name": "docs-style",
+      "type": "ocx:skill",
+      "description": "Documentation writing standards for Chipotle",
+      "files": [
+        "skill/docs-style/SKILL.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

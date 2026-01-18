@@ -1,0 +1,17 @@
+{
+  "name": "worktree-manager",
+  "versions": {
+    "0.1.0": {
+      "name": "worktree-manager",
+      "type": "ocx:plugin",
+      "description": "Git worktree isolation for parallel session development",
+      "files": [
+        "plugin/worktree-manager.ts"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

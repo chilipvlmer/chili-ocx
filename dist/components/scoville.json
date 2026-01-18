@@ -1,0 +1,17 @@
+{
+  "name": "scoville",
+  "versions": {
+    "0.1.0": {
+      "name": "scoville",
+      "type": "ocx:agent",
+      "description": "Orchestrator - coordinates work, delegates to specialized agents",
+      "files": [
+        "agent/scoville/AGENT.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

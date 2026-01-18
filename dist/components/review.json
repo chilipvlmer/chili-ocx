@@ -1,0 +1,17 @@
+{
+  "name": "review",
+  "versions": {
+    "0.1.0": {
+      "name": "review",
+      "type": "ocx:command",
+      "description": "Review code changes",
+      "files": [
+        "command/review/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

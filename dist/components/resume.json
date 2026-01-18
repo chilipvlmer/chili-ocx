@@ -1,0 +1,17 @@
+{
+  "name": "resume",
+  "versions": {
+    "0.1.0": {
+      "name": "resume",
+      "type": "ocx:command",
+      "description": "Resume work after context compaction",
+      "files": [
+        "command/resume/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "rfc-review",
+  "versions": {
+    "0.1.0": {
+      "name": "rfc-review",
+      "type": "ocx:command",
+      "description": "Review RFC for technical completeness",
+      "files": [
+        "command/rfc-review/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

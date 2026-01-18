@@ -1,0 +1,35 @@
+{
+  "name": "chipotle-scribe",
+  "versions": {
+    "0.1.0": {
+      "name": "chipotle-scribe",
+      "type": "ocx:agent",
+      "description": "Scribe - creates and maintains documentation, README files, and code comments",
+      "files": [
+        "agent/chipotle-scribe/AGENT.md"
+      ],
+      "dependencies": [],
+      "opencode": {
+        "mcp": {
+          "context7": "https://mcp.context7.com/mcp"
+        },
+        "agent": {
+          "chipotle-scribe": {
+            "tools": {
+              "question": true
+            },
+            "permission": {
+              "context7_*": "allow"
+            }
+          }
+        },
+        "permission": {
+          "context7_*": "deny"
+        }
+      }
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

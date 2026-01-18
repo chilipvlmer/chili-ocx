@@ -1,0 +1,17 @@
+{
+  "name": "sprout",
+  "versions": {
+    "0.1.0": {
+      "name": "sprout",
+      "type": "ocx:agent",
+      "description": "Execution Planner - creates actionable plans from PRDs and RFCs",
+      "files": [
+        "agent/sprout/AGENT.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "rfc",
+  "versions": {
+    "0.1.0": {
+      "name": "rfc",
+      "type": "ocx:command",
+      "description": "Create a new Request for Comments (technical design)",
+      "files": [
+        "command/rfc/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

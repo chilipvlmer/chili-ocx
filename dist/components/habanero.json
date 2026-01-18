@@ -1,0 +1,17 @@
+{
+  "name": "habanero",
+  "versions": {
+    "0.1.0": {
+      "name": "habanero",
+      "type": "ocx:agent",
+      "description": "Reviewer - reviews code for correctness, security, performance, and style",
+      "files": [
+        "agent/habanero/AGENT.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

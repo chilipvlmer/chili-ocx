@@ -1,0 +1,17 @@
+{
+  "name": "toast-status",
+  "versions": {
+    "0.1.0": {
+      "name": "toast-status",
+      "type": "ocx:plugin",
+      "description": "Dynamic toast notifications for background delegation status",
+      "files": [
+        "plugin/toast-status.ts"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

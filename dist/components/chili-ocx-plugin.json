@@ -1,0 +1,17 @@
+{
+  "name": "chili-ocx-plugin",
+  "versions": {
+    "0.1.0": {
+      "name": "chili-ocx-plugin",
+      "type": "ocx:plugin",
+      "description": "Executable command plugin for Pepper harness - makes slash commands work automatically",
+      "files": [
+        "plugin/executable-commands.js"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

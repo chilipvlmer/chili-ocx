@@ -1,0 +1,38 @@
+{
+  "name": "pepper-harness",
+  "versions": {
+    "0.1.0": {
+      "name": "pepper-harness",
+      "type": "ocx:bundle",
+      "description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
+      "files": [],
+      "dependencies": [
+        "pepper-plugin",
+        "prd-methodology",
+        "prd-format",
+        "pepper-protocol",
+        "scoville-orchestrator",
+        "seed-prd-rfc",
+        "sprout-execution-planner",
+        "jalapeno-coder",
+        "habanero-reviewer",
+        "ghost-explorer",
+        "pepper-init",
+        "prd",
+        "prd-refine",
+        "rfc",
+        "rfc-refine",
+        "plan",
+        "work",
+        "review",
+        "status",
+        "notepad",
+        "resume",
+        "auto-continue"
+      ]
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

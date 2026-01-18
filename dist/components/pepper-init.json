@@ -1,0 +1,17 @@
+{
+  "name": "pepper-init",
+  "versions": {
+    "0.1.0": {
+      "name": "pepper-init",
+      "type": "ocx:command",
+      "description": "Initialize .pepper/ directory structure",
+      "files": [
+        "command/pepper-init/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

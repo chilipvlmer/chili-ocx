@@ -1,0 +1,17 @@
+{
+  "name": "prd",
+  "versions": {
+    "0.1.0": {
+      "name": "prd",
+      "type": "ocx:command",
+      "description": "Create a new Product Requirements Document",
+      "files": [
+        "command/prd/COMMAND.md"
+      ],
+      "dependencies": []
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}

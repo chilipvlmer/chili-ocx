@@ -1,0 +1,35 @@
+{
+  "name": "habanero-reviewer",
+  "versions": {
+    "0.1.0": {
+      "name": "habanero-reviewer",
+      "type": "ocx:agent",
+      "description": "Reviewer - reviews code for correctness, security, performance, and style",
+      "files": [
+        "agent/habanero-reviewer/AGENT.md"
+      ],
+      "dependencies": [],
+      "opencode": {
+        "agent": {
+          "habanero-reviewer": {
+            "tools": {
+              "edit": false,
+              "write": false
+            },
+            "permission": {
+              "bash": {
+                "git diff*": "allow",
+                "git log*": "allow",
+                "git status": "allow",
+                "*": "deny"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "dist-tags": {
+    "latest": "0.1.0"
+  }
+}
