@@ -46,6 +46,106 @@ Always follow the code-philosophy skill:
 4. **Fail Loud, Fail Fast** — Errors should be obvious
 5. **Readability is a Feature** — Optimize for understanding
 
+## Symlink Workspace Awareness
+
+**CRITICAL**: You may be working in a symlinked workspace (e.g., OpenCode Ghost at `/tmp/ocx-ghost-*`).
+
+### Workspace Path Resolution
+
+When performing file or git operations, **always use resolved real paths**:
+
+```javascript
+// ✅ CORRECT: Use workspace utilities
+import { getWorkspaceInfo } from './utils/workspace';
+
+const workspaceInfo = getWorkspaceInfo(process.cwd());
+const realPath = workspaceInfo.real;  // Use this for operations
+
+// ✅ CORRECT: Read from state.json
+const state = JSON.parse(fs.readFileSync('.pepper/state.json'));
+const realPath = state.workspacePath.real;
+
+// ❌ WRONG: Using symlink path directly
+const path = process.cwd();  // May be symlink!
+```
+
+### Git Operations
+
+**ALWAYS use real path for git commands**:
+
+```bash
+# ✅ CORRECT: Navigate to real path first
+cd /Users/dev/chili-ocx  # Real path
+git status
+git add .
+git commit -m "message"
+
+# ❌ WRONG: Git from symlink path
+cd /tmp/ocx-ghost-abc123  # Symlink - git may fail!
+git status  # Error: not a git repository
+```
+
+### File Operations
+
+**Use real path for all file I/O**:
+
+```javascript
+// ✅ CORRECT
+const pepperDir = join(workspaceInfo.real, '.pepper');
+fs.writeFileSync(join(pepperDir, 'state.json'), data);
+
+// ❌ WRONG
+const pepperDir = join(process.cwd(), '.pepper');  // May be symlink!
+```
+
+### Error Reporting
+
+When reporting errors, include both paths for debugging:
+
+```
+❌ Git operation failed:
+  Working directory (symlink): /tmp/ocx-ghost-abc123
+  Resolved real path: /Users/dev/chili-ocx
+  Command: git status
+  Error: fatal: not a git repository
+  
+  This suggests git is being run from the symlink path.
+  Solution: Use workspaceInfo.real for all git operations.
+```
+
+### Reading Workspace Info
+
+Access workspace information from state.json v1.1.0:
+
+```javascript
+const state = JSON.parse(
+  fs.readFileSync('.pepper/state.json', 'utf-8')
+);
+
+if (state.workspacePath.isSymlink) {
+  console.log(`Symlinked workspace detected:`);
+  console.log(`  Symlink: ${state.workspacePath.symlink}`);
+  console.log(`  Real: ${state.workspacePath.real}`);
+}
+
+// Always use real path for operations
+const workingDir = state.workspacePath.real;
+```
+
+### Testing in Ghost Workspaces
+
+When implementing features that involve workspace detection:
+1. Test in regular directory first
+2. Test in Ghost workspace (`/tmp/ocx-ghost-*`)
+3. Verify both symlink and real paths are handled correctly
+4. Ensure no regressions in non-symlinked setups
+
+### References
+
+- RFC-001: Workspace Path Resolution Utility (implementation details)
+- RFC-002: pepper_init Enhancement (state.json v1.1.0 schema)
+- Utilities: `plugin/src/utils/workspace.ts` (resolveWorkspacePath, getWorkspaceInfo)
+
 ## Commit Guidelines
 
 Every commit should be:

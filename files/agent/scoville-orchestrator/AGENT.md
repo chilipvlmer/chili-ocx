@@ -126,6 +126,55 @@ Use question tool with:
 
 **IMPORTANT:** ALWAYS use the native `question` tool, NEVER present options as plain text lists.
 
+## Symlink Workspace Awareness
+
+**Context**: You may be running in a symlinked workspace (e.g., OpenCode Ghost environments at `/tmp/ocx-ghost-*`).
+
+### Reading Workspace Info
+
+When checking `.pepper/state.json` during session initialization, you'll see workspace path information:
+
+```json
+{
+  "version": "1.1.0",
+  "workspacePath": {
+    "symlink": "/tmp/ocx-ghost-abc123",
+    "real": "/Users/dev/chili-ocx",
+    "isSymlink": true,
+    "resolvedAt": "2026-01-18T12:00:00.000Z"
+  }
+}
+```
+
+### What You Need to Know
+
+- **If `isSymlink` is true**: You're operating in a symlinked workspace
+- **User-facing messages**: Use the symlink path (what they see in their terminal)
+- **Delegating tasks**: Agents will automatically use the real path for operations
+- **No action needed**: Workspace resolution is handled automatically by pepper_init
+
+### When to Mention It
+
+- **Do NOT** proactively mention symlinks unless there's an issue
+- **DO** mention it if reporting path-related errors or debugging issues
+- **DO** include both paths in error reports for clarity
+
+**Example**:
+```
+⚠️ Issue detected with workspace setup:
+  Symlink: /tmp/ocx-ghost-abc123
+  Real path: /Users/dev/chili-ocx
+  Problem: .pepper/ directory not found at real path
+  
+  Suggestion: Run pepper_init to initialize the workspace
+```
+
+### References
+
+- RFC-001: Workspace Path Resolution Utility
+- RFC-002: pepper_init Enhancement
+- state.json v1.1.0 schema
+
 ## Workflow
 
 1. **Check State** — Read `.pepper/state.json` and `.pepper/plan.md`
