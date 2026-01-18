@@ -1,8 +1,27 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
+import { getWorkspaceInfo, WorkspaceError } from './workspace.js';
 
 export function initPepperStructure(projectDir: string): string {
-  const pepperDir = join(projectDir, ".pepper");
+  // Resolve workspace path (handles symlinks)
+  let workspaceInfo;
+  try {
+    workspaceInfo = getWorkspaceInfo(projectDir);
+  } catch (error) {
+    if (error instanceof WorkspaceError) {
+      return `❌ Failed to resolve workspace path: ${error.message}
+
+Please ensure:
+- The path exists and is accessible
+- You have permission to read the directory
+- If using a symlink, the target exists`;
+    }
+    throw error;
+  }
+
+  // Use resolved real path for all operations
+  const resolvedDir = workspaceInfo.real;
+  const pepperDir = join(resolvedDir, ".pepper");
   
   if (existsSync(pepperDir)) {
     return "✅ .pepper/ already initialized\n\nRun /status to see current state.";
@@ -22,9 +41,16 @@ export function initPepperStructure(projectDir: string): string {
     mkdirSync(join(pepperDir, dir), { recursive: true });
   }
 
-  // Write initial state.json
+  // Write initial state.json with workspace info
   const initialState = {
-    version: "1.0.0",
+    version: "1.1.0",
+    initialized: new Date().toISOString(),
+    workspacePath: {
+      symlink: workspaceInfo.symlink,
+      real: workspaceInfo.real,
+      isSymlink: workspaceInfo.isSymlink,
+      resolvedAt: workspaceInfo.resolvedAt
+    },
     session_ids: [],
     auto_continue: false
   };
@@ -71,9 +97,16 @@ export function initPepperStructure(projectDir: string): string {
 
   writeFileSync(join(pepperDir, "plan.md"), planTemplate);
 
-  return `✅ Initialized .pepper/ structure
+  // Build success message
+  let successMessage = `✅ Initialized .pepper/ structure`;
 
-Created:
+  if (workspaceInfo.isSymlink) {
+    successMessage += `\n\n📍 Workspace resolved:\n`;
+    successMessage += `  Symlink: ${workspaceInfo.symlink}\n`;
+    successMessage += `  Real path: ${workspaceInfo.real}`;
+  }
+
+  successMessage += `\n\nCreated:
 - specs/prd/ - Product Requirements Documents
 - specs/rfc/ - Request for Comments (technical designs)
 - plans/ - Execution plans
@@ -84,6 +117,8 @@ Created:
 Next steps:
 - Run /prd to create your first PRD
 - Run /status to verify setup`;
+
+  return successMessage;
 }
 
 export function readPepperState(projectDir: string): any {
