@@ -27,7 +27,7 @@ function parseFrontmatter(content) {
   };
 }
 function discoverOcxCommands() {
-  const commandDir = join(homedir(), ".config/opencode/command");
+  const commandDir = join(homedir(), ".config/opencode/profiles/default/.opencode/command");
   if (!existsSync(commandDir)) {
     console.log("\u26A0\uFE0F No OCX commands directory found at:", commandDir);
     return [];

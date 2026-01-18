@@ -34,7 +34,7 @@ function parseFrontmatter(content: string): { data: CommandFrontmatter; body: st
 }
 
 export function discoverOcxCommands(): CommandInfo[] {
-  const commandDir = join(homedir(), ".config/opencode/command");
+  const commandDir = join(homedir(), ".config/opencode/profiles/default/.opencode/command");
   
   if (!existsSync(commandDir)) {
     console.log("⚠️ No OCX commands directory found at:", commandDir);
