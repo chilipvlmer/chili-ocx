@@ -4,26 +4,62 @@ description: Create a new Request for Comments (technical design)
 agent: seed
 ---
 
-# /rfc
+# Create RFC
 
-Create a new RFC for a feature.
+The user wants to create a Request for Comments (technical design document).
 
-## Usage
+**Your task (Seed):**
 
-```
-/rfc [feature-name]
-```
+1. Check if `.pepper/` exists:
+   - If not: Suggest running `/pepper-init` first
 
-## What It Does
+2. Check for active PRD in `.pepper/state.json`:
+   - If PRD exists: Use it as context for the RFC
+   - If no PRD: Proceed without (user doing technical-first approach)
 
-1. Identifies parent PRD version
-2. Gets next RFC number
-3. Delegates to **Seed** with rfc-format skill
-4. Creates RFC at `.pepper/specs/rfc/v{version}/RFC-{NNN}-{slug}.md`
-5. Updates `.pepper/tracking/rfc-status.json`
+3. Use the `rfc-generation` skill for the RFC structure
 
-## Related Commands
+4. Conduct interview to gather:
+   - Problem statement (link to PRD if exists)
+   - Proposed solution overview
+   - Technical architecture
+   - Data models
+   - API design
+   - Security considerations
+   - Performance requirements
+   - Testing strategy
+   - Deployment plan
+   - Risks and mitigations
+   - Alternatives considered
 
-- `/rfc-refine` — Refine existing RFC
-- `/rfc-review` — Review RFC quality
-- `/plan` — Create execution plan from RFCs
+5. Create RFC at `.pepper/specs/rfc/{name}-v1.0.0.md`
+
+6. Create initial status entry in `.pepper/tracking/rfc-status.json`:
+   ```json
+   {
+     "{name}": {
+       "version": "1.0.0",
+       "status": "draft",
+       "created": "2026-01-18",
+       "last_updated": "2026-01-18"
+     }
+   }
+   ```
+
+7. Update `.pepper/state.json`:
+   ```json
+   {
+     "active_spec": {
+       "type": "rfc",
+       "name": "{name}",
+       "version": "1.0.0",
+       "path": ".pepper/specs/rfc/{name}-v1.0.0.md"
+     }
+   }
+   ```
+
+8. Tell user to switch back to Scoville (TAB → scoville-orchestrator) to create execution plan
+
+## Use the question tool for each section
+
+Gather structured input for all RFC sections using the `question` tool.
