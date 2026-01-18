@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "fs";
 import { join } from "path";
+import { homedir } from "os";
 import type { CommandInfo, CommandFrontmatter } from "./types";
 
 // Commands that execute TypeScript logic directly
@@ -33,7 +34,6 @@ function parseFrontmatter(content: string): { data: CommandFrontmatter; body: st
 }
 
 export function discoverOcxCommands(): CommandInfo[] {
-  const { homedir } = require("os");
   const commandDir = join(homedir(), ".config/opencode/command");
   
   if (!existsSync(commandDir)) {

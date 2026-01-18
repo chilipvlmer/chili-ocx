@@ -1,13 +1,7 @@
-var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-}) : x)(function(x) {
-  if (typeof require !== "undefined") return require.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
-});
-
 // dist/commands/loader.js
 import { existsSync, readdirSync, readFileSync } from "fs";
 import { join } from "path";
+import { homedir } from "os";
 var EXECUTE_MODE_COMMANDS = /* @__PURE__ */ new Set([
   "pepper-init",
   "status",
@@ -33,7 +27,6 @@ function parseFrontmatter(content) {
   };
 }
 function discoverOcxCommands() {
-  const { homedir } = __require("os");
   const commandDir = join(homedir(), ".config/opencode/command");
   if (!existsSync(commandDir)) {
     console.log("\u26A0\uFE0F No OCX commands directory found at:", commandDir);
