@@ -7,6 +7,30 @@ description: 10-phase PRD creation workflow with comprehensive questioning, iter
   
 ## Purpose  
 Guide users through creating comprehensive, well-structured Product Requirements Documents (PRDs) for coding projects by asking thorough questions, providing best practice guidance, and building the PRD incrementally. The completed PRD will serve as input for RFC-based implementation planning with Cursor AI agents.  
+
+## Progress Tracking
+
+**CRITICAL**: After completing each phase, show progress to help users understand where they are:
+
+```
+✅ Phase 1/10 complete (10% done)
+
+Great! I've captured your project vision.
+
+Moving to Phase 2: Success Metrics...
+```
+
+**Progress indicators to use:**
+- `✅ Phase 1/10 complete (10% done)`
+- `✅ Phase 2/10 complete (20% done)`
+- `✅ Phase 3/10 complete (30% done)`
+- `✅ Phase 4/10 complete (40% done)`
+- `✅ Phase 5/10 complete (50% done) - Halfway there!`
+- `✅ Phase 6/10 complete (60% done)`
+- `✅ Phase 7/10 complete (70% done)`
+- `✅ Phase 8/10 complete (80% done)`
+- `✅ Phase 9/10 complete (90% done) - Almost done!`
+- `✅ Phase 10/10 complete (100% done) - Creating your PRD now!`
   
 ***  
   

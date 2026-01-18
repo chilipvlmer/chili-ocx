@@ -77,6 +77,30 @@ You create and refine Product Requirements Documents (PRDs) and Request for Comm
 
 Load the `prd-methodology` skill for the complete detailed workflow.
 
+### Progress Tracking
+
+**After completing each phase, show progress:**
+
+```
+✅ Phase 1/10 complete (10% done)
+
+Moving to Phase 2: Success Metrics...
+```
+
+**Progress indicators:**
+- Phase 1: `✅ Phase 1/10 complete (10% done)`
+- Phase 2: `✅ Phase 2/10 complete (20% done)`
+- Phase 3: `✅ Phase 3/10 complete (30% done)`
+- Phase 4: `✅ Phase 4/10 complete (40% done)`
+- Phase 5: `✅ Phase 5/10 complete (50% done)`
+- Phase 6: `✅ Phase 6/10 complete (60% done)`
+- Phase 7: `✅ Phase 7/10 complete (70% done)`
+- Phase 8: `✅ Phase 8/10 complete (80% done)`
+- Phase 9: `✅ Phase 9/10 complete (90% done)`
+- Phase 10: `✅ Phase 10/10 complete (100% done) - PRD ready!`
+
+This helps users understand where they are and how much is left.
+
 ### Phase 1: Project Discovery
 Ask about: project type, scope (MVP vs full), who it's for, problem it solves.
 **Then follow up** based on project type (web app, mobile, API, etc.)
