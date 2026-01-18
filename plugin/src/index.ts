@@ -1,6 +1,6 @@
 import type { Plugin } from "@opencode-ai/plugin";
 import { tool } from "@opencode-ai/plugin";
-import { initPepperStructure } from "./utils/pepper-io";
+import { initPepperStructure, getPepperStatus, addNotepadEntry } from "./utils/pepper-io";
 import { writeFileSync } from "fs";
 
 const ChiliOcxPlugin: Plugin = async (ctx) => {
@@ -29,6 +29,29 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
           log("🔧 pepper_init tool executing");
           const result = initPepperStructure(ctx.directory);
           log(`✅ pepper_init result: ${result.substring(0, 100)}`);
+          return result;
+        }
+      }),
+      "pepper_status": tool({
+        description: "Get the current status of the Pepper harness including PRDs, RFCs, plans, and state",
+        args: {},
+        execute: async (args, context) => {
+          log("🔧 pepper_status tool executing");
+          const result = getPepperStatus(ctx.directory);
+          log(`✅ pepper_status returned status report`);
+          return result;
+        }
+      }),
+      "pepper_notepad_add": tool({
+        description: "Add an entry to one of the Pepper notepads (learnings, issues, or decisions)",
+        args: {
+          notepadType: tool.schema.enum(["learnings", "issues", "decisions"]).describe("Type of notepad: learnings, issues, or decisions"),
+          entry: tool.schema.string().describe("The content to add to the notepad")
+        },
+        execute: async (args, context) => {
+          log(`🔧 pepper_notepad_add tool executing (type: ${args.notepadType})`);
+          const result = addNotepadEntry(ctx.directory, args.notepadType, args.entry);
+          log(`✅ pepper_notepad_add: ${result.substring(0, 100)}`);
           return result;
         }
       })

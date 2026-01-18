@@ -116,3 +116,112 @@ export function readPepperPlan(projectDir: string): string | null {
     return null;
   }
 }
+
+export function getPepperStatus(projectDir: string): string {
+  const pepperDir = join(projectDir, ".pepper");
+  
+  if (!existsSync(pepperDir)) {
+    return "❌ Pepper harness not initialized\n\nRun /pepper-init to set up the directory structure.";
+  }
+
+  const state = readPepperState(projectDir);
+  if (!state) {
+    return "⚠️ .pepper/ exists but state.json is missing or invalid\n\nTry running /pepper-init again.";
+  }
+
+  // Find PRDs
+  const prdDir = join(pepperDir, "specs/prd");
+  const prds = existsSync(prdDir) ? readdirSync(prdDir).filter(f => f.endsWith(".md")) : [];
+  
+  // Find RFCs
+  const rfcDir = join(pepperDir, "specs/rfc");
+  let rfcs: string[] = [];
+  if (existsSync(rfcDir)) {
+    const rfcVersions = readdirSync(rfcDir);
+    rfcs = rfcVersions.flatMap(version => {
+      const versionDir = join(rfcDir, version);
+      return existsSync(versionDir) ? readdirSync(versionDir).filter(f => f.endsWith(".md")) : [];
+    });
+  }
+
+  // Find plans
+  const plansDir = join(pepperDir, "plans");
+  const plans = existsSync(plansDir) ? readdirSync(plansDir).filter(f => f.endsWith(".md")) : [];
+
+  // Build status report
+  let report = "# 🌶️ Pepper Harness Status\n\n";
+  
+  report += `## State\n`;
+  report += `- Version: ${state.version || "unknown"}\n`;
+  report += `- Auto-continue: ${state.auto_continue ? "✅ enabled" : "❌ disabled"}\n`;
+  report += `- Active sessions: ${state.session_ids?.length || 0}\n\n`;
+
+  report += `## Documents\n`;
+  report += `- PRDs: ${prds.length}\n`;
+  if (prds.length > 0) {
+    prds.forEach(prd => report += `  - ${prd}\n`);
+  }
+  report += `- RFCs: ${rfcs.length}\n`;
+  if (rfcs.length > 0) {
+    rfcs.forEach(rfc => report += `  - ${rfc}\n`);
+  }
+  report += `- Plans: ${plans.length}\n`;
+  if (plans.length > 0) {
+    plans.forEach(plan => report += `  - ${plan}\n`);
+  }
+
+  // Check current plan
+  const currentPlan = readPepperPlan(projectDir);
+  if (currentPlan && !currentPlan.includes("No active plan yet")) {
+    report += `\n## Current Plan\n`;
+    report += `✅ Active plan exists in .pepper/plan.md\n`;
+  } else {
+    report += `\n## Current Plan\n`;
+    report += `❌ No active plan\n`;
+  }
+
+  report += `\n## Next Steps\n`;
+  if (prds.length === 0) {
+    report += `- Run /prd to create your first Product Requirements Document\n`;
+  } else if (rfcs.length === 0) {
+    report += `- Run /rfc to create technical design from your PRD\n`;
+  } else if (plans.length === 0) {
+    report += `- Run /plan to generate an execution plan from your RFC\n`;
+  } else {
+    report += `- Run /work to continue with your current plan\n`;
+    report += `- Run /review to get code review feedback\n`;
+  }
+
+  return report;
+}
+
+export function addNotepadEntry(projectDir: string, notepadType: "learnings" | "issues" | "decisions", entry: string): string {
+  const pepperDir = join(projectDir, ".pepper");
+  
+  if (!existsSync(pepperDir)) {
+    return "❌ Pepper harness not initialized. Run /pepper-init first.";
+  }
+
+  const notepadPath = join(pepperDir, "notepad", `${notepadType}.json`);
+  
+  if (!existsSync(notepadPath)) {
+    return `❌ Notepad file not found: ${notepadType}.json`;
+  }
+
+  try {
+    const content = readFileSync(notepadPath, "utf-8");
+    const notepad = JSON.parse(content);
+    
+    notepad.entries.push({
+      timestamp: new Date().toISOString(),
+      content: entry
+    });
+    
+    writeFileSync(notepadPath, JSON.stringify(notepad, null, 2));
+    
+    return `✅ Added entry to ${notepadType} notepad\n\n"${entry}"`;
+  } catch (error) {
+    console.error(`Failed to add notepad entry:`, error);
+    return `❌ Failed to add entry: ${error instanceof Error ? error.message : String(error)}`;
+  }
+}
