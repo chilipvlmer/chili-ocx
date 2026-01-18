@@ -21,10 +21,10 @@
 		// ============================================================
 
 		{
-			"name": "chili-ocx-plugin",
+			"name": "pepper-plugin",
 			"type": "ocx:plugin",
-			"description": "Executable command plugin for Pepper harness - makes slash commands work automatically",
-			"files": ["plugin/executable-commands.js"]
+			"description": "Pepper harness plugin - provides pepper_init, pepper_status, and pepper_notepad_add tools",
+			"files": ["plugin/pepper-plugin.js"]
 		},
 
 		// ============================================================
@@ -424,6 +424,9 @@
 			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
 			"files": [],
 			"dependencies": [
+				// Plugin (provides executable tools)
+				"pepper-plugin",
+
 				// Skills (agent knowledge)
 				"prd-methodology",
 				"prd-format",
