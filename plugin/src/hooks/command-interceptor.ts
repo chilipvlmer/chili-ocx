@@ -8,15 +8,36 @@ export function createCommandInterceptor(
   ctx: PluginInput
 ): Hooks["chat.message"] {
   return async (input, output) => {
+    // Debug logging to file
+    const { writeFileSync } = await import("fs");
+    const log = (msg: string) => {
+      const timestamp = new Date().toISOString();
+      const line = `[${timestamp}] ${msg}\n`;
+      console.log(msg);
+      try {
+        writeFileSync("/tmp/chili-ocx-plugin.log", line, { flag: "a" });
+      } catch (e) {}
+    };
+    
+    log("🔍 chat.message hook called");
+    log(`  Input sessionID: ${input.sessionID}`);
+    log(`  Output parts count: ${output.parts?.length || 0}`);
+    
     const textPart = output.parts.find(p => p.type === "text");
     if (!textPart || typeof textPart.text !== "string") {
+      log("  ⚠️ No text part found or text is not a string");
       return;
     }
 
     const text = textPart.text.trim();
+    log(`  📝 Text content: "${text.substring(0, 50)}"`);
+    
     if (!text.startsWith("/")) {
+      log("  ⚠️ Text does not start with /");
       return;
     }
+    
+    log(`  ✅ Command detected: ${text}`);
 
     const [cmdName, ...args] = text.slice(1).split(/\s+/);
     
