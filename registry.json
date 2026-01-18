@@ -24,7 +24,7 @@
 			"name": "chili-ocx-plugin",
 			"type": "ocx:plugin",
 			"description": "Executable command plugin for Pepper harness - makes slash commands work automatically",
-			"files": ["plugin/executable-commands.ts"]
+			"files": ["plugin/executable-commands.js"]
 		},
 
 		// ============================================================
