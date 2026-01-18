@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "entries": [
+    {
+      "timestamp": "2026-01-18T21:24:07.075Z",
+      "content": "**Dev Branch Testing Workflow for Chili-OCX**\n\nWhen developing chili-ocx itself (meta-development):\n\n**Setup (One-time):**\n1. Create dev branch: `git checkout -b dev-feature-name`\n2. Build branch: `./scripts/build-branch.sh dev-feature-name`\n3. Create isolated ghost profile: `ocx ghost profile add dev-feature`\n4. Switch to dev profile: `ocx ghost profile use dev-feature`\n5. Add dev registry: `ocx ghost registry add file:///Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/dist-dev-feature-name --name dev-feature`\n6. Install components: `ocx ghost add dev-feature/pepper-harness`\n\n**Iterative Development:**\n1. Make code changes in the repo\n2. Rebuild: `./scripts/build-branch.sh dev-feature-name`\n3. Switch profile: `ocx ghost profile use dev-feature`\n4. Restart OpenCode: `ocx ghost opencode`\n5. Test changes\n6. Repeat\n\n**Profile Management:**\n- Production profile: `pepper-harness` (uses https://chili-ocx.pages.dev)\n- Dev profiles: Custom per branch (uses local file:// registry)\n- Switch: `ocx ghost profile use <name>`\n- List: `ocx ghost profile list`\n\n**When to Full Reset:**\n- Adding/removing components from registry.jsonc: Remove and re-add registry\n- Changing component structure: Reinstall with `ocx ghost add`\n- Code/prompt changes only: Just rebuild + restart OpenCode"
+    },
+    {
+      "timestamp": "2026-01-18T21:37:48.993Z",
+      "content": "**Testing Strategy for OCX Ghost Commands**\n\nWhen testing commands like `ocx ghost opencode` that launch interactive sessions:\n- Use **tmux parallel terminal instances** with reasonable timeouts\n- Don't run interactively - agents will wait indefinitely and get stuck\n- Example approach:\n  ```bash\n  # Start OpenCode in background tmux session\n  tmux new-session -d -s test-ghost \"ocx ghost opencode\"\n  sleep 5  # Wait for startup\n  # Run test commands\n  tmux send-keys -t test-ghost \"test command here\" C-m\n  # Check results with timeout\n  timeout 30s tmux capture-pane -t test-ghost -p\n  # Cleanup\n  tmux kill-session -t test-ghost\n  ```\n- This prevents blocking and allows automated testing of interactive workflows"
+    },
+    {
+      "timestamp": "2026-01-18T21:39:54.490Z",
+      "content": "**Automated Testing Strategy for Interactive OCX Commands**\n\nWhen writing tests for chili-ocx that involve interactive commands (e.g., `ocx ghost opencode`, `ocx ghost add`), use **tmux with timeouts** to prevent blocking:\n\n**Standard Pattern:**\n```bash\ntest_interactive_command() {\n  local session=\"test-$$\"\n  \n  # 1. Start in background tmux\n  tmux new-session -d -s \"$session\" \"ocx ghost opencode\"\n  sleep 5  # Startup time\n  \n  # 2. Send commands\n  tmux send-keys -t \"$session\" \"/command-to-test\" C-m\n  sleep 2\n  \n  # 3. Capture with timeout\n  timeout 30s tmux capture-pane -t \"$session\" -p > output.txt\n  \n  # 4. Verify results\n  grep -q \"expected output\" output.txt\n  \n  # 5. Always cleanup (even on failure)\n  tmux kill-session -t \"$session\" 2>/dev/null || true\n}\n```\n\n**Key Guidelines:**\n- Never run interactive OCX commands directly in tests - they block indefinitely\n- Use unique session names (e.g., `test-$$` with PID)\n- Set reasonable timeouts: 5s startup, 30s max per test\n- Always cleanup tmux sessions (use trap handlers for failures)\n- Capture output for debugging failed tests\n- Alternative: use `expect/pexpect` for complex multi-step interactions\n\n**Why This Matters:**\n- Prevents CI/CD pipeline hangs\n- Enables automated testing of the full Ghost workflow\n- Allows parallel test execution\n- Makes tests reproducible and reliable"
+    },
+    {
+      "timestamp": "2026-01-18T21:44:09.150Z",
+      "content": "**Feature Idea: Link .pepper/notepad to GitHub Issues**\n\nEnable agents to create GitHub issues/PRs directly from notepad entries (learnings, issues, decisions).\n\nUse cases:\n- Convert notepad issues → GitHub bug reports\n- Convert learnings → Documentation PRs\n- Convert decisions → Architecture discussion issues\n\nBenefits: Seamless transition from local development notes to public issue tracking.\n\nWorth exploring: GitHub API integration, issue templates, automatic linking."
+    },
+    {
+      "timestamp": "2026-01-18T22:51:32.835Z",
+      "content": "State Management: Ownership was unclear during RFC-001/002/003. Root cause: state.json is minimalist and doesn't track workflow. Solution direction: Use file structure as state (plan.md, RFC status fields) rather than duplicating in state.json. Convention over configuration approach - derive state by reading files rather than maintaining separate state object. This eliminates sync issues and provides single source of truth."
+    },
+    {
+      "timestamp": "2026-01-18T22:51:51.651Z",
+      "content": "Testing Timing: Tests written in RFCs but executed after implementation. Root cause: No test framework + manual testing approach. Achieved 100% pass rate but testing was post-implementation rather than TDD. Solution: Hybrid approach - critical code gets test-first treatment (even if .skip), documentation gets manual testing. Match testing rigor to risk level. Consider future RFC for test infrastructure setup."
+    },
+    {
+      "timestamp": "2026-01-18T22:52:12.394Z",
+      "content": "Notepad Usage: Exists but underutilized during RFC-001/002/003. Root cause: No workflow integration in agent prompts, manual entry required, unclear value proposition. Solution: Add notepad review to agent prompts (Seed checks learnings before RFCs, Habanero adds review findings). Consider structured format with tags and relevance indicators. The irony: We're using notepad NOW to document that notepad is underused!"
+    },
+    {
+      "timestamp": "2026-01-18T22:52:35.856Z",
+      "content": "Progress Visibility: Hard to see PRD-level completion during RFC-001/002/003. Root cause: Excellent task-level tracking (plan.md checkboxes) but no high-level view. Solution: Enhance plan.md header with PRD progress (3/5 RFCs = 60%), derive from RFC status fields in files. Consider progress visualization command (pepper_status --verbose) showing phase completion and RFC tree."
+    },
+    {
+      "timestamp": "2026-01-18T22:58:16.088Z",
+      "content": "Progress Visibility (UPDATED): The real issue isn't lack of visibility - it's that we're using plan.md checkboxes instead of OpenCode's native todolist UI. OpenCode has todowrite/todoread tools that agents can use, but usage is inconsistent (Jalapeño used it for RFC-003 then abandoned, leaving stale completed todos). Solution: Context-aware todo management - Scoville shows PRD progress, Seed shows RFC progress, Sprout/Jalapeño show execution plan. Need workflow convention: agents should clear old todos and write context-appropriate todos at session start. This provides better UX (dedicated UI panel) and leverages existing OpenCode infrastructure."
+    },
+    {
+      "timestamp": "2026-01-18T23:00:02.882Z",
+      "content": "Notepad Consolidation Pattern: When brainstorming revealed duplicate/related issues (Progress Visibility + earlier Plan-TODO Desync), consolidated into single comprehensive issue entry. This prevents notepad bloat and creates better reference material. Pattern: Read existing issues first, identify overlap, merge with enhanced solution. Result: Single \"State Management & Todo Integration\" issue now captures full problem space with concrete solution proposals."
+    }
+  ]
+}
