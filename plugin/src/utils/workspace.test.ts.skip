@@ -1,0 +1,302 @@
+/**
+ * Unit tests for workspace path resolution utilities
+ */
+
+import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
+import {
+  resolveWorkspacePath,
+  isSymlink,
+  getWorkspaceInfo,
+  WorkspaceError
+} from './workspace';
+
+describe('workspace utilities', () => {
+  let testDir: string;
+  let realDir: string;
+  let symlinkPath: string;
+
+  beforeEach(() => {
+    // Create test directory structure
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'workspace-test-'));
+    realDir = path.join(testDir, 'real-workspace');
+    symlinkPath = path.join(testDir, 'symlink-workspace');
+    
+    fs.mkdirSync(realDir);
+  });
+
+  afterEach(() => {
+    // Clean up test directories
+    fs.rmSync(testDir, { recursive: true, force: true });
+  });
+
+  describe('resolveWorkspacePath', () => {
+    test('resolves symlink to real path', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      
+      const resolved = resolveWorkspacePath(symlinkPath);
+      
+      expect(resolved).toBe(fs.realpathSync(realDir));
+      expect(resolved).not.toBe(symlinkPath);
+    });
+
+    test('returns same path for non-symlink directory', () => {
+      const resolved = resolveWorkspacePath(realDir);
+      
+      expect(resolved).toBe(fs.realpathSync(realDir));
+    });
+
+    test('resolves relative paths', () => {
+      const cwd = process.cwd();
+      process.chdir(testDir);
+      
+      try {
+        const resolved = resolveWorkspacePath('./real-workspace');
+        expect(resolved).toBe(fs.realpathSync(realDir));
+      } finally {
+        process.chdir(cwd);
+      }
+    });
+
+    test('throws WorkspaceError for non-existent path', () => {
+      const nonExistent = path.join(testDir, 'does-not-exist');
+      
+      expect(() => resolveWorkspacePath(nonExistent)).toThrow(WorkspaceError);
+      expect(() => resolveWorkspacePath(nonExistent)).toThrow(/does not exist/);
+    });
+
+    test('throws WorkspaceError for broken symlink', () => {
+      const brokenTarget = path.join(testDir, 'broken-target');
+      fs.symlinkSync(brokenTarget, symlinkPath);
+      
+      expect(() => resolveWorkspacePath(symlinkPath)).toThrow(WorkspaceError);
+      expect(() => resolveWorkspacePath(symlinkPath)).toThrow(/does not exist/);
+    });
+
+    test('throws WorkspaceError for empty path', () => {
+      expect(() => resolveWorkspacePath('')).toThrow(WorkspaceError);
+      expect(() => resolveWorkspacePath('')).toThrow(/non-empty string/);
+    });
+
+    test('throws WorkspaceError for non-string input', () => {
+      expect(() => resolveWorkspacePath(null as any)).toThrow(WorkspaceError);
+      expect(() => resolveWorkspacePath(undefined as any)).toThrow(WorkspaceError);
+      expect(() => resolveWorkspacePath(123 as any)).toThrow(WorkspaceError);
+    });
+
+    test('includes error code in WorkspaceError', () => {
+      const nonExistent = path.join(testDir, 'does-not-exist');
+      
+      try {
+        resolveWorkspacePath(nonExistent);
+        fail('Should have thrown WorkspaceError');
+      } catch (error) {
+        expect(error).toBeInstanceOf(WorkspaceError);
+        expect((error as WorkspaceError).code).toBe('ENOENT');
+      }
+    });
+
+    test('handles chained symlinks', () => {
+      const symlink1 = path.join(testDir, 'symlink1');
+      const symlink2 = path.join(testDir, 'symlink2');
+      
+      fs.symlinkSync(realDir, symlink1);
+      fs.symlinkSync(symlink1, symlink2);
+      
+      const resolved = resolveWorkspacePath(symlink2);
+      expect(resolved).toBe(fs.realpathSync(realDir));
+    });
+
+    // Platform-specific tests
+    if (process.platform !== 'win32') {
+      test('throws WorkspaceError for permission denied', () => {
+        const restrictedDir = path.join(testDir, 'restricted');
+        fs.mkdirSync(restrictedDir);
+        fs.chmodSync(restrictedDir, 0o000);
+        
+        try {
+          expect(() => resolveWorkspacePath(restrictedDir)).toThrow(WorkspaceError);
+          expect(() => resolveWorkspacePath(restrictedDir)).toThrow(/Permission denied/);
+        } finally {
+          fs.chmodSync(restrictedDir, 0o755);
+        }
+      });
+    }
+  });
+
+  describe('isSymlink', () => {
+    test('returns true for symlink', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      
+      expect(isSymlink(symlinkPath)).toBe(true);
+    });
+
+    test('returns false for regular directory', () => {
+      expect(isSymlink(realDir)).toBe(false);
+    });
+
+    test('returns true for broken symlink', () => {
+      const brokenTarget = path.join(testDir, 'broken-target');
+      fs.symlinkSync(brokenTarget, symlinkPath);
+      
+      expect(isSymlink(symlinkPath)).toBe(true);
+    });
+
+    test('throws WorkspaceError for non-existent path', () => {
+      const nonExistent = path.join(testDir, 'does-not-exist');
+      
+      expect(() => isSymlink(nonExistent)).toThrow(WorkspaceError);
+      expect(() => isSymlink(nonExistent)).toThrow(/does not exist/);
+    });
+
+    test('throws WorkspaceError for invalid input', () => {
+      expect(() => isSymlink('')).toThrow(WorkspaceError);
+      expect(() => isSymlink(null as any)).toThrow(WorkspaceError);
+    });
+
+    test('handles relative paths', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      const cwd = process.cwd();
+      process.chdir(testDir);
+      
+      try {
+        expect(isSymlink('./symlink-workspace')).toBe(true);
+        expect(isSymlink('./real-workspace')).toBe(false);
+      } finally {
+        process.chdir(cwd);
+      }
+    });
+  });
+
+  describe('getWorkspaceInfo', () => {
+    test('returns complete info for symlinked workspace', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      
+      const info = getWorkspaceInfo(symlinkPath);
+      
+      expect(info.isSymlink).toBe(true);
+      expect(info.symlink).toBe(path.resolve(symlinkPath));
+      expect(info.real).toBe(fs.realpathSync(realDir));
+      expect(info.resolvedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/); // ISO 8601 format
+    });
+
+    test('returns complete info for regular directory', () => {
+      const info = getWorkspaceInfo(realDir);
+      
+      expect(info.isSymlink).toBe(false);
+      expect(info.symlink).toBe(null);
+      expect(info.real).toBe(fs.realpathSync(realDir));
+      expect(info.resolvedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    });
+
+    test('includes timestamp in ISO 8601 format', () => {
+      const info = getWorkspaceInfo(realDir);
+      
+      const timestamp = new Date(info.resolvedAt);
+      expect(timestamp).toBeInstanceOf(Date);
+      expect(timestamp.getTime()).toBeGreaterThan(0);
+    });
+
+    test('throws WorkspaceError for broken symlink', () => {
+      const brokenTarget = path.join(testDir, 'broken-target');
+      fs.symlinkSync(brokenTarget, symlinkPath);
+      
+      expect(() => getWorkspaceInfo(symlinkPath)).toThrow(WorkspaceError);
+    });
+
+    test('handles relative paths', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      const cwd = process.cwd();
+      process.chdir(testDir);
+      
+      try {
+        const info = getWorkspaceInfo('./symlink-workspace');
+        expect(info.isSymlink).toBe(true);
+        expect(path.isAbsolute(info.real)).toBe(true);
+      } finally {
+        process.chdir(cwd);
+      }
+    });
+
+    test('returns absolute paths even for relative input', () => {
+      const cwd = process.cwd();
+      process.chdir(testDir);
+      
+      try {
+        const info = getWorkspaceInfo('./real-workspace');
+        expect(path.isAbsolute(info.real)).toBe(true);
+      } finally {
+        process.chdir(cwd);
+      }
+    });
+  });
+
+  describe('WorkspaceError', () => {
+    test('includes error name, message, and code', () => {
+      const error = new WorkspaceError('Test error', 'TEST_CODE');
+      
+      expect(error.name).toBe('WorkspaceError');
+      expect(error.message).toBe('Test error');
+      expect(error.code).toBe('TEST_CODE');
+    });
+
+    test('includes cause when provided', () => {
+      const cause = new Error('Original error');
+      const error = new WorkspaceError('Wrapped error', 'TEST_CODE', cause);
+      
+      expect(error.cause).toBe(cause);
+    });
+
+    test('is instance of Error', () => {
+      const error = new WorkspaceError('Test');
+      
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toBeInstanceOf(WorkspaceError);
+    });
+  });
+
+  describe('cross-platform compatibility', () => {
+    test('normalizes path separators', () => {
+      const info = getWorkspaceInfo(realDir);
+      
+      // Should use platform-appropriate separators
+      expect(info.real).toContain(path.sep);
+    });
+
+    test('handles absolute paths consistently', () => {
+      const absoluteReal = path.resolve(realDir);
+      const info = getWorkspaceInfo(absoluteReal);
+      
+      expect(info.real).toBe(fs.realpathSync(absoluteReal));
+    });
+  });
+
+  describe('performance', () => {
+    test('resolves path in under 10ms', () => {
+      const start = Date.now();
+      resolveWorkspacePath(realDir);
+      const duration = Date.now() - start;
+      
+      expect(duration).toBeLessThan(10);
+    });
+
+    test('checks symlink status in under 10ms', () => {
+      const start = Date.now();
+      isSymlink(realDir);
+      const duration = Date.now() - start;
+      
+      expect(duration).toBeLessThan(10);
+    });
+
+    test('gets workspace info in under 10ms', () => {
+      fs.symlinkSync(realDir, symlinkPath);
+      
+      const start = Date.now();
+      getWorkspaceInfo(symlinkPath);
+      const duration = Date.now() - start;
+      
+      expect(duration).toBeLessThan(10);
+    });
+  });
+});
