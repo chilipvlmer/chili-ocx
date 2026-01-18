@@ -1,0 +1,20 @@
+{
+  "name": "@chili-ocx/plugin",
+  "version": "1.0.0",
+  "description": "Executable command plugin for Pepper harness",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.1.20",
+    "@opencode-ai/sdk": "^1.1.20"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^22.0.0"
+  }
+}

@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "clean": "rm -rf dist plugin/dist",
+    "build:plugin": "cd plugin && npm install && npm run build",
+    "build:registry": "bunx ocx build . --out dist",
+    "build": "npm run build:plugin && npm run build:registry",
+    "rebuild": "npm run clean && npm run build"
+  },
   "dependencies": {
     "@opencode-ai/plugin": "1.1.10",
     "zod": "^3.24.1"
