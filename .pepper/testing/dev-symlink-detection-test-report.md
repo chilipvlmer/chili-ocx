@@ -547,6 +547,37 @@ During final review, a **critical testing gap** was identified:
 
 ---
 
+## Post-Merge Validation Plan
+
+**Owner**: Project maintainer (or designated tester)  
+**Timeline**: Within 24 hours of merge to main  
+**Priority**: P0 - Critical validation required
+
+**Pass Criteria**:
+1. ✅ `/pepper-init` creates `.pepper/state.json` with version "1.1.0"
+2. ✅ state.json contains workspacePath object with all fields (symlink, real, isSymlink, resolvedAt)
+3. ✅ Agent prompts visible in OpenCode TUI (spot check: Habanero, Jalapeño)
+4. ✅ No errors in plugin log (`/tmp/chili-ocx-plugin.log`) during basic workflow
+5. ✅ `/pepper-status` command works correctly
+
+**Rollback Criteria**:
+- Any P0 bug discovered during validation
+- `/pepper-init` fails or creates incorrect state.json
+- Plugin errors in log that break core functionality
+- Agent prompts fail to load
+
+**Validation Procedure**:
+1. Launch OpenCode: `ocx ghost opencode`
+2. Execute manual test checklist (see `.pepper/testing/phase-8-manual-checklist.md`)
+3. Monitor plugin log for errors
+4. Document results in test report
+5. If validation passes: Close validation task
+6. If validation fails: Create issue, consider rollback
+
+**Success Definition**: All 5 pass criteria met with zero P0 bugs found
+
+---
+
 **Report Status**: REVISED - Testing Incomplete  
 **Merge Status**: 🔴 BLOCKED - E2E Testing Required  
 **Last Updated**: 2026-01-19 21:29
