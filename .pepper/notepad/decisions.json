@@ -1,4 +1,9 @@
 {
   "version": "1.0.0",
-  "entries": []
+  "entries": [
+    {
+      "timestamp": "2026-01-19T19:32:53.154Z",
+      "content": "**Project Roadmap Decision - 2026-01-19**\n\n**Decision**: Clear path forward for chili-ocx development:\n\n1. **Complete RFC-003** (Agent Prompt Updates)\n   - Continue on `dev-symlink-detection` branch\n   - Skip feature branch creation (inconsistent with RFC-001/002 practice)\n   - Implement all 22 tasks\n\n2. **Test dev-symlink-detection branch**\n   - Validate RFC-001, RFC-002, RFC-003 improvements work together\n   - Test in real Ghost workspace scenarios\n   - Verify agent workflow improvements\n\n3. **Merge to main** (if testing proves useful)\n   - First major merge of symlink detection work\n   - Brings all Phase 1 (Foundation) + Phase 2 (Integration) improvements to main\n   - Includes: workspace utilities, pepper_init enhancement, agent prompt updates\n\n4. **Tackle remaining issues**\n   - After merge to main, address recorded notepad issues:\n     - Seed write permissions (save PRDs/RFCs directly)\n     - Sprout write permissions (save execution plans directly)\n     - Git workflow documentation\n     - State management & todo integration\n     - Other medium/low priority issues\n\n**Rationale**:\n- Focused approach: complete current work before context-switching\n- Validation before merge: ensure quality\n- Systematic issue resolution: prioritize after major milestone\n\n**Status**: RFC-003 implementation started (Phase 1)"
+    }
+  ]
 }

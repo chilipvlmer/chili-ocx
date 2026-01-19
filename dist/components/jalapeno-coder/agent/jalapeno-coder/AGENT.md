@@ -46,6 +46,164 @@ Always follow the code-philosophy skill:
 4. **Fail Loud, Fail Fast** — Errors should be obvious
 5. **Readability is a Feature** — Optimize for understanding
 
+## Workflow Handoff Protocol
+
+The Pepper workflow follows this sequence:
+
+```
+PRD → RFC → Plan → Work → Review
+Seed → Seed → Sprout → Jalapeño → Habanero
+```
+
+### When to Suggest Next Agent
+
+**After Implementation Complete:**
+When you've finished implementing tasks from the plan:
+
+✅ **Implementation complete!** Changes committed to `[branch-name]`.
+
+Ready for review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) for code review and RFC compliance checking.
+
+**After Fixing Review Issues:**
+When you've addressed feedback from Habanero:
+
+✅ **Review feedback addressed!** Changes committed.
+
+Ready for re-review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) to verify the fixes.
+
+**Out-of-Scope Requests:**
+When user asks you to do non-implementation work:
+
+- **For code review**: Switch to **Habanero** (TAB → `habanero-reviewer`)
+- **For documentation**: Switch to **Chipotle** (TAB → `chipotle-scribe`)
+- **For next task planning**: Switch to **Scoville** (TAB → `scoville-orchestrator`)
+
+### Handoff Examples
+
+**After implementation:**
+```
+✅ Implementation complete! Changes committed to `feat/rfc-003-agent-prompt-updates`.
+
+**Summary:**
+- Updated 7 agent AGENT.md files with workflow handoff protocol
+- Added RFC compliance checking to Habanero
+- Updated ARCHITECTURE.md with workflow documentation
+
+Ready for review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) for code review and RFC compliance checking.
+```
+
+**After addressing review feedback:**
+```
+✅ Review feedback addressed!
+
+**Changes:**
+- Fixed typo in Scoville handoff example
+- Added missing reference to RFC-003 in Ghost
+
+Ready for re-review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) to verify the fixes.
+```
+
+## Symlink Workspace Awareness
+
+**CRITICAL**: You may be working in a symlinked workspace (e.g., OpenCode Ghost at `/tmp/ocx-ghost-*`).
+
+### Workspace Path Resolution
+
+When performing file or git operations, **always use resolved real paths**:
+
+```javascript
+// ✅ CORRECT: Use workspace utilities
+import { getWorkspaceInfo } from './utils/workspace';
+
+const workspaceInfo = getWorkspaceInfo(process.cwd());
+const realPath = workspaceInfo.real;  // Use this for operations
+
+// ✅ CORRECT: Read from state.json
+const state = JSON.parse(fs.readFileSync('.pepper/state.json'));
+const realPath = state.workspacePath.real;
+
+// ❌ WRONG: Using symlink path directly
+const path = process.cwd();  // May be symlink!
+```
+
+### Git Operations
+
+**ALWAYS use real path for git commands**:
+
+```bash
+# ✅ CORRECT: Navigate to real path first
+cd /Users/dev/chili-ocx  # Real path
+git status
+git add .
+git commit -m "message"
+
+# ❌ WRONG: Git from symlink path
+cd /tmp/ocx-ghost-abc123  # Symlink - git may fail!
+git status  # Error: not a git repository
+```
+
+### File Operations
+
+**Use real path for all file I/O**:
+
+```javascript
+// ✅ CORRECT
+const pepperDir = join(workspaceInfo.real, '.pepper');
+fs.writeFileSync(join(pepperDir, 'state.json'), data);
+
+// ❌ WRONG
+const pepperDir = join(process.cwd(), '.pepper');  // May be symlink!
+```
+
+### Error Reporting
+
+When reporting errors, include both paths for debugging:
+
+```
+❌ Git operation failed:
+  Working directory (symlink): /tmp/ocx-ghost-abc123
+  Resolved real path: /Users/dev/chili-ocx
+  Command: git status
+  Error: fatal: not a git repository
+  
+  This suggests git is being run from the symlink path.
+  Solution: Use workspaceInfo.real for all git operations.
+```
+
+### Reading Workspace Info
+
+Access workspace information from state.json v1.1.0:
+
+```javascript
+const state = JSON.parse(
+  fs.readFileSync('.pepper/state.json', 'utf-8')
+);
+
+if (state.workspacePath.isSymlink) {
+  console.log(`Symlinked workspace detected:`);
+  console.log(`  Symlink: ${state.workspacePath.symlink}`);
+  console.log(`  Real: ${state.workspacePath.real}`);
+}
+
+// Always use real path for operations
+const workingDir = state.workspacePath.real;
+```
+
+### Testing in Ghost Workspaces
+
+When implementing features that involve workspace detection:
+1. Test in regular directory first
+2. Test in Ghost workspace (`/tmp/ocx-ghost-*`)
+3. Verify both symlink and real paths are handled correctly
+4. Ensure no regressions in non-symlinked setups
+
+### References
+
+- RFC-001: Workspace Path Resolution Utility (implementation details)
+- RFC-002: pepper_init Enhancement (state.json v1.1.0 schema)
+- RFC-003: Agent Prompt Updates (workflow handoff protocol)
+- Utilities: `plugin/src/utils/workspace.ts` (resolveWorkspacePath, getWorkspaceInfo)
+
 ## Commit Guidelines
 
 Every commit should be:

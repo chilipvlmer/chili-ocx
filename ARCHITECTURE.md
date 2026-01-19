@@ -209,6 +209,101 @@ The plugin registers tools that agents can call:
 5. **Plugin**: Executes, creates structure
 6. **Scoville**: "✅ Initialized! What's next?" (question tool)
 
+## Agent Workflow Handoff Protocol
+
+### The Pepper Workflow Sequence
+
+All Pepper agents follow a structured workflow to guide users through the development process:
+
+```
+PRD → RFC → Plan → Work → Review
+Seed → Seed → Sprout → Jalapeño → Habanero
+```
+
+Each agent completes their specialized task, then explicitly hands off to the next agent in the sequence.
+
+### How Handoffs Work
+
+**At Task Completion:**
+When an agent finishes their primary task, they provide a friendly handoff message:
+
+```
+✅ [Task] complete!
+
+Ready for the next step? Switch to **[Next Agent]** (press TAB, select `agent-id`) to [next action].
+```
+
+**For Out-of-Scope Requests:**
+When a user asks an agent to do something outside their role:
+
+```
+That's outside my role as [Role]. For [task], switch to **[Agent]** (TAB → `agent-id`).
+```
+
+### Agent Handoff Matrix
+
+| After Completion | Next Agent | Action |
+|------------------|------------|--------|
+| PRD created | Seed (same) | Create RFC specifications |
+| RFC(s) created | Sprout | Create execution plan |
+| Plan created | Jalapeño | Implement the plan |
+| Implementation done | Habanero | Code review + RFC compliance |
+| Review APPROVE | Scoville | Decide next task |
+| Review REQUEST_CHANGES | Jalapeño | Fix issues |
+| Documentation done | Scoville | Decide next task |
+| Research done | Scoville | Decide next steps |
+
+### Handoff Examples
+
+**Seed → Sprout** (after RFC creation):
+```
+✅ RFC-003 complete and saved to `.pepper/specs/rfc/v1.0.0/RFC-003-agent-prompt-updates.md`
+
+Ready for the next step? Switch to **Sprout** (press TAB, select `sprout-execution-planner`) to create an execution plan from this RFC.
+```
+
+**Sprout → Jalapeño** (after plan creation):
+```
+✅ Execution plan complete and saved to `.pepper/plan.md`!
+
+**Plan Summary:**
+- 3 phases, 22 tasks
+- Estimated time: ~2 hours
+
+Ready for the next step? Switch to **Jalapeño** (press TAB, select `jalapeno-coder`) to implement the plan.
+```
+
+**Jalapeño → Habanero** (after implementation):
+```
+✅ Implementation complete! Changes committed to `feat/rfc-003-agent-prompt-updates`.
+
+Ready for review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) for code review and RFC compliance checking.
+```
+
+**Habanero → Scoville** (after approval):
+```
+✅ Code review complete - APPROVED
+
+All RFC-003 acceptance criteria met.
+
+Ready for the next task? Switch to **Scoville** (press TAB, select `scoville-orchestrator`) to continue with RFC-004 or other work.
+```
+
+### Benefits
+
+- **Clear workflow guidance**: Users always know what to do next
+- **Reduced confusion**: No guessing which agent to switch to
+- **Consistent experience**: All agents follow the same handoff pattern
+- **Workflow enforcement**: Helps users follow PRD → RFC → Plan → Work → Review sequence
+
+### Implementation
+
+The workflow handoff protocol is implemented in each agent's AGENT.md file:
+- **Section**: "## Workflow Handoff Protocol"
+- **Location**: After "What You CANNOT Do", before other sections
+- **Content**: When to suggest next agent, handoff matrix, examples
+- **RFC**: RFC-003 - Agent Prompt Updates for Workflow & Compliance
+
 ## Key Principles
 
 ### 1. Commands Are Instructions

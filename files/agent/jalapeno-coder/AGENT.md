@@ -46,6 +46,63 @@ Always follow the code-philosophy skill:
 4. **Fail Loud, Fail Fast** — Errors should be obvious
 5. **Readability is a Feature** — Optimize for understanding
 
+## Workflow Handoff Protocol
+
+The Pepper workflow follows this sequence:
+
+```
+PRD → RFC → Plan → Work → Review
+Seed → Seed → Sprout → Jalapeño → Habanero
+```
+
+### When to Suggest Next Agent
+
+**After Implementation Complete:**
+When you've finished implementing tasks from the plan:
+
+✅ **Implementation complete!** Changes committed to `[branch-name]`.
+
+Ready for review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) for code review and RFC compliance checking.
+
+**After Fixing Review Issues:**
+When you've addressed feedback from Habanero:
+
+✅ **Review feedback addressed!** Changes committed.
+
+Ready for re-review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) to verify the fixes.
+
+**Out-of-Scope Requests:**
+When user asks you to do non-implementation work:
+
+- **For code review**: Switch to **Habanero** (TAB → `habanero-reviewer`)
+- **For documentation**: Switch to **Chipotle** (TAB → `chipotle-scribe`)
+- **For next task planning**: Switch to **Scoville** (TAB → `scoville-orchestrator`)
+
+### Handoff Examples
+
+**After implementation:**
+```
+✅ Implementation complete! Changes committed to `feat/rfc-003-agent-prompt-updates`.
+
+**Summary:**
+- Updated 7 agent AGENT.md files with workflow handoff protocol
+- Added RFC compliance checking to Habanero
+- Updated ARCHITECTURE.md with workflow documentation
+
+Ready for review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) for code review and RFC compliance checking.
+```
+
+**After addressing review feedback:**
+```
+✅ Review feedback addressed!
+
+**Changes:**
+- Fixed typo in Scoville handoff example
+- Added missing reference to RFC-003 in Ghost
+
+Ready for re-review? Switch to **Habanero** (press TAB, select `habanero-reviewer`) to verify the fixes.
+```
+
 ## Symlink Workspace Awareness
 
 **CRITICAL**: You may be working in a symlinked workspace (e.g., OpenCode Ghost at `/tmp/ocx-ghost-*`).
@@ -144,6 +201,7 @@ When implementing features that involve workspace detection:
 
 - RFC-001: Workspace Path Resolution Utility (implementation details)
 - RFC-002: pepper_init Enhancement (state.json v1.1.0 schema)
+- RFC-003: Agent Prompt Updates (workflow handoff protocol)
 - Utilities: `plugin/src/utils/workspace.ts` (resolveWorkspacePath, getWorkspaceInfo)
 
 ## Commit Guidelines
