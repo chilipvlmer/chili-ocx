@@ -1,0 +1,45 @@
+{
+  "RFC-001": {
+    "title": "Workspace Path Resolution Utility",
+    "status": "draft",
+    "priority": "P0",
+    "phase": "Foundation (Phase 1)",
+    "prdReference": "core-improvements-v1.0.0.md",
+    "created": "2026-01-18",
+    "author": "Jalapeño",
+    "scope": "Create plugin/src/utils/workspace.ts with symlink resolution utilities",
+    "deliverables": [
+      "plugin/src/utils/workspace.ts - Full implementation",
+      "plugin/src/utils/workspace.test.ts - Unit tests",
+      "Integration with existing plugin structure",
+      "README/docs updates"
+    ],
+    "dependencies": [],
+    "blockedBy": [],
+    "nextSteps": "Ready for Jalapeño implementation"
+  },
+  "RFC-003": {
+    "title": "Agent Prompt Updates for Workflow & Compliance",
+    "status": "planned",
+    "priority": "P0",
+    "phase": "Integration (Phase 2)",
+    "prdReference": "core-improvements-v1.0.0.md",
+    "created": "2026-01-19",
+    "author": "Seed",
+    "planCreated": "2026-01-19",
+    "scope": "Update all 7 agent prompts with workflow handoff protocol and RFC compliance checking",
+    "deliverables": [
+      "files/agent/scoville-orchestrator/AGENT.md - Add Workflow Handoff Protocol",
+      "files/agent/seed-prd-rfc/AGENT.md - Add Workflow Handoff Protocol",
+      "files/agent/sprout-execution-planner/AGENT.md - Add Workflow Handoff Protocol",
+      "files/agent/jalapeno-coder/AGENT.md - Add Workflow Handoff Protocol",
+      "files/agent/habanero-reviewer/AGENT.md - Add RFC Compliance + Workflow Handoff",
+      "files/agent/chipotle-scribe/AGENT.md - Add Workflow Handoff Protocol",
+      "files/agent/ghost-explorer/AGENT.md - Add Workflow Handoff Protocol",
+      "ARCHITECTURE.md - Document workflow handoff protocol"
+    ],
+    "dependencies": ["RFC-001", "RFC-002"],
+    "blockedBy": [],
+    "nextSteps": "Ready for Jalapeño implementation - start with Phase 1: Preparation"
+  }
+}
