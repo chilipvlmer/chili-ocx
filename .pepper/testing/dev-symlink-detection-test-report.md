@@ -469,3 +469,84 @@ The `dev-symlink-detection` branch has passed comprehensive testing with a 100% 
 **Report Author**: Jalapeño (Coder Agent)  
 **Test Plan**: `.pepper/plan.md`  
 **Total Test Duration**: ~1 hour
+
+---
+
+## ⚠️ CRITICAL UPDATE (Post-Review)
+
+**Date**: 2026-01-19 (Post-Testing Review)
+
+### Issue Discovered
+
+During final review, a **critical testing gap** was identified:
+
+**Missing Test Phase**: End-to-End Installation & Launch Test
+
+### What Was NOT Tested
+
+❌ **Installation from Local Registry**
+- Installing pepper-harness components from the dev branch's `dist/` directory
+- Verifying the registry is correctly formatted and discoverable
+- Confirming all 40 components can be installed
+
+❌ **Live Ghost Session**
+- Launching Ghost OpenCode with the new components
+- Testing `/pepper-init` command in a live session
+- Testing `/pepper-status` command in a live session
+- Verifying pepper_notepad_add works
+
+❌ **Agent Prompt Loading**
+- Confirming agent prompts load correctly in OpenCode
+- Verifying workflow handoff messages appear in UI
+- Testing agent switching (TAB completion)
+- Confirming RFC compliance protocol works in Habanero reviews
+
+### Risk Assessment
+
+| Risk | Severity | Impact |
+|------|----------|--------|
+| Build broken at runtime | HIGH | Users get broken components |
+| Registry malformed | HIGH | Components not installable |
+| Component metadata incorrect | MEDIUM | Features don't work |
+| Agent prompts don't load | MEDIUM | Workflow improvements invisible |
+| Tools fail in live session | HIGH | Core functionality broken |
+
+### Revised Recommendation
+
+## 🔴 **NOT READY TO MERGE**
+
+**Reason**: Critical testing phase missing
+
+**Required Before Merge**:
+1. ✅ Add Phase 8: End-to-End Installation & Launch Test to plan
+2. ⏳ Execute E2E test protocol (documented in learnings notepad)
+3. ⏳ Fix any issues discovered
+4. ⏳ Update test report with E2E results
+5. ⏳ Re-evaluate merge readiness
+
+### Test Statistics (Updated)
+
+- **Total Test Phases**: 8 (was 7)
+- **Completed Phases**: 7/8 (88%)
+- **Blocking Phase**: Phase 8 (E2E Installation & Launch)
+- **Individual Tests Passed**: 18/18 (100%)
+- **Overall Readiness**: 🔴 **INCOMPLETE**
+
+### Lessons Learned
+
+**For Future Development**: 
+- ALL branch testing MUST include end-to-end installation and launch verification
+- Code-level testing is necessary but NOT sufficient
+- Registry and runtime testing is CRITICAL before merge
+- This gap could have resulted in shipping broken components to production
+
+**Action Taken**:
+- Documented E2E testing protocol in learnings notepad
+- Added blocker issue to prevent premature merge
+- Updated all future testing plans to include mandatory E2E phase
+
+---
+
+**Report Status**: REVISED - Testing Incomplete  
+**Merge Status**: 🔴 BLOCKED - E2E Testing Required  
+**Last Updated**: 2026-01-19 21:29
