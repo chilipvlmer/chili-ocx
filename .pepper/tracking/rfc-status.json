@@ -1,12 +1,16 @@
 {
   "RFC-001": {
     "title": "Workspace Path Resolution Utility",
-    "status": "draft",
+    "status": "tested",
     "priority": "P0",
     "phase": "Foundation (Phase 1)",
     "prdReference": "core-improvements-v1.0.0.md",
     "created": "2026-01-18",
     "author": "Jalapeño",
+    "implemented": "2026-01-18",
+    "tested": "2026-01-19",
+    "commit": "b296aba",
+    "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
     "scope": "Create plugin/src/utils/workspace.ts with symlink resolution utilities",
     "deliverables": [
       "plugin/src/utils/workspace.ts - Full implementation",
@@ -16,11 +20,45 @@
     ],
     "dependencies": [],
     "blockedBy": [],
-    "nextSteps": "Ready for Jalapeño implementation"
+    "testResults": {
+      "totalTests": 6,
+      "passed": 6,
+      "failed": 0,
+      "acceptanceCriteria": "4/6 met, 2/6 partial (acceptable)"
+    },
+    "nextSteps": "Ready to merge - all tests passed"
+  },
+  "RFC-002": {
+    "title": "pepper_init Enhancement - Workspace Path Resolution Integration",
+    "status": "tested",
+    "priority": "P0",
+    "phase": "Foundation (Phase 1)",
+    "prdReference": "core-improvements-v1.0.0.md",
+    "created": "2026-01-18",
+    "author": "Seed",
+    "implemented": "2026-01-18",
+    "tested": "2026-01-19",
+    "commit": "8ee3c24",
+    "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
+    "scope": "Integrate workspace path resolution into pepper_init tool",
+    "deliverables": [
+      "plugin/src/utils/pepper-io.ts - Enhanced initPepperStructure()",
+      "state.json v1.1.0 schema with workspacePath",
+      "Backward compatibility maintained"
+    ],
+    "dependencies": ["RFC-001"],
+    "blockedBy": [],
+    "testResults": {
+      "totalTests": 6,
+      "passed": 6,
+      "failed": 0,
+      "acceptanceCriteria": "6/6 met (100%)"
+    },
+    "nextSteps": "Ready to merge - all tests passed"
   },
   "RFC-003": {
     "title": "Agent Prompt Updates for Workflow & Compliance",
-    "status": "implemented",
+    "status": "tested",
     "priority": "P0",
     "phase": "Integration (Phase 2)",
     "prdReference": "core-improvements-v1.0.0.md",
@@ -28,7 +66,9 @@
     "author": "Seed",
     "planCreated": "2026-01-19",
     "implemented": "2026-01-19",
+    "tested": "2026-01-19",
     "commit": "ae5a686",
+    "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
     "scope": "Update all 7 agent prompts with workflow handoff protocol and RFC compliance checking",
     "deliverables": [
       "files/agent/scoville-orchestrator/AGENT.md - Add Workflow Handoff Protocol",
@@ -42,6 +82,12 @@
     ],
     "dependencies": ["RFC-001", "RFC-002"],
     "blockedBy": [],
-    "nextSteps": "Completed - all acceptance criteria met (10/10)"
+    "testResults": {
+      "totalTests": 4,
+      "passed": 4,
+      "failed": 0,
+      "acceptanceCriteria": "6/10 met, 4/10 cannot verify (static/interactive - code confirmed)"
+    },
+    "nextSteps": "Ready to merge - all tests passed"
   }
 }
