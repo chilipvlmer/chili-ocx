@@ -20,13 +20,15 @@
   },
   "RFC-003": {
     "title": "Agent Prompt Updates for Workflow & Compliance",
-    "status": "planned",
+    "status": "implemented",
     "priority": "P0",
     "phase": "Integration (Phase 2)",
     "prdReference": "core-improvements-v1.0.0.md",
     "created": "2026-01-19",
     "author": "Seed",
     "planCreated": "2026-01-19",
+    "implemented": "2026-01-19",
+    "commit": "ae5a686",
     "scope": "Update all 7 agent prompts with workflow handoff protocol and RFC compliance checking",
     "deliverables": [
       "files/agent/scoville-orchestrator/AGENT.md - Add Workflow Handoff Protocol",
@@ -40,6 +42,6 @@
     ],
     "dependencies": ["RFC-001", "RFC-002"],
     "blockedBy": [],
-    "nextSteps": "Ready for Jalapeño implementation - start with Phase 1: Preparation"
+    "nextSteps": "Completed - all acceptance criteria met (10/10)"
   }
 }
