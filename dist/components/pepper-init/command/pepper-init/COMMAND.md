@@ -1,7 +1,7 @@
 ---
 name: pepper-init
 description: Initialize .pepper/ directory structure in the current project
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 The user has requested to initialize the Pepper harness.
