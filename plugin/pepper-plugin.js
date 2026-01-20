@@ -90,7 +90,7 @@ function initPepperStructure(projectDir) {
     workspaceInfo = getWorkspaceInfo(projectDir);
   } catch (error) {
     if (error instanceof WorkspaceError) {
-      return `❌ Failed to resolve workspace path: ${error.message}
+      return `\u274C Failed to resolve workspace path: ${error.message}
 
 Please ensure:
 - The path exists and is accessible
@@ -102,7 +102,7 @@ Please ensure:
   const resolvedDir = workspaceInfo.real;
   const pepperDir = join(resolvedDir, ".pepper");
   if (existsSync(pepperDir)) {
-    return "✅ .pepper/ already initialized\n\nRun /status to see current state.";
+    return "\u2705 .pepper/ already initialized\n\nRun /status to see current state.";
   }
   const dirs = [
     "specs/prd",
@@ -151,11 +151,11 @@ Please ensure:
 (Tasks will appear here after running /plan)
 `;
   writeFileSync(join(pepperDir, "plan.md"), planTemplate);
-  let successMessage = `✅ Initialized .pepper/ structure`;
+  let successMessage = `\u2705 Initialized .pepper/ structure`;
   if (workspaceInfo.isSymlink) {
     successMessage += `
 
-📍 Workspace resolved:
+\u{1F4CD} Workspace resolved:
 `;
     successMessage += `  Symlink: ${workspaceInfo.symlink}
 `;
