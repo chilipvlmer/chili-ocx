@@ -1,7 +1,7 @@
 ---
 name: auto-continue
 description: Toggle auto-continue mode
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 # Auto-Continue

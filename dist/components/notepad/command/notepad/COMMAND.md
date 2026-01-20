@@ -1,7 +1,7 @@
 ---
 name: notepad
 description: View or add notepad entries
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 # Notepad

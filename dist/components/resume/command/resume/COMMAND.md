@@ -1,7 +1,7 @@
 ---
 name: resume
 description: Resume work after context compaction
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 # /resume

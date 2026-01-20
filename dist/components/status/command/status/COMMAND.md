@@ -1,7 +1,7 @@
 ---
 name: status
 description: Show current plan progress and state
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 # Show Current Status

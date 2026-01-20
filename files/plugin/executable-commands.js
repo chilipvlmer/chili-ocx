@@ -1,11 +1,11 @@
-// ../../../../../../../../Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/plugin/dist/index.js
+// dist/index.js
 import { tool } from "@opencode-ai/plugin";
 
-// ../../../../../../../../Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/plugin/dist/utils/pepper-io.js
+// dist/utils/pepper-io.js
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
 
-// ../../../../../../../../Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/plugin/dist/utils/workspace.js
+// dist/utils/workspace.js
 import * as fs from "fs";
 import * as path from "path";
 var WorkspaceError = class _WorkspaceError extends Error {
@@ -83,7 +83,7 @@ function getWorkspaceInfo(workspacePath) {
   return info;
 }
 
-// ../../../../../../../../Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/plugin/dist/utils/pepper-io.js
+// dist/utils/pepper-io.js
 function initPepperStructure(projectDir) {
   let workspaceInfo;
   try {
@@ -313,7 +313,7 @@ function addNotepadEntry(projectDir, notepadType, entry) {
   }
 }
 
-// ../../../../../../../../Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx/plugin/dist/index.js
+// dist/index.js
 import { writeFileSync as writeFileSync2 } from "fs";
 var ChiliOcxPlugin = async (ctx) => {
   const logFile = "/tmp/chili-ocx-plugin.log";
@@ -376,7 +376,7 @@ var ChiliOcxPlugin = async (ctx) => {
     throw error;
   }
 };
-var dist_default = ChiliOcxPlugin;
+var index_default = ChiliOcxPlugin;
 export {
-  dist_default as default
+  index_default as default
 };

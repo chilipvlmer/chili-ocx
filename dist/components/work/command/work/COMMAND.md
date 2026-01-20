@@ -1,7 +1,7 @@
 ---
 name: work
 description: Start or resume execution of current plan
-agent: scoville
+agent: scoville-orchestrator
 ---
 
 # Continue Work
