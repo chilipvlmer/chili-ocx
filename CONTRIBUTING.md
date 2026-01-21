@@ -198,7 +198,7 @@ git push origin add-my-component
 
 ## 🎨 Code Style
 
-Follow "The 5 Laws of Elegant Defense" (see [AGENTS.md](AGENTS.md)):
+Follow "The 5 Laws of Elegant Defense" (see [README.md](README.md#agents)):
 
 1. **Early Exit** - Guard clauses at the top
 2. **Parse, Don't Validate** - Use Zod schemas
@@ -235,7 +235,7 @@ Found a bug or have a feature request?
 ## 💬 Questions?
 
 - Open an issue with the `question` label
-- Check existing documentation in [AGENTS.md](AGENTS.md)
+- Check existing documentation in [README.md](README.md)
 - Review the [OCX documentation](https://github.com/kdcokenny/ocx)
 
 ## 📄 License

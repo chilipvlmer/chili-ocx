@@ -1,6 +1,6 @@
 ---
 status: in-progress
-phase: 3
+phase: 5
 created: 2026-01-21
 priority: P0-P1 (Critical), then P2-P3
 rfc: none
@@ -91,25 +91,25 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost H-2 prevention
   - Acceptance: No dist artifacts tracked in git
 
-## Phase 3: AI Slop Removal (P2) [COMPLETED]
+## Phase 3: AI Slop Removal (P2) [NOT STARTED]
 
 ### Documentation Slop Cleanup
 
-- [x] **3.1 Archive SESSION-SUMMARY.md** ✅ COMPLETED
+- [ ] **3.1 Archive SESSION-SUMMARY.md**
   - Current: Root `SESSION-SUMMARY.md` (261 lines of AI-generated session notes)
   - Action: Move to `.pepper/archive/ai-slop/SESSION-SUMMARY-2026-01-18.md`
   - Reason: Contains useful historical context but is AI slop in wrong location
   - Source: Ghost M-1
   - Acceptance: Root clean, file archived with date
 
-- [x] **3.2 Archive PLUGIN-TESTING.md** ✅ COMPLETED
+- [ ] **3.2 Archive PLUGIN-TESTING.md**
   - Current: Root `PLUGIN-TESTING.md` (216 lines of testing notes)
   - Action: Move to `.pepper/archive/ai-slop/PLUGIN-TESTING-2026-01-18.md`
   - Reason: Temporary testing documentation, AI-generated
   - Source: Ghost M-1
   - Acceptance: Root clean, file archived
 
-- [x] **3.3 Archive COMMANDS.md** ✅ COMPLETED
+- [ ] **3.3 Archive COMMANDS.md**
   - Current: Root `COMMANDS.md` (200 lines of command reference)
   - Action: Move to `.pepper/archive/ai-slop/COMMANDS-2026-01-18.md`
   - Reason: Redundant with actual COMMAND.md files, AI-generated
@@ -117,7 +117,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost M-1
   - Acceptance: Root clean, content preserved if needed
 
-- [x] **3.4 Archive ARCHITECTURE.md** ✅ COMPLETED
+- [ ] **3.4 Archive ARCHITECTURE.md**
   - Current: Root `ARCHITECTURE.md` (375 lines of architecture notes)
   - Action: Move to `.pepper/archive/ai-slop/ARCHITECTURE-2026-01-18.md`
   - Reason: Verbose AI slop, useful info should go in proper docs
@@ -125,7 +125,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost M-1
   - Acceptance: Root clean, useful content extracted
 
-- [x] **3.5 Create .pepper/archive/ structure** ✅ COMPLETED
+- [ ] **3.5 Create .pepper/archive/ structure**
   - Directories:
     - `.pepper/archive/ai-slop/` - Temporary AI-generated docs
     - `.pepper/archive/testing/` - Old test reports
@@ -134,37 +134,36 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost M-1, M-2, L-1
   - Acceptance: Archive structure exists with README
 
-## Phase 4: Documentation Fixes (P2) [NOT STARTED]
+## Phase 4: Documentation Fixes (P2) [COMPLETED]
 
 ### README Corrections
 
-- [ ] **4.1 Fix README agent count inconsistency** ← CURRENT
+- [x] **4.1 Fix README agent count inconsistency** ✅ COMPLETED (FALSE POSITIVE)
   - File: `README.md`
   - Line 9: Claims "7 agents"
-  - Table (lines 20-30): Shows only 6 agents
-  - Issue: Missing one agent in table
-  - Fix: Verify actual agent count (7 is correct: Scoville, Seed, Sprout, Jalapeño, Chipotle, Habanero, Ghost)
-  - Ensure table lists all 7
+  - Table (lines 20-30): Shows all 7 agents (Scoville, Seed, Sprout, Jalapeño, Chipotle, Habanero, Ghost)
+  - Issue: **FALSE POSITIVE** - Count is actually correct
+  - No fix needed
   - Source: Ghost D-1
-  - Acceptance: README claim matches table count
+  - Acceptance: README claim matches table count ✅
 
 ### CONTRIBUTING Fixes
 
-- [ ] **4.2 Fix CONTRIBUTING.md broken reference**
+- [x] **4.2 Fix CONTRIBUTING.md broken reference** ✅ COMPLETED
   - File: `CONTRIBUTING.md`
   - Lines: 201, 238
   - Current: References `AGENTS.md` (doesn't exist)
-  - Fix Option 1: Create `AGENTS.md` with agent documentation
-  - Fix Option 2: Change references to point to README.md agent table
-  - Fix Option 3: Remove references if not needed
+  - Fix Applied: Changed references to point to README.md
+    - Line 201: Now references `README.md#agents`
+    - Line 238: Now references `README.md`
   - Source: Ghost D-2
-  - Acceptance: No broken links in CONTRIBUTING.md
+  - Acceptance: No broken links in CONTRIBUTING.md ✅
 
 ## Phase 5: Documentation Consolidation (P2-P3) [NOT STARTED]
 
 ### Verify pepper-structure.md Accuracy
 
-- [ ] **5.1 Cross-check docs/pepper-structure.md**
+- [ ] **5.1 Cross-check docs/pepper-structure.md** ← CURRENT
   - File: `docs/pepper-structure.md`
   - Action: Compare documented structure vs actual `.pepper/` implementation
   - Check: Directory tree, file purposes, state.json schema
@@ -316,9 +315,9 @@ Address all critical, medium, and low priority issues identified by Ghost during
 - [x] **AC-4**: Only `dist/` directory exists (no dist-* variants)
 
 ### High Priority (P2) - Should Complete
-- [x] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
-- [ ] **AC-6**: README agent count matches table
-- [ ] **AC-7**: CONTRIBUTING.md has no broken links
+- [ ] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
+- [x] **AC-6**: README agent count matches table (was already correct)
+- [x] **AC-7**: CONTRIBUTING.md has no broken links
 - [ ] **AC-8**: Completed RFC-004 plan archived
 
 ### Medium Priority (P3) - Nice to Have
@@ -368,4 +367,4 @@ Address all critical, medium, and low priority issues identified by Ghost during
 **Plan Status**: IN PROGRESS  
 **Created**: 2026-01-21  
 **Based On**: Ghost Exploration Report  
-**Next Step**: Execute Phase 4, Task 4.1 (Fix README agent count inconsistency)
+**Next Step**: Execute Phase 5, Task 5.1 (Cross-check docs/pepper-structure.md)
