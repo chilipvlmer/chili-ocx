@@ -1,7 +1,7 @@
 {
   "scripts": {
     "clean": "rm -rf dist plugin/dist",
-    "build:plugin": "cd plugin && npm install && npm run build && cp dist/bundle.js ../plugin/pepper-plugin.js && cp dist/bundle.js ../files/plugin/executable-commands.js",
+    "build:plugin": "cd plugin && npm install && npm run build && cp dist/bundle.js ../plugin/pepper-plugin.js && cp dist/bundle.js ../files/plugin/executable-commands.js && cp dist/bundle.js ../files/plugin/pepper-plugin.js",
     "build:registry": "bunx ocx build . --out dist",
     "build": "npm run build:plugin && npm run build:registry",
     "rebuild": "npm run clean && npm run build"

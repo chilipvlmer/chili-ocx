@@ -199,13 +199,16 @@
 							"bash": false,
 							"question": true
 						},
-						"permission": {
-							"edit": "deny",
-							"write": {
-								".pepper/**": "allow",
-								"*": "deny"
-							}
+					"permission": {
+						"edit": {
+							".pepper/**": "allow",
+							"*": "deny"
+						},
+						"write": {
+							".pepper/**": "allow",
+							"*": "deny"
 						}
+					}
 					}
 				}
 			}
