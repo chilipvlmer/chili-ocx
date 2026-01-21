@@ -41,18 +41,33 @@ Uses `← CURRENT` marker to track progress.
 
 ### state.json
 
-Session coordination tracking:
+Session coordination and workspace tracking (v1.1.0):
 
 ```json
 {
-  "active_plan": ".pepper/plan.md",
-  "session_ids": ["abc123", "def456"],
-  "started_at": "2026-01-14T10:00:00Z",
-  "auto_continue": true,
-  "current_phase": 1,
-  "current_task": "1.2"
+  "version": "1.1.0",
+  "initialized": "2026-01-20T20:16:00.000Z",
+  "workspacePath": {
+    "symlink": null,
+    "real": "/path/to/project",
+    "isSymlink": false,
+    "resolvedAt": "2026-01-20T21:54:00.000Z"
+  },
+  "session_ids": [],
+  "auto_continue": false
 }
 ```
+
+**Fields:**
+- `version` - State schema version (current: 1.1.0)
+- `initialized` - When .pepper/ was first created
+- `workspacePath` - Resolved workspace paths (handles symlinks like Ghost mode)
+  - `symlink` - Symlink path if workspace is symlinked, null otherwise
+  - `real` - Real filesystem path (always present)
+  - `isSymlink` - Boolean flag
+  - `resolvedAt` - When path was resolved
+- `session_ids` - Array of active session IDs
+- `auto_continue` - Auto-continue mode flag
 
 ### notepad/
 

@@ -151,6 +151,17 @@ ocx ghost add chili-ocx/pepper-protocol
 | worktree-manager | Git worktree isolation for parallel work |
 | toast-status | Dynamic delegation status display |
 
+## Development
+
+### Documentation
+
+- **[Plugin Development Guide](docs/PLUGIN-DEVELOPMENT.md)** - How to develop, build, and deploy plugins
+- **[Pepper Directory Structure](docs/pepper-structure.md)** - Understanding the `.pepper/` directory
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and agent workflow protocols.
+
 ## License
 
 MIT

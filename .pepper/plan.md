@@ -1,6 +1,6 @@
 ---
 status: in-progress
-phase: 5
+phase: 6
 created: 2026-01-21
 priority: P0-P1 (Critical), then P2-P3
 rfc: none
@@ -159,21 +159,21 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost D-2
   - Acceptance: No broken links in CONTRIBUTING.md ✅
 
-## Phase 5: Documentation Consolidation (P2-P3) [NOT STARTED]
+## Phase 5: Documentation Consolidation (P2-P3) [COMPLETED]
 
 ### Verify pepper-structure.md Accuracy
 
-- [ ] **5.1 Cross-check docs/pepper-structure.md** ← CURRENT
+- [x] **5.1 Cross-check docs/pepper-structure.md** ✅ COMPLETED
   - File: `docs/pepper-structure.md`
   - Action: Compare documented structure vs actual `.pepper/` implementation
   - Check: Directory tree, file purposes, state.json schema
-  - Update: Fix any discrepancies found
+  - Update: **UPDATED** - state.json schema was outdated (showed v1.0.0, actual is v1.1.0 with workspace path tracking)
   - Source: Ghost D-3
-  - Acceptance: Documentation matches implementation
+  - Acceptance: Documentation matches implementation ✅
 
 ### Create Plugin Development Documentation
 
-- [ ] **5.2 Create PLUGIN-DEVELOPMENT.md**
+- [x] **5.2 Create PLUGIN-DEVELOPMENT.md** ✅ COMPLETED
   - Location: `docs/PLUGIN-DEVELOPMENT.md`
   - Content:
     - Plugin architecture overview
@@ -182,20 +182,20 @@ Address all critical, medium, and low priority issues identified by Ghost during
     - Testing methodology
     - Deployment to files/plugin/
   - Source: Ghost D-4
-  - Acceptance: Clear plugin development guide exists
+  - Acceptance: Clear plugin development guide exists ✅
 
-- [ ] **5.3 Update README to link new docs**
+- [x] **5.3 Update README to link new docs** ✅ COMPLETED
   - Add section: "## Development"
   - Link to `docs/PLUGIN-DEVELOPMENT.md`
   - Link to `docs/pepper-structure.md`
   - Source: Ghost D-4
-  - Acceptance: Developers can find plugin docs from README
+  - Acceptance: Developers can find plugin docs from README ✅
 
 ## Phase 6: Archive and Cleanup (P3) [NOT STARTED]
 
 ### Archive Completed Plans
 
-- [ ] **6.1 Archive RFC-004 completed plan**
+- [ ] **6.1 Archive RFC-004 completed plan** ← CURRENT
   - Current: `.pepper/plan.md` (334 lines, status: complete)
   - Action: Move to `.pepper/plans/RFC-004-fix-log-output-leak-COMPLETED.md`
   - Update: Add completion timestamp to filename
@@ -321,7 +321,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 - [ ] **AC-8**: Completed RFC-004 plan archived
 
 ### Medium Priority (P3) - Nice to Have
-- [ ] **AC-9**: Plugin development documentation exists
+- [x] **AC-9**: Plugin development documentation exists
 - [ ] **AC-10**: Test reports archived
 - [ ] **AC-11**: CHANGELOG updated
 - [ ] **AC-12**: Cleanup summary created
