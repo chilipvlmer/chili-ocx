@@ -1,6 +1,6 @@
 ---
 status: in-progress
-phase: 1
+phase: 3
 created: 2026-01-21
 priority: P0-P1 (Critical), then P2-P3
 rfc: none
@@ -30,7 +30,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 | Archive test reports | Move to `.pepper/testing/archive/` | Ghost M-2: Test report cleanup |
 | Document plugin development | Create PLUGIN-DEVELOPMENT.md with proper guidance | Ghost D-4: Missing plugin docs |
 
-## Phase 1: Critical Bug Fixes (P0-P1) [IN PROGRESS]
+## Phase 1: Critical Bug Fixes (P0-P1) [COMPLETED]
 
 ### Build Script Fix
 
@@ -54,11 +54,11 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost Q-1
   - Acceptance: Sprout can edit `.pepper/plan.md` without permission errors
 
-## Phase 2: File Deletion & Consolidation (P0-P1) [NOT STARTED]
+## Phase 2: File Deletion & Consolidation (P0-P1) [COMPLETED]
 
 ### Legacy Directory Cleanup
 
-- [ ] **2.1 Delete .sisyphus/ directory** ← CURRENT
+- [x] **2.1 Delete .sisyphus/ directory** ✅ COMPLETED
   - Path: `.sisyphus/`
   - Contents: Old Sisyphus harness files (plans, specs, notepads)
   - Action: Delete entire directory recursively
@@ -68,7 +68,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 
 ### Dist Directory Consolidation
 
-- [ ] **2.2 Delete dist-dev-symlink-detection/ directory**
+- [x] **2.2 Delete dist-dev-symlink-detection/ directory** ✅ COMPLETED
   - Path: `dist-dev-symlink-detection/`
   - Contents: Development build artifacts from symlink detection testing
   - Action: Delete entire directory recursively
@@ -76,7 +76,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost H-2
   - Acceptance: `dist-dev-symlink-detection/` no longer exists
 
-- [ ] **2.3 Delete dist-main/ directory**
+- [x] **2.3 Delete dist-main/ directory** ✅ COMPLETED
   - Path: `dist-main/`
   - Contents: Old main branch dist artifacts
   - Action: Delete entire directory recursively
@@ -84,7 +84,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost H-2
   - Acceptance: `dist-main/` no longer exists, only `dist/` remains
 
-- [ ] **2.4 Verify .gitignore excludes dist variants**
+- [x] **2.4 Verify .gitignore excludes dist variants** ✅ COMPLETED
   - File: `.gitignore`
   - Check: `dist/`, `dist-*/`, and `plugin/dist/` are excluded
   - Add if missing: `dist-*/` pattern to catch future variants
@@ -95,7 +95,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 
 ### Documentation Slop Cleanup
 
-- [ ] **3.1 Archive SESSION-SUMMARY.md**
+- [ ] **3.1 Archive SESSION-SUMMARY.md** ← CURRENT
   - Current: Root `SESSION-SUMMARY.md` (261 lines of AI-generated session notes)
   - Action: Move to `.pepper/archive/ai-slop/SESSION-SUMMARY-2026-01-18.md`
   - Reason: Contains useful historical context but is AI slop in wrong location
@@ -312,8 +312,8 @@ Address all critical, medium, and low priority issues identified by Ghost during
 ### Critical (P0-P1) - Must Complete
 - [x] **AC-1**: Build script copies to all three plugin locations
 - [x] **AC-2**: Registry permissions allow Sprout/Seed to edit `.pepper/**`
-- [ ] **AC-3**: `.sisyphus/` directory deleted
-- [ ] **AC-4**: Only `dist/` directory exists (no dist-* variants)
+- [x] **AC-3**: `.sisyphus/` directory deleted
+- [x] **AC-4**: Only `dist/` directory exists (no dist-* variants)
 
 ### High Priority (P2) - Should Complete
 - [ ] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
@@ -368,4 +368,4 @@ Address all critical, medium, and low priority issues identified by Ghost during
 **Plan Status**: IN PROGRESS  
 **Created**: 2026-01-21  
 **Based On**: Ghost Exploration Report  
-**Next Step**: Execute Phase 2, Task 2.1 (Delete .sisyphus/ directory)
+**Next Step**: Execute Phase 3, Task 3.1 (Archive SESSION-SUMMARY.md)
