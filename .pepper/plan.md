@@ -91,25 +91,25 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost H-2 prevention
   - Acceptance: No dist artifacts tracked in git
 
-## Phase 3: AI Slop Removal (P2) [NOT STARTED]
+## Phase 3: AI Slop Removal (P2) [COMPLETED]
 
 ### Documentation Slop Cleanup
 
-- [ ] **3.1 Archive SESSION-SUMMARY.md** ← CURRENT
+- [x] **3.1 Archive SESSION-SUMMARY.md** ✅ COMPLETED
   - Current: Root `SESSION-SUMMARY.md` (261 lines of AI-generated session notes)
   - Action: Move to `.pepper/archive/ai-slop/SESSION-SUMMARY-2026-01-18.md`
   - Reason: Contains useful historical context but is AI slop in wrong location
   - Source: Ghost M-1
   - Acceptance: Root clean, file archived with date
 
-- [ ] **3.2 Archive PLUGIN-TESTING.md**
+- [x] **3.2 Archive PLUGIN-TESTING.md** ✅ COMPLETED
   - Current: Root `PLUGIN-TESTING.md` (216 lines of testing notes)
   - Action: Move to `.pepper/archive/ai-slop/PLUGIN-TESTING-2026-01-18.md`
   - Reason: Temporary testing documentation, AI-generated
   - Source: Ghost M-1
   - Acceptance: Root clean, file archived
 
-- [ ] **3.3 Archive COMMANDS.md**
+- [x] **3.3 Archive COMMANDS.md** ✅ COMPLETED
   - Current: Root `COMMANDS.md` (200 lines of command reference)
   - Action: Move to `.pepper/archive/ai-slop/COMMANDS-2026-01-18.md`
   - Reason: Redundant with actual COMMAND.md files, AI-generated
@@ -117,7 +117,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost M-1
   - Acceptance: Root clean, content preserved if needed
 
-- [ ] **3.4 Archive ARCHITECTURE.md**
+- [x] **3.4 Archive ARCHITECTURE.md** ✅ COMPLETED
   - Current: Root `ARCHITECTURE.md` (375 lines of architecture notes)
   - Action: Move to `.pepper/archive/ai-slop/ARCHITECTURE-2026-01-18.md`
   - Reason: Verbose AI slop, useful info should go in proper docs
@@ -125,7 +125,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost M-1
   - Acceptance: Root clean, useful content extracted
 
-- [ ] **3.5 Create .pepper/archive/ structure**
+- [x] **3.5 Create .pepper/archive/ structure** ✅ COMPLETED
   - Directories:
     - `.pepper/archive/ai-slop/` - Temporary AI-generated docs
     - `.pepper/archive/testing/` - Old test reports
@@ -138,7 +138,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 
 ### README Corrections
 
-- [ ] **4.1 Fix README agent count inconsistency**
+- [ ] **4.1 Fix README agent count inconsistency** ← CURRENT
   - File: `README.md`
   - Line 9: Claims "7 agents"
   - Table (lines 20-30): Shows only 6 agents
@@ -316,7 +316,7 @@ Address all critical, medium, and low priority issues identified by Ghost during
 - [x] **AC-4**: Only `dist/` directory exists (no dist-* variants)
 
 ### High Priority (P2) - Should Complete
-- [ ] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
+- [x] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
 - [ ] **AC-6**: README agent count matches table
 - [ ] **AC-7**: CONTRIBUTING.md has no broken links
 - [ ] **AC-8**: Completed RFC-004 plan archived
@@ -368,4 +368,4 @@ Address all critical, medium, and low priority issues identified by Ghost during
 **Plan Status**: IN PROGRESS  
 **Created**: 2026-01-21  
 **Based On**: Ghost Exploration Report  
-**Next Step**: Execute Phase 3, Task 3.1 (Archive SESSION-SUMMARY.md)
+**Next Step**: Execute Phase 4, Task 4.1 (Fix README agent count inconsistency)
