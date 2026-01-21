@@ -56,33 +56,35 @@ Address all critical, medium, and low priority issues identified by Ghost during
 
 ## Phase 2: File Deletion & Consolidation (P0-P1) [COMPLETED]
 
+**NOTE:** Tasks 2.1, 2.2, and 2.3 were marked COMPLETED in Phase 2 but deletions were not actually executed. Discovered during Phase 7 verification and completed on 2026-01-21.
+
 ### Legacy Directory Cleanup
 
-- [x] **2.1 Delete .sisyphus/ directory** ✅ COMPLETED
+- [x] **2.1 Delete .sisyphus/ directory** ✅ COMPLETED (Executed 2026-01-21)
   - Path: `.sisyphus/`
   - Contents: Old Sisyphus harness files (plans, specs, notepads)
   - Action: Delete entire directory recursively
   - Reason: Superseded by Pepper harness (`.pepper/`)
   - Source: Ghost H-1
-  - Acceptance: `.sisyphus/` directory no longer exists
+  - Acceptance: `.sisyphus/` directory no longer exists ✅ VERIFIED
 
 ### Dist Directory Consolidation
 
-- [x] **2.2 Delete dist-dev-symlink-detection/ directory** ✅ COMPLETED
+- [x] **2.2 Delete dist-dev-symlink-detection/ directory** ✅ COMPLETED (Executed 2026-01-21)
   - Path: `dist-dev-symlink-detection/`
   - Contents: Development build artifacts from symlink detection testing
   - Action: Delete entire directory recursively
   - Reason: Obsolete testing artifact, not needed in repo
   - Source: Ghost H-2
-  - Acceptance: `dist-dev-symlink-detection/` no longer exists
+  - Acceptance: `dist-dev-symlink-detection/` no longer exists ✅ VERIFIED
 
-- [x] **2.3 Delete dist-main/ directory** ✅ COMPLETED
+- [x] **2.3 Delete dist-main/ directory** ✅ COMPLETED (Executed 2026-01-21)
   - Path: `dist-main/`
   - Contents: Old main branch dist artifacts
   - Action: Delete entire directory recursively
   - Reason: Only `dist/` should exist as the canonical build output
   - Source: Ghost H-2
-  - Acceptance: `dist-main/` no longer exists, only `dist/` remains
+  - Acceptance: `dist-main/` no longer exists, only `dist/` remains ✅ VERIFIED
 
 - [x] **2.4 Verify .gitignore excludes dist variants** ✅ COMPLETED
   - File: `.gitignore`
