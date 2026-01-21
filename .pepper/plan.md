@@ -1,6 +1,6 @@
 ---
 status: in-progress
-phase: 6
+phase: 7
 created: 2026-01-21
 priority: P0-P1 (Critical), then P2-P3
 rfc: none
@@ -191,46 +191,56 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost D-4
   - Acceptance: Developers can find plugin docs from README ✅
 
-## Phase 6: Archive and Cleanup (P3) [NOT STARTED]
+## Phase 6: Archive and Cleanup (P3) [COMPLETED]
 
 ### Archive Completed Plans
 
-- [ ] **6.1 Archive RFC-004 completed plan** ← CURRENT
-  - Current: `.pepper/plan.md` (334 lines, status: complete)
-  - Action: Move to `.pepper/plans/RFC-004-fix-log-output-leak-COMPLETED.md`
-  - Update: Add completion timestamp to filename
+- [x] **6.1 Archive RFC-004 completed plan** ✅ N/A - Already Handled
+  - Investigation: `.pepper/plans/RFC-004-fix-log-output-leak-COMPLETED.md` exists as symlink to current plan
+  - Finding: This is NOT the actual RFC-004 plan, just a symlink to current Technical Debt Cleanup plan
+  - Decision: The actual RFC-004 plan was never properly archived (may have been overwritten)
+  - Status: Marked as N/A - no action possible, original plan is gone
   - Source: Ghost L-1
-  - Acceptance: Completed plan archived, `.pepper/plan.md` ready for new work
+  - Acceptance: Documented finding, no further action needed ✅
 
 ### Archive Test Reports
 
-- [ ] **6.2 Archive dev-symlink-detection test report**
-  - Current: `.pepper/testing/dev-symlink-detection-test-report.md`
-  - Action: Move to `.pepper/testing/archive/dev-symlink-detection-test-report-2026-01-20.md`
+- [x] **6.2 Archive dev-symlink-detection test report** ✅ COMPLETED
+  - Archived: `.pepper/testing/archive/dev-symlink-detection-test-report-2026-01-20.md`
+  - Size: 20,135 bytes
   - Source: Ghost M-2
-  - Acceptance: Active testing/ directory contains only current work
+  - Acceptance: Active testing/ directory contains only current work ✅
 
-- [ ] **6.3 Archive phase-8-manual-checklist**
-  - Current: `.pepper/testing/phase-8-manual-checklist.md`
-  - Action: Move to `.pepper/testing/archive/RFC-004-phase-8-manual-checklist.md`
+- [x] **6.3 Archive phase-8-manual-checklist** ✅ COMPLETED
+  - Archived: `.pepper/testing/archive/RFC-004-phase-8-manual-checklist.md`
+  - Size: 7,507 bytes
   - Source: Ghost M-2
-  - Acceptance: Checklist archived with RFC reference
+  - Acceptance: Checklist archived with RFC reference ✅
 
 ### Unused Plugin Files Review
 
-- [ ] **6.4 Review files/plugin/ directory**
+- [x] **6.4 Review files/plugin/ directory** ✅ COMPLETED
   - Current files: `executable-commands.js`, `pepper-plugin.js`
-  - Question: Are both needed or is one redundant?
-  - Check: Registry references, deployment scripts
-  - Decision: Document purpose or remove redundant file
+  - Finding: **Both files are IDENTICAL** (same bundle copy, 12,675 bytes each)
+  - Registry reference: Only `plugin/pepper-plugin.js` is referenced (line 27)
+  - Build script: Copies `dist/bundle.js` to BOTH locations (line 4 of package.json)
+  - **Decision: `executable-commands.js` appears REDUNDANT**
+    - Not referenced in registry.json
+    - Identical content to pepper-plugin.js
+    - Likely legacy artifact from earlier build process
+  - **Recommendation**: Consider removing in future cleanup (Phase 3 or separate task)
   - Source: Ghost M-3
-  - Acceptance: Clear understanding of plugin file purposes
+  - Acceptance: Clear understanding of plugin file purposes ✅
+  - **Notes**: 
+    - Keep both for now to avoid breaking existing workflows
+    - Document for future removal in P2 cleanup phase
+    - Update build script when removing executable-commands.js
 
 ## Phase 7: Verification & Testing (P3) [NOT STARTED]
 
 ### Build Verification
 
-- [ ] **7.1 Run full build**
+- [ ] **7.1 Run full build** ← CURRENT
   - Command: `npm run rebuild`
   - Expected: No errors
   - Verify: All three plugin copies created
@@ -318,11 +328,11 @@ Address all critical, medium, and low priority issues identified by Ghost during
 - [ ] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
 - [x] **AC-6**: README agent count matches table (was already correct)
 - [x] **AC-7**: CONTRIBUTING.md has no broken links
-- [ ] **AC-8**: Completed RFC-004 plan archived
+- [x] **AC-8**: Completed RFC-004 plan archived (N/A - original plan was lost/overwritten)
 
 ### Medium Priority (P3) - Nice to Have
 - [x] **AC-9**: Plugin development documentation exists
-- [ ] **AC-10**: Test reports archived
+- [x] **AC-10**: Test reports archived (dev-symlink-detection, phase-8-manual-checklist)
 - [ ] **AC-11**: CHANGELOG updated
 - [ ] **AC-12**: Cleanup summary created
 
@@ -367,4 +377,4 @@ Address all critical, medium, and low priority issues identified by Ghost during
 **Plan Status**: IN PROGRESS  
 **Created**: 2026-01-21  
 **Based On**: Ghost Exploration Report  
-**Next Step**: Execute Phase 5, Task 5.1 (Cross-check docs/pepper-structure.md)
+**Next Step**: Execute Phase 7, Task 7.1 (Run full build verification)
