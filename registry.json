@@ -8,7 +8,7 @@
 	"$schema": "https://ocx.kdco.dev/schemas/registry.json",
 	"name": "Chili OCX Registry",
 	"namespace": "chili-ocx",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "chilipvlmer",
 
 	// Compatibility versions

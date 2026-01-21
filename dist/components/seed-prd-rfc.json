@@ -17,7 +17,10 @@
               "question": true
             },
             "permission": {
-              "edit": "deny",
+              "edit": {
+                ".pepper/**": "allow",
+                "*": "deny"
+              },
               "write": {
                 ".pepper/**": "allow",
                 "*": "deny"
