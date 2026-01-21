@@ -4,10 +4,105 @@ import { tool } from "@opencode-ai/plugin";
 // dist/utils/pepper-io.js
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
+
+// dist/utils/workspace.js
+import * as fs from "fs";
+import * as path from "path";
+var WorkspaceError = class _WorkspaceError extends Error {
+  code;
+  cause;
+  /**
+   * @param message - Human-readable error message
+   * @param code - Optional error code (e.g., ENOENT, EACCES)
+   * @param cause - Optional underlying error
+   */
+  constructor(message, code, cause) {
+    super(message);
+    this.code = code;
+    this.cause = cause;
+    this.name = "WorkspaceError";
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, _WorkspaceError);
+    }
+  }
+};
+function resolveWorkspacePath(workspacePath) {
+  if (!workspacePath || typeof workspacePath !== "string") {
+    throw new WorkspaceError("Path must be a non-empty string");
+  }
+  const absolutePath = path.resolve(workspacePath);
+  try {
+    const realPath = fs.realpathSync(absolutePath);
+    return realPath;
+  } catch (error) {
+    const err = error;
+    if (err.code === "ENOENT") {
+      throw new WorkspaceError(`Path does not exist: ${absolutePath}`, "ENOENT", err);
+    }
+    if (err.code === "EACCES" || err.code === "EPERM") {
+      throw new WorkspaceError(`Permission denied accessing path: ${absolutePath}`, err.code, err);
+    }
+    if (err.code === "ELOOP") {
+      throw new WorkspaceError(`Circular symlink detected: ${absolutePath}`, "ELOOP", err);
+    }
+    throw new WorkspaceError(`Failed to resolve workspace path: ${err.message}`, err.code, err);
+  }
+}
+function isSymlink(workspacePath) {
+  if (!workspacePath || typeof workspacePath !== "string") {
+    throw new WorkspaceError("Path must be a non-empty string");
+  }
+  const absolutePath = path.resolve(workspacePath);
+  try {
+    const stats = fs.lstatSync(absolutePath);
+    return stats.isSymbolicLink();
+  } catch (error) {
+    const err = error;
+    if (err.code === "ENOENT") {
+      throw new WorkspaceError(`Path does not exist: ${absolutePath}`, "ENOENT", err);
+    }
+    if (err.code === "EACCES" || err.code === "EPERM") {
+      throw new WorkspaceError(`Permission denied accessing path: ${absolutePath}`, err.code, err);
+    }
+    throw new WorkspaceError(`Failed to check symlink status: ${err.message}`, err.code, err);
+  }
+}
+function getWorkspaceInfo(workspacePath) {
+  if (!workspacePath || typeof workspacePath !== "string") {
+    throw new WorkspaceError("Path must be a non-empty string");
+  }
+  const absolutePath = path.resolve(workspacePath);
+  const isSymlinkPath = isSymlink(absolutePath);
+  const realPath = resolveWorkspacePath(absolutePath);
+  const info = {
+    symlink: isSymlinkPath ? absolutePath : null,
+    real: realPath,
+    isSymlink: isSymlinkPath,
+    resolvedAt: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  return info;
+}
+
+// dist/utils/pepper-io.js
 function initPepperStructure(projectDir) {
-  const pepperDir = join(projectDir, ".pepper");
+  let workspaceInfo;
+  try {
+    workspaceInfo = getWorkspaceInfo(projectDir);
+  } catch (error) {
+    if (error instanceof WorkspaceError) {
+      return `❌ Failed to resolve workspace path: ${error.message}
+
+Please ensure:
+- The path exists and is accessible
+- You have permission to read the directory
+- If using a symlink, the target exists`;
+    }
+    throw error;
+  }
+  const resolvedDir = workspaceInfo.real;
+  const pepperDir = join(resolvedDir, ".pepper");
   if (existsSync(pepperDir)) {
-    return "\u2705 .pepper/ already initialized\n\nRun /status to see current state.";
+    return "✅ .pepper/ already initialized\n\nRun /status to see current state.";
   }
   const dirs = [
     "specs/prd",
@@ -21,7 +116,14 @@ function initPepperStructure(projectDir) {
     mkdirSync(join(pepperDir, dir), { recursive: true });
   }
   const initialState = {
-    version: "1.0.0",
+    version: "1.1.0",
+    initialized: (/* @__PURE__ */ new Date()).toISOString(),
+    workspacePath: {
+      symlink: workspaceInfo.symlink,
+      real: workspaceInfo.real,
+      isSymlink: workspaceInfo.isSymlink,
+      resolvedAt: workspaceInfo.resolvedAt
+    },
     session_ids: [],
     auto_continue: false
   };
@@ -49,7 +151,17 @@ function initPepperStructure(projectDir) {
 (Tasks will appear here after running /plan)
 `;
   writeFileSync(join(pepperDir, "plan.md"), planTemplate);
-  return `\u2705 Initialized .pepper/ structure
+  let successMessage = `✅ Initialized .pepper/ structure`;
+  if (workspaceInfo.isSymlink) {
+    successMessage += `
+
+📍 Workspace resolved:
+`;
+    successMessage += `  Symlink: ${workspaceInfo.symlink}
+`;
+    successMessage += `  Real path: ${workspaceInfo.real}`;
+  }
+  successMessage += `
 
 Created:
 - specs/prd/ - Product Requirements Documents
@@ -62,6 +174,7 @@ Created:
 Next steps:
 - Run /prd to create your first PRD
 - Run /status to verify setup`;
+  return successMessage;
 }
 function readPepperState(projectDir) {
   const statePath = join(projectDir, ".pepper/state.json");

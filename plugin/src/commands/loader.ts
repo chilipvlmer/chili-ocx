@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
 import type { CommandInfo, CommandFrontmatter } from "./types";
+import { logInfo, logWarn, logError } from "../utils/logger.js";
 
 // Commands that execute TypeScript logic directly
 const EXECUTE_MODE_COMMANDS = new Set([
@@ -37,7 +38,7 @@ export function discoverOcxCommands(): CommandInfo[] {
   const commandDir = join(homedir(), ".config/opencode/profiles/default/.opencode/command");
   
   if (!existsSync(commandDir)) {
-    console.log("⚠️ No OCX commands directory found at:", commandDir);
+    logWarn(`⚠️ No OCX commands directory found at: ${commandDir}`);
     return [];
   }
 
@@ -65,11 +66,11 @@ export function discoverOcxCommands(): CommandInfo[] {
 
       commands.push(commandInfo);
     } catch (error) {
-      console.error(`Failed to load command ${entry.name}:`, error);
+      logError(`Failed to load command ${entry.name}: ${error}`);
       continue;
     }
   }
 
-  console.log(`🌶️ Discovered ${commands.length} OCX commands`);
+  logInfo(`🌶️ Discovered ${commands.length} OCX commands`);
   return commands;
 }

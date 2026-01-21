@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
 import { getWorkspaceInfo, WorkspaceError } from './workspace.js';
+import { logError } from './logger.js';
 
 export function initPepperStructure(projectDir: string): string {
   // Resolve workspace path (handles symlinks)
@@ -132,7 +133,7 @@ export function readPepperState(projectDir: string): any {
     const content = readFileSync(statePath, "utf-8");
     return JSON.parse(content);
   } catch (error) {
-    console.error("Failed to read state.json:", error);
+    logError(`Failed to read state.json: ${error}`);
     return null;
   }
 }
@@ -147,7 +148,7 @@ export function readPepperPlan(projectDir: string): string | null {
   try {
     return readFileSync(planPath, "utf-8");
   } catch (error) {
-    console.error("Failed to read plan.md:", error);
+    logError(`Failed to read plan.md: ${error}`);
     return null;
   }
 }
@@ -256,7 +257,7 @@ export function addNotepadEntry(projectDir: string, notepadType: "learnings" | "
     
     return `✅ Added entry to ${notepadType} notepad\n\n"${entry}"`;
   } catch (error) {
-    console.error(`Failed to add notepad entry:`, error);
+    logError(`Failed to add notepad entry: ${error}`);
     return `❌ Failed to add entry: ${error instanceof Error ? error.message : String(error)}`;
   }
 }

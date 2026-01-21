@@ -2,42 +2,32 @@ import type { Hooks, PluginInput } from "@opencode-ai/plugin";
 import type { CommandInfo } from "../commands/types";
 import { executeHandlers, delegateHandlers } from "../commands/handlers";
 import { switchToAgent } from "../utils/agent-switch";
+import { logInfo, logWarn, logError } from "../utils/logger.js";
 
 export function createCommandInterceptor(
   commands: CommandInfo[],
   ctx: PluginInput
 ): Hooks["chat.message"] {
   return async (input, output) => {
-    // Debug logging to file
-    const { writeFileSync } = await import("fs");
-    const log = (msg: string) => {
-      const timestamp = new Date().toISOString();
-      const line = `[${timestamp}] ${msg}\n`;
-      console.log(msg);
-      try {
-        writeFileSync("/tmp/chili-ocx-plugin.log", line, { flag: "a" });
-      } catch (e) {}
-    };
-    
-    log("🔍 chat.message hook called");
-    log(`  Input sessionID: ${input.sessionID}`);
-    log(`  Output parts count: ${output.parts?.length || 0}`);
+    logInfo("🔍 chat.message hook called");
+    logInfo(`  Input sessionID: ${input.sessionID}`);
+    logInfo(`  Output parts count: ${output.parts?.length || 0}`);
     
     const textPart = output.parts.find(p => p.type === "text");
     if (!textPart || typeof textPart.text !== "string") {
-      log("  ⚠️ No text part found or text is not a string");
+      logWarn("  ⚠️ No text part found or text is not a string");
       return;
     }
 
     const text = textPart.text.trim();
-    log(`  📝 Text content: "${text.substring(0, 50)}"`);
+    logInfo(`  📝 Text content: "${text.substring(0, 50)}"`);
     
     if (!text.startsWith("/")) {
-      log("  ⚠️ Text does not start with /");
+      logWarn("  ⚠️ Text does not start with /");
       return;
     }
     
-    log(`  ✅ Command detected: ${text}`);
+    logInfo(`  ✅ Command detected: ${text}`);
 
     const [cmdName, ...args] = text.slice(1).split(/\s+/);
     
@@ -79,14 +69,14 @@ export function createCommandInterceptor(
             const result = await handler(ctx, sessionID, args);
             if (result) {
               // Handler returned an error message
-              console.log("Delegate handler returned:", result);
+              logInfo(`Delegate handler returned: ${result}`);
             }
           } else if (command.agent) {
             // Fallback: generic agent switching
             await switchToAgent(ctx, sessionID, command.agent, command.content);
           }
         } catch (error) {
-          console.error(`Failed to execute command /${cmdName}:`, error);
+          logError(`Failed to execute command /${cmdName}: ${error}`);
         }
       }, 100);
     }

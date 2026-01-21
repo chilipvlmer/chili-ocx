@@ -2,7 +2,7 @@
 import { tool } from "@opencode-ai/plugin";
 
 // dist/utils/pepper-io.js
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync as writeFileSync2, readdirSync } from "fs";
 import { join } from "path";
 
 // dist/utils/workspace.js
@@ -83,6 +83,33 @@ function getWorkspaceInfo(workspacePath) {
   return info;
 }
 
+// dist/utils/logger.js
+import { writeFileSync } from "fs";
+var LOG_FILE = "/tmp/chili-ocx-plugin.log";
+var DEBUG_MODE = process.env.CHILI_OCX_DEBUG === "1";
+function log(msg, level = "INFO") {
+  const timestamp = (/* @__PURE__ */ new Date()).toISOString();
+  const line = `[${timestamp}] [${level}] ${msg}
+`;
+  if (DEBUG_MODE) {
+    if (level === "ERROR") {
+      console.error(msg);
+    } else {
+      console.log(msg);
+    }
+  }
+  try {
+    writeFileSync(LOG_FILE, line, { flag: "a" });
+  } catch (e) {
+  }
+}
+function logInfo(msg) {
+  log(msg, "INFO");
+}
+function logError(msg) {
+  log(msg, "ERROR");
+}
+
 // dist/utils/pepper-io.js
 function initPepperStructure(projectDir) {
   let workspaceInfo;
@@ -127,15 +154,15 @@ Please ensure:
     session_ids: [],
     auto_continue: false
   };
-  writeFileSync(join(pepperDir, "state.json"), JSON.stringify(initialState, null, 2));
+  writeFileSync2(join(pepperDir, "state.json"), JSON.stringify(initialState, null, 2));
   const emptyNotepad = {
     version: "1.0.0",
     entries: []
   };
   for (const notepadFile of ["learnings.json", "issues.json", "decisions.json"]) {
-    writeFileSync(join(pepperDir, "notepad", notepadFile), JSON.stringify(emptyNotepad, null, 2));
+    writeFileSync2(join(pepperDir, "notepad", notepadFile), JSON.stringify(emptyNotepad, null, 2));
   }
-  writeFileSync(join(pepperDir, "tracking/rfc-status.json"), "{}");
+  writeFileSync2(join(pepperDir, "tracking/rfc-status.json"), "{}");
   const planTemplate = `# Execution Plan
 
 > Created: ${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}
@@ -150,7 +177,7 @@ Please ensure:
 ## Tasks
 (Tasks will appear here after running /plan)
 `;
-  writeFileSync(join(pepperDir, "plan.md"), planTemplate);
+  writeFileSync2(join(pepperDir, "plan.md"), planTemplate);
   let successMessage = `\u2705 Initialized .pepper/ structure`;
   if (workspaceInfo.isSymlink) {
     successMessage += `
@@ -185,7 +212,7 @@ function readPepperState(projectDir) {
     const content = readFileSync(statePath, "utf-8");
     return JSON.parse(content);
   } catch (error) {
-    console.error("Failed to read state.json:", error);
+    logError(`Failed to read state.json: ${error}`);
     return null;
   }
 }
@@ -197,7 +224,7 @@ function readPepperPlan(projectDir) {
   try {
     return readFileSync(planPath, "utf-8");
   } catch (error) {
-    console.error("Failed to read plan.md:", error);
+    logError(`Failed to read plan.md: ${error}`);
     return null;
   }
 }
@@ -303,41 +330,29 @@ function addNotepadEntry(projectDir, notepadType, entry) {
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
       content: entry
     });
-    writeFileSync(notepadPath, JSON.stringify(notepad, null, 2));
+    writeFileSync2(notepadPath, JSON.stringify(notepad, null, 2));
     return `\u2705 Added entry to ${notepadType} notepad
 
 "${entry}"`;
   } catch (error) {
-    console.error(`Failed to add notepad entry:`, error);
+    logError(`Failed to add notepad entry: ${error}`);
     return `\u274C Failed to add entry: ${error instanceof Error ? error.message : String(error)}`;
   }
 }
 
 // dist/index.js
-import { writeFileSync as writeFileSync2 } from "fs";
 var ChiliOcxPlugin = async (ctx) => {
-  const logFile = "/tmp/chili-ocx-plugin.log";
-  const log = (msg) => {
-    const timestamp = (/* @__PURE__ */ new Date()).toISOString();
-    const line = `[${timestamp}] ${msg}
-`;
-    console.log(msg);
-    try {
-      writeFileSync2(logFile, line, { flag: "a" });
-    } catch (e) {
-    }
-  };
   try {
-    log("\u{1F336}\uFE0F chili-ocx plugin initializing...");
-    log(`  Context directory: ${ctx.directory}`);
+    logInfo("\u{1F336}\uFE0F chili-ocx plugin initializing...");
+    logInfo(`  Context directory: ${ctx.directory}`);
     const tools = {
       "pepper_init": tool({
         description: "Initialize the Pepper harness .pepper/ directory structure in the current project",
         args: {},
         execute: async (args, context) => {
-          log("\u{1F527} pepper_init tool executing");
+          logInfo("\u{1F527} pepper_init tool executing");
           const result = initPepperStructure(ctx.directory);
-          log(`\u2705 pepper_init result: ${result.substring(0, 100)}`);
+          logInfo(`\u2705 pepper_init result: ${result.substring(0, 100)}`);
           return result;
         }
       }),
@@ -345,9 +360,9 @@ var ChiliOcxPlugin = async (ctx) => {
         description: "Get the current status of the Pepper harness including PRDs, RFCs, plans, and state",
         args: {},
         execute: async (args, context) => {
-          log("\u{1F527} pepper_status tool executing");
+          logInfo("\u{1F527} pepper_status tool executing");
           const result = getPepperStatus(ctx.directory);
-          log(`\u2705 pepper_status returned status report`);
+          logInfo(`\u2705 pepper_status returned status report`);
           return result;
         }
       }),
@@ -358,21 +373,21 @@ var ChiliOcxPlugin = async (ctx) => {
           entry: tool.schema.string().describe("The content to add to the notepad")
         },
         execute: async (args, context) => {
-          log(`\u{1F527} pepper_notepad_add tool executing (type: ${args.notepadType})`);
+          logInfo(`\u{1F527} pepper_notepad_add tool executing (type: ${args.notepadType})`);
           const result = addNotepadEntry(ctx.directory, args.notepadType, args.entry);
-          log(`\u2705 pepper_notepad_add: ${result.substring(0, 100)}`);
+          logInfo(`\u2705 pepper_notepad_add: ${result.substring(0, 100)}`);
           return result;
         }
       })
     };
-    log(`\u{1F4CB} Registered ${Object.keys(tools).length} custom tools`);
-    log("\u2705 chili-ocx plugin loaded successfully");
+    logInfo(`\u{1F4CB} Registered ${Object.keys(tools).length} custom tools`);
+    logInfo("\u2705 chili-ocx plugin loaded successfully");
     return { tool: tools };
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : "";
-    log(`\u274C chili-ocx plugin failed to load: ${errorMsg}`);
-    log(`Stack: ${errorStack}`);
+    logInfo(`\u274C chili-ocx plugin failed to load: ${errorMsg}`);
+    logInfo(`Stack: ${errorStack}`);
     throw error;
   }
 };
