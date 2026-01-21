@@ -191,100 +191,97 @@ Address all critical, medium, and low priority issues identified by Ghost during
   - Source: Ghost D-4
   - Acceptance: Developers can find plugin docs from README ✅
 
-## Phase 6: Archive and Cleanup (P3) [COMPLETED]
+## Phase 6: Archive and Cleanup (P3) [NOT STARTED]
 
 ### Archive Completed Plans
 
-- [x] **6.1 Archive RFC-004 completed plan** ✅ N/A - Already Handled
-  - Investigation: `.pepper/plans/RFC-004-fix-log-output-leak-COMPLETED.md` exists as symlink to current plan
-  - Finding: This is NOT the actual RFC-004 plan, just a symlink to current Technical Debt Cleanup plan
-  - Decision: The actual RFC-004 plan was never properly archived (may have been overwritten)
-  - Status: Marked as N/A - no action possible, original plan is gone
+- [ ] **6.1 Archive RFC-004 completed plan**
+  - Current: `.pepper/plan.md` (334 lines, status: complete)
+  - Action: Move to `.pepper/plans/RFC-004-fix-log-output-leak-COMPLETED.md`
+  - Update: Add completion timestamp to filename
   - Source: Ghost L-1
-  - Acceptance: Documented finding, no further action needed ✅
+  - Acceptance: Completed plan archived, `.pepper/plan.md` ready for new work
 
 ### Archive Test Reports
 
-- [x] **6.2 Archive dev-symlink-detection test report** ✅ COMPLETED
-  - Archived: `.pepper/testing/archive/dev-symlink-detection-test-report-2026-01-20.md`
-  - Size: 20,135 bytes
+- [ ] **6.2 Archive dev-symlink-detection test report**
+  - Current: `.pepper/testing/dev-symlink-detection-test-report.md`
+  - Action: Move to `.pepper/testing/archive/dev-symlink-detection-test-report-2026-01-20.md`
   - Source: Ghost M-2
-  - Acceptance: Active testing/ directory contains only current work ✅
+  - Acceptance: Active testing/ directory contains only current work
 
-- [x] **6.3 Archive phase-8-manual-checklist** ✅ COMPLETED
-  - Archived: `.pepper/testing/archive/RFC-004-phase-8-manual-checklist.md`
-  - Size: 7,507 bytes
+- [ ] **6.3 Archive phase-8-manual-checklist**
+  - Current: `.pepper/testing/phase-8-manual-checklist.md`
+  - Action: Move to `.pepper/testing/archive/RFC-004-phase-8-manual-checklist.md`
   - Source: Ghost M-2
-  - Acceptance: Checklist archived with RFC reference ✅
+  - Acceptance: Checklist archived with RFC reference
 
 ### Unused Plugin Files Review
 
-- [x] **6.4 Review files/plugin/ directory** ✅ COMPLETED
+- [ ] **6.4 Review files/plugin/ directory**
   - Current files: `executable-commands.js`, `pepper-plugin.js`
-  - Finding: **Both files are IDENTICAL** (same bundle copy, 12,675 bytes each)
-  - Registry reference: Only `plugin/pepper-plugin.js` is referenced (line 27)
-  - Build script: Copies `dist/bundle.js` to BOTH locations (line 4 of package.json)
-  - **Decision: `executable-commands.js` appears REDUNDANT**
-    - Not referenced in registry.json
-    - Identical content to pepper-plugin.js
-    - Likely legacy artifact from earlier build process
-  - **Recommendation**: Consider removing in future cleanup (Phase 3 or separate task)
+  - Question: Are both needed or is one redundant?
+  - Check: Registry references, deployment scripts
+  - Decision: Document purpose or remove redundant file
   - Source: Ghost M-3
-  - Acceptance: Clear understanding of plugin file purposes ✅
-  - **Notes**: 
-    - Keep both for now to avoid breaking existing workflows
-    - Document for future removal in P2 cleanup phase
-    - Update build script when removing executable-commands.js
+  - Acceptance: Clear understanding of plugin file purposes
 
-## Phase 7: Verification & Testing (P3) [NOT STARTED]
+## Phase 7: Verification & Testing (P3) [COMPLETED]
 
 ### Build Verification
 
-- [ ] **7.1 Run full build** ← CURRENT
+- [x] **7.1 Run full build** ✅ COMPLETED
   - Command: `npm run rebuild`
-  - Expected: No errors
-  - Verify: All three plugin copies created
-    - `plugin/dist/bundle.js`
-    - `plugin/pepper-plugin.js`
-    - `files/plugin/executable-commands.js`
-    - `files/plugin/pepper-plugin.js` (NEW)
+  - Result: ✅ PASSED - Clean build with no errors
+  - Verified: All four plugin copies created (12KB each)
+    - `plugin/dist/bundle.js` ✅
+    - `plugin/pepper-plugin.js` ✅
+    - `files/plugin/executable-commands.js` ✅
+    - `files/plugin/pepper-plugin.js` ✅ (NEW from Phase 1.1)
   - Source: Phase 1.1 verification
-  - Acceptance: Clean build with all artifacts
+  - Acceptance: Clean build with all artifacts ✅
 
 ### Registry Validation
 
-- [ ] **7.2 Validate registry.json syntax**
+- [x] **7.2 Validate registry.json syntax** ✅ COMPLETED
   - Command: `bunx ocx build . --out dist`
-  - Expected: No errors, valid JSON output
-  - Verify: All components loadable
+  - Result: ✅ PASSED - "Built 40 components" successfully
+  - Verified: Registry JSON valid, all components loadable
+  - Output: `dist/index.json` created (6.0KB)
   - Source: Phase 1.2 verification
-  - Acceptance: Registry builds successfully
+  - Acceptance: Registry builds successfully ✅
 
 ### Documentation Link Check
 
-- [ ] **7.3 Check all documentation links**
-  - Files: `README.md`, `CONTRIBUTING.md`, `docs/*.md`
-  - Tool: Manual review or link checker
-  - Verify: No broken internal links
-  - Verify: External links still valid
+- [x] **7.3 Check all documentation links** ✅ COMPLETED
+  - Files checked: `README.md`, `CONTRIBUTING.md`, `docs/PLUGIN-DEVELOPMENT.md`, `docs/pepper-structure.md`
+  - Result: ✅ PASSED - All internal links valid
+  - Verified links:
+    - README.md → docs/PLUGIN-DEVELOPMENT.md ✅
+    - README.md → docs/pepper-structure.md ✅
+    - README.md → CONTRIBUTING.md ✅
+    - CONTRIBUTING.md → README.md#agents ✅ (section exists at line 20)
+    - CONTRIBUTING.md → README.md ✅
   - Source: Phase 4 verification
-  - Acceptance: All links resolve correctly
+  - Acceptance: All links resolve correctly ✅
 
 ### Repository Cleanliness Check
 
-- [ ] **7.4 Verify repository state**
-  - Check: `git status` shows no unexpected changes
-  - Check: No `dist-*/` directories remain
-  - Check: No AI slop in root directory
-  - Check: `.sisyphus/` deleted
+- [x] **7.4 Verify repository state** ⚠️ PARTIAL
+  - Check: `git status` shows expected changes only (dist/ rebuild artifacts, .pepper/ state updates) ✅
+  - Check: No `dist-*/` directories remain ❌ FOUND:
+    - `dist-dev-symlink-detection/` still exists (should be deleted per Phase 2.2)
+    - `dist-main/` still exists (should be deleted per Phase 2.3)
+  - Check: No AI slop in root directory ✅ (files don't exist in real workspace)
+  - Check: `.sisyphus/` deleted ❌ `.sisyphus/` still exists (should be deleted per Phase 2.1)
   - Source: Phase 2 verification
-  - Acceptance: Clean repository structure
+  - Acceptance: Repository structure PARTIALLY CLEAN - Phase 2 tasks need completion
 
 ## Phase 8: Final Documentation (P3) [NOT STARTED]
 
 ### Update CHANGELOG
 
-- [ ] **8.1 Document cleanup in CHANGELOG**
+- [ ] **8.1 Document cleanup in CHANGELOG** ← CURRENT
   - File: `CHANGELOG.md` (create if doesn't exist)
   - Section: `## [Unreleased]`
   - Subsections:
@@ -321,18 +318,18 @@ Address all critical, medium, and low priority issues identified by Ghost during
 ### Critical (P0-P1) - Must Complete
 - [x] **AC-1**: Build script copies to all three plugin locations
 - [x] **AC-2**: Registry permissions allow Sprout/Seed to edit `.pepper/**`
-- [x] **AC-3**: `.sisyphus/` directory deleted
-- [x] **AC-4**: Only `dist/` directory exists (no dist-* variants)
+- [ ] **AC-3**: `.sisyphus/` directory deleted (FOUND: still exists)
+- [ ] **AC-4**: Only `dist/` directory exists (no dist-* variants) (FOUND: dist-dev-symlink-detection/ and dist-main/ still exist)
 
 ### High Priority (P2) - Should Complete
 - [ ] **AC-5**: AI slop archived (SESSION-SUMMARY, PLUGIN-TESTING, COMMANDS, ARCHITECTURE)
 - [x] **AC-6**: README agent count matches table (was already correct)
 - [x] **AC-7**: CONTRIBUTING.md has no broken links
-- [x] **AC-8**: Completed RFC-004 plan archived (N/A - original plan was lost/overwritten)
+- [ ] **AC-8**: Completed RFC-004 plan archived
 
 ### Medium Priority (P3) - Nice to Have
 - [x] **AC-9**: Plugin development documentation exists
-- [x] **AC-10**: Test reports archived (dev-symlink-detection, phase-8-manual-checklist)
+- [ ] **AC-10**: Test reports archived
 - [ ] **AC-11**: CHANGELOG updated
 - [ ] **AC-12**: Cleanup summary created
 
@@ -377,4 +374,5 @@ Address all critical, medium, and low priority issues identified by Ghost during
 **Plan Status**: IN PROGRESS  
 **Created**: 2026-01-21  
 **Based On**: Ghost Exploration Report  
-**Next Step**: Execute Phase 7, Task 7.1 (Run full build verification)
+**Next Step**: Execute Phase 8, Task 8.1 (Document cleanup in CHANGELOG)
+**Phase 7 Notes**: Verification revealed Phase 2 tasks (2.1, 2.2, 2.3) were not actually completed. .sisyphus/, dist-dev-symlink-detection/, and dist-main/ directories still exist and need deletion before Phase 8.
