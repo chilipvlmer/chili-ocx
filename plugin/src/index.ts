@@ -2,6 +2,9 @@ import type { Plugin } from "@opencode-ai/plugin";
 import { tool } from "@opencode-ai/plugin";
 import { initPepperStructure, getPepperStatus, addNotepadEntry } from "./utils/pepper-io";
 import { logInfo } from "./utils/logger.js";
+import { SkillRegistry } from "./skills/registry.js";
+import { loadSkills } from "./skills/loader.js";
+import { join } from "path";
 
 const ChiliOcxPlugin: Plugin = async (ctx) => {
   try {
@@ -9,7 +12,7 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
     logInfo(`  Context directory: ${ctx.directory}`);
     
     // Register custom tools using the tool() helper
-    const tools = {
+    const tools: Record<string, any> = {
       "pepper_init": tool({
         description: "Initialize the Pepper harness .pepper/ directory structure in the current project",
         args: {},
@@ -44,8 +47,28 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
         }
       })
     };
+
+    // --- Dynamic Skill Loading ---
+    const skillsDir = join(ctx.directory, ".pepper/skills");
+    // Also support default skills shipped with the plugin?
+    // For now, let's look in .pepper/skills as per RFC-006 user-extensibility
     
-    logInfo(`📋 Registered ${Object.keys(tools).length} custom tools`);
+    logInfo(`🔍 Scanning for skills in: ${skillsDir}`);
+    const skills = await loadSkills(skillsDir);
+    
+    if (skills.length > 0) {
+      logInfo(`📦 Found ${skills.length} skills. Registering...`);
+      const registry = new SkillRegistry();
+      skills.forEach(skill => registry.register(skill));
+      
+      const skillTools = registry.getTools();
+      Object.assign(tools, skillTools);
+      logInfo(`✅ Registered ${Object.keys(skillTools).length} skill tools.`);
+    } else {
+      logInfo("ℹ️ No custom skills found.");
+    }
+    
+    logInfo(`📋 Registered ${Object.keys(tools).length} custom tools (total)`);
     logInfo("✅ chili-ocx plugin loaded successfully");
     
     return { tool: tools };
