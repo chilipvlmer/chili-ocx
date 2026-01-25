@@ -30,15 +30,15 @@ Implement the Agent Skill Framework (RFC-006) and the Git Mastery Skill (RFC-007
 - [x] **1.3 Implement Skill Registry**
   - Implement `registry.js` to manage loaded skills
   - Add logic to generate tool definitions (`skill_*`) from skill metadata
-- [ ] **1.4 Implement Skill Runner** ← CURRENT
+- [x] **1.4 Implement Skill Runner**
   - Implement `runner.js` to execute steps
   - Support 'regex_scan' step type in runner
   - Add "Internal LLM" capability stub (mocked for now)
-- [ ] **1.5 Wire up to Main Entry Point**
+- [x] **1.5 Wire up to Main Entry Point**
   - Update `index.js` (or equivalent) to load skills on startup
 
 ## Phase 2: Git Mastery Skill (RFC-007) [STATUS]
-- [ ] **2.1 Create Skill Definition**
+- [ ] **2.1 Create Skill Definition** ← CURRENT
   - Create `.opencode/skills/git-mastery.md`
   - Write steps as defined in RFC-007 (Status, Diff, Msg, Commit)
 - [ ] **2.2 Implement Step Logic**
