@@ -49,17 +49,22 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
     };
 
     // --- Dynamic Skill Loading ---
-    const skillsDir = join(ctx.directory, ".pepper/skills");
-    // Also support default skills shipped with the plugin?
-    // For now, let's look in .pepper/skills as per RFC-006 user-extensibility
+    const skillsDirs = [
+      join(ctx.directory, ".opencode/skills")
+    ];
     
-    logInfo(`🔍 Scanning for skills in: ${skillsDir}`);
-    const skills = await loadSkills(skillsDir);
+    logInfo(`🔍 Scanning for skills in: ${skillsDirs.join(", ")}`);
     
-    if (skills.length > 0) {
-      logInfo(`📦 Found ${skills.length} skills. Registering...`);
+    let allSkills: any[] = [];
+    for (const dir of skillsDirs) {
+      const skills = await loadSkills(dir);
+      allSkills = allSkills.concat(skills);
+    }
+    
+    if (allSkills.length > 0) {
+      logInfo(`📦 Found ${allSkills.length} skills. Registering...`);
       const registry = new SkillRegistry();
-      skills.forEach(skill => registry.register(skill));
+      allSkills.forEach(skill => registry.register(skill));
       
       const skillTools = registry.getTools();
       Object.assign(tools, skillTools);
