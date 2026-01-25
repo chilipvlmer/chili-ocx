@@ -1,5 +1,6 @@
-import { Skill } from './loader';
+import { Skill } from './loader.js';
 import { tool } from '@opencode-ai/plugin';
+import { SkillRunner } from './runner.js';
 
 /**
  * Registry to manage available skills and expose them as tools
@@ -93,11 +94,14 @@ export class SkillRegistry {
         description: `[SKILL] ${skill.description}`,
         args: argsSchema,
         execute: async (args, context) => {
-          // This is a placeholder. The actual execution logic will be handled 
-          // by the SkillRunner in Task 1.4.
-          // For now, we just return an acknowledgement.
-          console.log(`Executing skill ${skill.name} with args:`, args);
-          return `Skill ${skill.name} executed (Mock). Implementation pending in Task 1.4.`;
+          try {
+            const runner = new SkillRunner(skill, args);
+            const result = await runner.execute();
+            return JSON.stringify(result, null, 2);
+          } catch (error: any) {
+            console.error(`Skill ${skill.name} failed:`, error);
+            throw new Error(`Skill execution failed: ${error.message}`);
+          }
         }
       });
     }
