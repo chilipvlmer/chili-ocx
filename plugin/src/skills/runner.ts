@@ -308,9 +308,38 @@ export class SkillRunner {
     // If diff is huge, we might truncate or just say "large update"
     // The prompt contains the diff.
     if (prompt.length > 10000) {
-        console.warn(`[SkillRunner] Diff is too large (${prompt.length} chars). Truncating for heuristic.`);
-        // We might want to use a generic message if diff is massive
-        message = message.replace('fix', 'feat').replace('update', 'major update to');
+        console.warn(`[SkillRunner] Diff is too large (${prompt.length} chars). Summarizing.`);
+        
+        try {
+            // Attempt to get a summary instead of the full diff
+            // We assume this is a git diff because that's the primary use case for this heuristic
+            const cwd = this.context.steps?.status?.cwd || process.cwd();
+            // We use --stat --cached because typically we are generating a message for staged changes
+            const { stdout: statOut } = await execAsync('git diff --stat --cached', { cwd });
+            
+            // Replace the huge diff in the prompt with the stat summary
+            // We need to be careful where we replace it.
+            // The prompt usually looks like "Diff:\n<huge diff>"
+            // We'll just append the summary or replace the whole prompt content if we can't find the structure?
+            // Safer: Just use the stat output as the "context" for heuristic generation.
+            
+            // For the purpose of the heuristic below:
+            message = `feat: large update with ${statOut.split('\n').length} files changed`;
+             
+             // If we were calling a real LLM, we would replace the prompt text here.
+             // But since we are in the STUB/Heuristic method:
+             
+             // Let's refine the heuristic message based on stat
+             const lines = statOut.trim().split('\n');
+             if (lines.length > 0) {
+                 const summaryLine = lines[lines.length - 1]; // " 5 files changed, 10 insertions(+), 5 deletions(-)"
+                 message = `feat: ${summaryLine.trim()}`;
+             }
+
+        } catch (e) {
+             console.warn(`[SkillRunner] Failed to get git diff stat:`, e);
+             message = message.replace('fix', 'feat').replace('update', 'major update to');
+        }
     }
     
     // Allow user override via mock_output
