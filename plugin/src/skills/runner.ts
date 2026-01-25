@@ -113,8 +113,9 @@ export class SkillRunner {
 
     const command = this.resolveVariables(rawCommand);
     
-    // Safety check: Don't run purely dangerous things? 
-    // For now we assume the user/skill is trusted, but we logs.
+    // Permission check
+    this.checkPermission(command);
+
     console.log(`[SkillRunner] Shell command: ${command}`);
 
     // We default to running in CWD unless specified
@@ -140,6 +141,25 @@ export class SkillRunner {
       }
       throw error;
     }
+  }
+
+  /**
+   * Basic permission check for shell commands
+   */
+  private checkPermission(command: string): void {
+    const trimmed = command.trim();
+    
+    // Explicitly Allow
+    if (trimmed.startsWith('git ')) return;
+    if (trimmed.startsWith('npm test')) return;
+    
+    // Explicitly Block (Safety)
+    if (trimmed.includes('rm -rf /')) {
+        throw new Error(`[Security] Command blocked: ${command}`);
+    }
+    
+    // Allow others with warning (for now)
+    console.warn(`[Security] Unchecked command allowed: ${command}`);
   }
 
   private async runRegexScanStep(step: SkillStep): Promise<any> {

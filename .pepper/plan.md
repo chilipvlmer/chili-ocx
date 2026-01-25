@@ -37,7 +37,7 @@ Implement the Agent Skill Framework (RFC-006) and the Git Mastery Skill (RFC-007
 - [x] **1.5 Wire up to Main Entry Point**
   - Update `index.js` (or equivalent) to load skills on startup
 
-## Phase 2: Git Mastery Skill (RFC-007) [IN-PROGRESS]
+## Phase 2: Git Mastery Skill (RFC-007) [COMPLETED]
 - [x] **2.1 Create Skill Definition**
   - Create `.opencode/skills/git-mastery.md`
   - Write steps as defined in RFC-007 (Status, Diff, Msg, Commit)
@@ -59,10 +59,10 @@ Implement the Agent Skill Framework (RFC-006) and the Git Mastery Skill (RFC-007
   - Updated regex to handle unquoted secrets
   - Implemented `git ls-files` with `--others --exclude-standard` for robust scanning
   - Fixed variable substitution to handle empty/default values (`||`)
-- [ ] **2.9 Permission Check** ← CURRENT
+- [x] **2.9 Permission Check**
   - Add permission check to `shell` steps (Mock/Stub for now)
 
-## Phase 3: Testing & Verification [STATUS]
+## Phase 3: Testing & Verification [IN-PROGRESS]
 - [ ] **3.1 Test Framework Loading**
   - Verify `skill_git_mastery` appears in agent tool list
 - [ ] **3.2 Test Dry Run**
