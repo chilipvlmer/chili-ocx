@@ -16,8 +16,8 @@ ignore_errors: false
 
 ## check_secrets
 type: regex_scan
-file: "${inputs.file}"
-pattern: "(?i)(api_key|secret|password|token|access_key).*?['\"][a-zA-Z0-9]{20,}['\"]"
+file: "${inputs.files}"
+pattern: "(?i)(api_key|secret|password|token|access_key).*?(=|:|\\s)['\"]?[a-zA-Z0-9]{20,}['\"]?"
 fail_if_match: true
 
 ## stage
@@ -26,7 +26,7 @@ command: if [ -z "${inputs.files}" ]; then git add .; else git add ${inputs.file
 
 ## diff
 type: shell
-command: git diff --cached "${inputs.file}"
+command: if [ -z "${inputs.files}" ]; then git diff --cached; else git diff --cached ${inputs.files}; fi
 
 ## verify_cmd
 type: shell
@@ -42,7 +42,7 @@ system_prompt: |
   Types: feat, fix, docs, style, refactor, perf, test, chore
   Do NOT add any explanation, just the message.
 prompt: |
-  File: ${inputs.file}
+  Files: ${inputs.files}
   Diff:
   ${steps.diff.stdout}
 
