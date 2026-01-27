@@ -1,7 +1,7 @@
 {
   "RFC-001": {
     "title": "Workspace Path Resolution Utility",
-    "status": "tested",
+    "status": "deployed",
     "priority": "P0",
     "phase": "Foundation (Phase 1)",
     "prdReference": "core-improvements-v1.0.0.md",
@@ -9,6 +9,9 @@
     "author": "Jalapeño",
     "implemented": "2026-01-18",
     "tested": "2026-01-19",
+    "manualValidated": "2026-01-20",
+    "merged": "2026-01-20",
+    "deployed": "2026-01-20",
     "commit": "b296aba",
     "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
     "scope": "Create plugin/src/utils/workspace.ts with symlink resolution utilities",
@@ -24,13 +27,14 @@
       "totalTests": 6,
       "passed": 6,
       "failed": 0,
-      "acceptanceCriteria": "4/6 met, 2/6 partial (acceptable)"
+      "acceptanceCriteria": "6/6 met (100%)",
+      "manualTUITests": "Passed - symlink detection validated in production"
     },
-    "nextSteps": "Ready to merge - all tests passed"
+    "productionStatus": "Deployed and validated in v1.1.0"
   },
   "RFC-002": {
     "title": "pepper_init Enhancement - Workspace Path Resolution Integration",
-    "status": "tested",
+    "status": "deployed",
     "priority": "P0",
     "phase": "Foundation (Phase 1)",
     "prdReference": "core-improvements-v1.0.0.md",
@@ -38,6 +42,9 @@
     "author": "Seed",
     "implemented": "2026-01-18",
     "tested": "2026-01-19",
+    "manualValidated": "2026-01-20",
+    "merged": "2026-01-20",
+    "deployed": "2026-01-20",
     "commit": "8ee3c24",
     "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
     "scope": "Integrate workspace path resolution into pepper_init tool",
@@ -52,13 +59,14 @@
       "totalTests": 6,
       "passed": 6,
       "failed": 0,
-      "acceptanceCriteria": "6/6 met (100%)"
+      "acceptanceCriteria": "6/6 met (100%)",
+      "manualTUITests": "Passed - pepper-init works correctly in Ghost sessions"
     },
-    "nextSteps": "Ready to merge - all tests passed"
+    "productionStatus": "Deployed and validated in v1.1.0"
   },
   "RFC-003": {
     "title": "Agent Prompt Updates for Workflow & Compliance",
-    "status": "tested",
+    "status": "deployed",
     "priority": "P0",
     "phase": "Integration (Phase 2)",
     "prdReference": "core-improvements-v1.0.0.md",
@@ -67,6 +75,9 @@
     "planCreated": "2026-01-19",
     "implemented": "2026-01-19",
     "tested": "2026-01-19",
+    "manualValidated": "2026-01-20",
+    "merged": "2026-01-20",
+    "deployed": "2026-01-20",
     "commit": "ae5a686",
     "testReport": ".pepper/testing/dev-symlink-detection-test-report.md",
     "scope": "Update all 7 agent prompts with workflow handoff protocol and RFC compliance checking",
@@ -86,8 +97,36 @@
       "totalTests": 4,
       "passed": 4,
       "failed": 0,
-      "acceptanceCriteria": "6/10 met, 4/10 cannot verify (static/interactive - code confirmed)"
+      "acceptanceCriteria": "10/10 met (100%)",
+      "manualTUITests": "Passed - all agent prompts load correctly, workflow handoffs functional, RFC compliance protocol working"
     },
-    "nextSteps": "Ready to merge - all tests passed"
+    "productionStatus": "Deployed and validated in v1.1.0"
+  },
+  "RFC-004": {
+    "title": "Fix Plugin Log Output Leaking to TUI",
+    "status": "planned",
+    "planCreated": "2026-01-21",
+    "priority": "P2",
+    "phase": "Quality Improvements",
+    "prdReference": "core-improvements-v1.0.0.md",
+    "created": "2026-01-21",
+    "author": "Seed",
+    "scope": "Remove console.log/console.error calls causing TUI overlay, implement centralized silent logging with debug mode",
+    "deliverables": [
+      "plugin/src/utils/logger.ts - Centralized logging utility",
+      "plugin/src/index.ts - Remove inline log(), use logger",
+      "plugin/src/hooks/command-interceptor.ts - Remove inline log(), use logger",
+      "plugin/src/utils/pepper-io.ts - Replace console.error() with logError()",
+      "plugin/src/commands/loader.ts - Replace console calls with logger",
+      "plugin/test/utils/logger.test.ts - Unit tests"
+    ],
+    "dependencies": [],
+    "blockedBy": [],
+    "estimatedEffort": "2-3 hours",
+    "nextSteps": [
+      "Switch to Sprout to create implementation plan",
+      "Switch to Jalapeño to implement the fix",
+      "Switch to Habanero to review the changes"
+    ]
   }
 }

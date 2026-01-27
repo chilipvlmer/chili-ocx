@@ -1,7 +1,7 @@
 {
   "name": "scoville-orchestrator",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "scoville-orchestrator",
       "type": "ocx:agent",
       "description": "Orchestrator - coordinates work, delegates to specialized agents",
@@ -24,6 +24,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

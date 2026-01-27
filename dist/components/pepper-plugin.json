@@ -1,7 +1,7 @@
 {
   "name": "pepper-plugin",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "pepper-plugin",
       "type": "ocx:plugin",
       "description": "Pepper harness plugin - provides pepper_init, pepper_status, and pepper_notepad_add tools",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

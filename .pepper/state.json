@@ -1,5 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "initialized": "2026-01-20T20:16:00.000Z",
+  "workspacePath": {
+    "symlink": null,
+    "real": "/Users/chili/•KOKPIT•/•PROGRAMOWANIE•/chili-ocx",
+    "isSymlink": false,
+    "resolvedAt": "2026-01-20T21:54:00.000Z"
+  },
   "session_ids": [],
   "auto_continue": false
 }

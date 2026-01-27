@@ -1,7 +1,7 @@
 {
   "name": "pepper-harness",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "pepper-harness",
       "type": "ocx:bundle",
       "description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
@@ -33,6 +33,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

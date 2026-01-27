@@ -5,9 +5,20 @@ import { logInfo } from "./utils/logger.js";
 import { SkillRegistry } from "./skills/registry.js";
 import { loadSkills } from "./skills/loader.js";
 import { join } from "path";
+import * as fs from "fs";
+
+function logToTmp(msg: string) {
+  try {
+    const timestamp = new Date().toISOString();
+    fs.appendFileSync("/tmp/pepper-debug.log", `[${timestamp}] ${msg}\n`);
+  } catch (e) {
+    // Ignore logging errors
+  }
+}
 
 const ChiliOcxPlugin: Plugin = async (ctx) => {
   try {
+    logToTmp("Plugin initializing...");
     logInfo("🌶️ chili-ocx plugin initializing...");
     logInfo(`  Context directory: ${ctx.directory}`);
     
@@ -57,9 +68,13 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
     
     let allSkills: any[] = [];
     for (const dir of skillsDirs) {
+      logToTmp(`Scanning directory: ${dir}`);
+      const exists = fs.existsSync(dir);
+      logToTmp(`Directory exists? ${exists}`);
       const skills = await loadSkills(dir);
       allSkills = allSkills.concat(skills);
     }
+    logToTmp(`Found ${allSkills.length} skills`);
     
     if (allSkills.length > 0) {
       logInfo(`📦 Found ${allSkills.length} skills. Registering...`);
@@ -80,6 +95,7 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : "";
+    logToTmp(`Error: ${errorStack}`);
     logInfo(`❌ chili-ocx plugin failed to load: ${errorMsg}`);
     logInfo(`Stack: ${errorStack}`);
     throw error;

@@ -1,7 +1,7 @@
 {
   "name": "status",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "status",
       "type": "ocx:command",
       "description": "Show current plan progress and state",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

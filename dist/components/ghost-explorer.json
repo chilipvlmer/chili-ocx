@@ -1,7 +1,7 @@
 {
   "name": "ghost-explorer",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "ghost-explorer",
       "type": "ocx:agent",
       "description": "Explorer - researches codebases, finds patterns, navigates complex systems",
@@ -48,6 +48,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

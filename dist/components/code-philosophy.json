@@ -1,7 +1,7 @@
 {
   "name": "code-philosophy",
   "versions": {
-    "0.1.0": {
+    "0.1.1": {
       "name": "code-philosophy",
       "type": "ocx:skill",
       "description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.0"
+    "latest": "0.1.1"
   }
 }

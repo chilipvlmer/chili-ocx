@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ocx.kdco.dev/schemas/ocx.json",
+  "registries": {
+    "chili-ocx": {
+      "url": "https://chili-ocx.pages.dev"
+    }
+  },
+  "lockRegistries": false,
+  "skipCompatCheck": false
+}

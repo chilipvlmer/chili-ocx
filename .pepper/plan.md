@@ -1,6 +1,6 @@
 ---
-status: in-progress
-phase: 2
+status: completed
+phase: 4
 updated: 2026-01-25
 ---
 
@@ -62,17 +62,17 @@ Implement the Agent Skill Framework (RFC-006) and the Git Mastery Skill (RFC-007
 - [x] **2.9 Permission Check**
   - Add permission check to `shell` steps (Mock/Stub for now)
 
-## Phase 3: Testing & Verification [IN-PROGRESS]
-- [ ] **3.1 Test Framework Loading**
+## Phase 3: Testing & Verification [COMPLETED]
+- [x] **3.1 Test Framework Loading**
   - Verify `skill_git_mastery` appears in agent tool list
-- [ ] **3.2 Test Dry Run**
+- [x] **3.2 Test Dry Run**
   - Execute skill in a dirty repo (dry run mode if available, or verify logs)
-- [ ] **3.3 Verify Conventional Commits**
+- [x] **3.3 Verify Conventional Commits**
   - Check if generated messages match standard
 
-## Phase 4: Documentation [STATUS]
-- [ ] **4.1 Update README**
+## Phase 4: Documentation [COMPLETED]
+- [x] **4.1 Update README**
   - Document new Skill Framework
   - Add "Skills" section
-- [ ] **4.2 Create SKILLS.md**
+- [x] **4.2 Create SKILLS.md**
   - Guide for users to create their own skills

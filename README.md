@@ -131,8 +131,13 @@ ocx ghost add chili-ocx/pepper-protocol
 
 ## Skills
 
+The Chili-OCX framework includes a powerful **Agent Skills** system that allows you to define complex, multi-step workflows as declarative Markdown files.
+
+See **[Agent Skills Documentation](docs/SKILLS.md)** for details on creating and using skills.
+
 | Skill | Purpose |
 |-------|---------|
+| `skill_git_mastery` | Advanced git workflow with secret scanning, conventional commits, and interactive confirmation |
 | pepper-protocol | Orchestration rules |
 | prd-format | PRD structure |
 | rfc-format | RFC structure |
