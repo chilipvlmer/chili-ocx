@@ -1,6 +1,7 @@
 import type { Plugin } from "@opencode-ai/plugin";
 import { tool } from "@opencode-ai/plugin";
 import { initPepperStructure, getPepperStatus, addNotepadEntry } from "./utils/pepper-io";
+import { readSkill } from "./utils/skill-reader";
 import { logInfo } from "./utils/logger.js";
 import { SkillRegistry } from "./skills/registry.js";
 import { loadSkills } from "./skills/loader.js";
@@ -22,11 +23,31 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
     logInfo("🌶️ chili-ocx plugin initializing...");
     logInfo(`  Context directory: ${ctx.directory}`);
     
+    // Define the Skill Loading tool
+    const skillToolDef = tool({
+      description: "Load a knowledge skill (instructions) by name. Use this to access standard protocols like 'prd-methodology', 'rfc-format', etc.",
+      args: {
+        name: tool.schema.string().describe("The name of the skill to load (e.g., 'prd-methodology', 'rfc-format')")
+      },
+      execute: async (args, context) => {
+        try {
+          logInfo(`📖 Loading skill: ${args.name}`);
+          const content = await readSkill(args.name, ctx.directory);
+          return content;
+        } catch (error: any) {
+          logInfo(`❌ Failed to load skill ${args.name}: ${error.message}`);
+          throw new Error(`Failed to load skill: ${error.message}`);
+        }
+      }
+    });
+
     // Register custom tools using the tool() helper
     const tools: Record<string, any> = {
       "pepper_init": tool({
         description: "Initialize the Pepper harness .pepper/ directory structure in the current project",
-        args: {},
+        args: {
+           reason: tool.schema.string().describe("Brief explanation of why you are calling this tool")
+        },
         execute: async (args, context) => {
           logInfo("🔧 pepper_init tool executing");
           const result = initPepperStructure(ctx.directory);
@@ -36,7 +57,9 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
       }),
       "pepper_status": tool({
         description: "Get the current status of the Pepper harness including PRDs, RFCs, plans, and state",
-        args: {},
+        args: {
+           reason: tool.schema.string().describe("Brief explanation of why you are calling this tool")
+        },
         execute: async (args, context) => {
           logInfo("🔧 pepper_status tool executing");
           const result = getPepperStatus(ctx.directory);
@@ -59,7 +82,16 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
       })
     };
 
-    // --- Dynamic Skill Loading ---
+    // Try to register 'skill' (primary)
+    // OpenCode might block this if it conflicts with a built-in tool, 
+    // but the goal is to override the built-in one which is broken.
+    // We also register 'pepper_skill' as a fallback just in case.
+    tools["skill"] = skillToolDef;
+    tools["pepper_skill"] = skillToolDef;
+
+    // --- Dynamic Skill Loading (Legacy/Experimental) ---
+    // Keeping this for backward compatibility or future features, 
+    // but the main way to access knowledge skills is now the 'skill' tool above.
     const skillsDirs = [
       join(ctx.directory, ".opencode/skills")
     ];
