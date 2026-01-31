@@ -19,98 +19,98 @@
 		{
 			"name": "prd-methodology",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "10-phase PRD creation workflow",
 			"files": ["skills/prd-methodology/SKILL.md"]
 		},
 		{
 			"name": "prd-versioning",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "PRD/RFC versioning and status tracking with SemVer",
 			"files": ["skills/prd-versioning/SKILL.md"]
 		},
 		{
 			"name": "rfc-generation",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "12-section RFC structure and templates",
 			"files": ["skills/rfc-generation/SKILL.md"]
 		},
 		{
 			"name": "architecture-dialogue",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Technology decision and trade-off framework",
 			"files": ["skills/architecture-dialogue/SKILL.md"]
 		},
 		{
 			"name": "pepper-protocol",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Orchestration protocol for Scoville - state management, delegation patterns, and workflow",
 			"files": ["skills/pepper-protocol/SKILL.md"]
 		},
 		{
 			"name": "prd-format",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "PRD document structure, SemVer naming, and quality checklist for Seed",
 			"files": ["skills/prd-format/SKILL.md"]
 		},
 		{
 			"name": "rfc-format",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "RFC document structure with PRD version namespacing",
 			"files": ["skills/rfc-format/SKILL.md"]
 		},
 		{
 			"name": "planning-workflow",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Execution plan creation from PRDs/RFCs for Sprout",
 			"files": ["skills/planning-workflow/SKILL.md"]
 		},
 		{
 			"name": "code-philosophy",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
 			"files": ["skills/code-philosophy/SKILL.md"]
 		},
 		{
 			"name": "docs-style",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Documentation writing standards for Chipotle",
 			"files": ["skills/docs-style/SKILL.md"]
 		},
 		{
 			"name": "code-review",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "KDCO-style 4-layer review methodology with severity classification for Habanero",
 			"files": ["skills/code-review/SKILL.md"]
 		},
 		{
 			"name": "exploration-protocol",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Research and codebase exploration methodology for Ghost",
 			"files": ["skills/exploration-protocol/SKILL.md"]
 		},
 		{
 			"name": "git-mastery",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "Automated git workflow with safety checks, intelligent diffing, and conventional commits",
 			"files": ["skills/git-mastery/SKILL.md"]
 		},
 		{
 			"name": "frontend-philosophy",
 			"type": "ocx:skill",
-			"version": "1.0.1",
+			"version": "1.0.2",
 			"description": "The 5 Pillars of Intentional UI - principles for creating distinctive, memorable interfaces (ported from kdco)",
 			"files": ["skills/frontend-philosophy/SKILL.md"]
 		},
