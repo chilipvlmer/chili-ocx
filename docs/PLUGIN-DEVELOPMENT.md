@@ -107,6 +107,82 @@ The build process creates a single `bundle.js` that:
 - Is CommonJS compatible for OpenCode
 - Contains source maps for debugging
 
+## Registry Maintenance
+
+When you modify the plugin (add tools, fix bugs, or change behavior), you **MUST** update `registry.json` to reflect the changes.
+
+### When to Update registry.json
+
+| Change Type | Action Required | Example |
+|-------------|----------------|---------|
+| **Add new tool** | Bump version + update description | Adding `skill` tool |
+| **Fix bug** | Bump patch version | RFC-010 bug fix |
+| **New feature** | Bump minor version | New capability |
+| **Breaking change** | Bump major version | API redesign |
+
+### Version Bumping Rules
+
+Follow [Semantic Versioning](https://semver.org/):
+
+- **Patch** (1.0.0 → 1.0.1): Bug fixes, internal changes
+- **Minor** (1.0.0 → 1.1.0): New features, new tools, backward compatible
+- **Major** (1.0.0 → 2.0.0): Breaking changes, removed tools
+
+### Steps to Update
+
+1. **Edit `registry.json`**:
+   ```json
+   {
+     "name": "pepper-plugin",
+     "type": "ocx:plugin",
+     "version": "1.1.0",  // ← Bump this
+     "description": "Pepper harness plugin - provides pepper_init, pepper_status, pepper_notepad_add, and skill tools",  // ← Update this
+     "files": ["plugin/pepper-plugin.js"]
+   }
+   ```
+
+2. **Update description** to include new tools
+
+3. **Commit with message**:
+   ```bash
+   git add registry.json
+   git commit -m "chore: bump pepper-plugin to v1.1.0, add skill tool (RFC-010)"
+   ```
+
+### ⚠️ Critical: Don't Forget!
+
+If you skip this step:
+- Users won't see updated descriptions
+- Version tracking becomes inconsistent
+- Other agents won't know the plugin changed
+
+**Always update registry.json when modifying plugins!**
+
+### Bundle Maintenance
+
+The `pepper-harness` bundle (line ~449 in `registry.json`) groups all components together. When you update any component (plugin, skill, agent, command), you **must also bump the bundle version**.
+
+**Why?** The bundle version indicates which collection of components is included. Even though the bundle's `dependencies` array doesn't change (it still lists "pepper-plugin"), the version bump signals that the bundle now contains updated components.
+
+**Example:**
+```json
+{
+  "name": "pepper-harness",
+  "type": "ocx:bundle",
+  "version": "1.1.0",  // ← Bump this when ANY dependency updates
+  "description": "Complete Pepper harness...",
+  "dependencies": [
+    "pepper-plugin",  // ← This points to latest, but version tracks bundle state
+    "git-mastery",
+    ...
+  ]
+}
+```
+
+**Rule of Thumb:**
+- Component changes → Bump component version
+- Component version bumped → Bump bundle version too
+
 ## Adding New Tools
 
 ### 1. Create Tool Implementation

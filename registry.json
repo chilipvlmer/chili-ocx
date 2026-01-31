@@ -12,8 +12,8 @@
 		{
 			"name": "pepper-plugin",
 			"type": "ocx:plugin",
-			"version": "1.0.1",
-			"description": "Pepper harness plugin - provides pepper_init, pepper_status, and pepper_notepad_add tools",
+			"version": "1.1.0",
+			"description": "Pepper harness plugin - provides pepper_init, pepper_status, pepper_notepad_add, and skill tools",
 			"files": ["plugin/pepper-plugin.js"]
 		},
 		{
@@ -448,7 +448,7 @@
 		{
 			"name": "pepper-harness",
 			"type": "ocx:bundle",
-			"version": "1.0.1",
+			"version": "1.1.0",
 			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
 			"files": [],
 			"dependencies": [
