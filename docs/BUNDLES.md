@@ -9,10 +9,11 @@ The `pepper-harness` bundle includes the core workflow components for the Pepper
 **Plugin (1)**:
 - `pepper-plugin` - Core plugin with 3 custom tools
 
-**Skills (3)**:
+**Skills (4)**:
 - `prd-methodology` - PRD creation methodology
 - `prd-format` - PRD document structure
 - `pepper-protocol` - Orchestration rules and workflow
+- `frontend-philosophy` - The 5 Pillars of Intentional UI (ported from kdco)
 
 **Agents (6)**:
 - `scoville-orchestrator` - Main coordinator

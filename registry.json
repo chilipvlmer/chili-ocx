@@ -109,6 +109,12 @@
 			"description": "Automated git workflow with safety checks, intelligent diffing, and conventional commits",
 			"files": ["skills/git-mastery/SKILL.md"]
 		},
+		{
+			"name": "frontend-philosophy",
+			"type": "ocx:skill",
+			"description": "The 5 Pillars of Intentional UI - principles for creating distinctive, memorable interfaces (ported from kdco)",
+			"files": ["skills/frontend-philosophy/SKILL.md"]
+		},
 
 		// ============================================================
 		// === PLUGINS ===
@@ -439,6 +445,7 @@
 				// Skills (agent knowledge)
 				"prd-methodology",
 				"prd-format",
+				"frontend-philosophy",
 				"pepper-protocol",
 
 				// Agents

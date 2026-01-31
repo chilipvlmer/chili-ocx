@@ -77,6 +77,11 @@
       "description": "Automated git workflow with safety checks, intelligent diffing, and conventional commits"
     },
     {
+      "name": "frontend-philosophy",
+      "type": "ocx:skill",
+      "description": "The 5 Pillars of Intentional UI - principles for creating distinctive, memorable interfaces (ported from kdco)"
+    },
+    {
       "name": "state-management",
       "type": "ocx:plugin",
       "description": "Manages .pepper/ state, context compaction recovery, and notepad integration"
