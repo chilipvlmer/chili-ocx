@@ -9,7 +9,7 @@
     {
       "name": "pepper-plugin",
       "type": "ocx:plugin",
-      "description": "Pepper harness plugin - provides pepper_init, pepper_status, and pepper_notepad_add tools"
+      "description": "Pepper harness plugin - provides pepper_init, pepper_status, pepper_notepad_add, and skill tools"
     },
     {
       "name": "prd-methodology",

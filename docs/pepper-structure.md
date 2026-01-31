@@ -61,7 +61,7 @@ Session coordination and workspace tracking (v1.1.0):
 **Fields:**
 - `version` - State schema version (current: 1.1.0)
 - `initialized` - When .pepper/ was first created
-- `workspacePath` - Resolved workspace paths (handles symlinks like Ghost mode)
+- `workspacePath` - Resolved workspace paths (handles symlinks like Profile mode)
   - `symlink` - Symlink path if workspace is symlinked, null otherwise
   - `real` - Real filesystem path (always present)
   - `isSymlink` - Boolean flag

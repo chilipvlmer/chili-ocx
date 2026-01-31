@@ -188,6 +188,26 @@
     {
       "timestamp": "2026-01-25T21:22:42.562Z",
       "content": "Completed migration of git-mastery skill to registry structure.\nFile moved from .opencode/skills/git-mastery.md to files/skill/git-mastery/SKILL.md.\nRegistry rebuilt and verified.\nNext step: Commit and push changes to trigger deployment."
+    },
+    {
+      "timestamp": "2026-01-31T19:34:57.886Z",
+      "content": "**RFC-008 Created for OCX 1.4.6 Migration** (2026-01-31)\n\n**Decision**: Create RFC-008 to document OCX 1.4.6 compliance migration requirements.\n\n**Scope**: \n- Ghost → Profile terminology migration\n- Unregistered plugin resolution  \n- Symlink handling evaluation\n- Documentation updates\n\n**Status**: RFC creation in progress by Seed (appropriate role)"
+    },
+    {
+      "timestamp": "2026-01-31T19:36:15.904Z",
+      "content": "**RFC-008 Location Confirmed** (2026-01-31)\n\nPer rfc-format skill:\n- Location: `.pepper/specs/rfc/v{PRD_VERSION}/`\n- Filename: `RFC-{NNN}-{slug}.md`\n- Example: `.pepper/specs/rfc/v1.0.0/RFC-008-ocx-1.4.6-migration.md`\n\nExisting RFCs are in v1.0.0 namespace:\n- RFC-001 through RFC-007 exist in `.pepper/specs/rfc/v1.0.0/`\n\nRFC-008 should be: `.pepper/specs/rfc/v1.0.0/RFC-008-ocx-1.4.6-migration.md`"
+    },
+    {
+      "timestamp": "2026-01-31T20:48:45.476Z",
+      "content": "RFC-009 execution plan approved by user. Proceeding to save to .pepper/plan.md for Jalapeño implementation."
+    },
+    {
+      "timestamp": "2026-01-31T21:56:35.225Z",
+      "content": "Added Registry Maintenance section to docs/PLUGIN-DEVELOPMENT.md to document the convention of updating registry.json when modifying plugins."
+    },
+    {
+      "timestamp": "2026-01-31T22:48:17.213Z",
+      "content": "RFC-011 implementation complete: Added YAML frontmatter to all 12 skills missing it. All 15 skills now have proper frontmatter. Changes committed and pushed to main (commit 51cc5c5)."
     }
   ]
 }

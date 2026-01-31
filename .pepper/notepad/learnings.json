@@ -112,6 +112,82 @@
     {
       "timestamp": "2026-01-31T14:55:46.681Z",
       "content": "Plan review feedback incorporated: Added specific OCX documentation URLs (REGISTRY_PROTOCOL.md, registry.schema.json) and clarified Phase 4.2 scope to focus on local build configuration rather than live environment checks."
+    },
+    {
+      "timestamp": "2026-01-31T20:41:54.319Z",
+      "content": "Task tool execution failed (\"aborted\") when trying to write PRD file. Proceeding to write PRD directly to file system."
+    },
+    {
+      "timestamp": "2026-01-31T21:55:50.660Z",
+      "content": "Documented registry maintenance convention: When modifying plugins, agents must update registry.json version and description. Added to docs/PLUGIN-DEVELOPMENT.md."
+    },
+    {
+      "timestamp": "2026-01-31T21:58:02.403Z",
+      "content": "Bundle components also need version bumps when their dependencies are updated. Documented in registry maintenance guide."
+    },
+    {
+      "timestamp": "2026-01-31T22:07:09.249Z",
+      "content": "Testing if pepper_skill fallback is available after plugin reload."
+    },
+    {
+      "timestamp": "2026-01-31T22:07:44.183Z",
+      "content": "Testing pepper_skill tool directly - checking if fallback registration works."
+    },
+    {
+      "timestamp": "2026-01-31T22:10:19.000Z",
+      "content": "Testing pepper_skill fallback tool directly - the host skill tool is shadowing our plugin's skill tool."
+    },
+    {
+      "timestamp": "2026-01-31T22:10:26.803Z",
+      "content": "Analysis: Host 'skill' tool is shadowing plugin. Our plugin works (pepper_init/status/notepad_add all function), but 'skill' call is intercepted by OpenCode's built-in tool before reaching our plugin. Need to use 'pepper_skill' fallback or find a way to override host tool."
+    },
+    {
+      "timestamp": "2026-01-31T22:17:14.205Z",
+      "content": "Investigating plugin installation path - found at .opencode/.opencode/plugin/ instead of expected profiles/default/plugin/. Attempting manual fix to correct location."
+    },
+    {
+      "timestamp": "2026-01-31T22:25:18.692Z",
+      "content": "Skills ARE correctly installed at /Users/chili/.config/opencode/skills/ - found git-mastery, pepper-protocol, etc. Native skill tool should be able to load them by name, but still failing. Possible OpenCode bug or version issue."
+    },
+    {
+      "timestamp": "2026-01-31T22:25:40.193Z",
+      "content": "Partial success: skill(name=\"git-mastery\") works! But skill(name=\"rfc-format\") fails with \"Available skills: 0, 1, 2\". Only some skills are discoverable by the native tool. Need to check which skills are installed vs which are discoverable."
+    },
+    {
+      "timestamp": "2026-01-31T22:26:23.074Z",
+      "content": "Testing if pepper_skill fallback tool is available for loading knowledge skills like rfc-format."
+    },
+    {
+      "timestamp": "2026-01-31T22:29:10.981Z",
+      "content": "Testing pepper_skill tool directly by calling it as a tool, not via skill() wrapper."
+    },
+    {
+      "timestamp": "2026-01-31T22:31:47.032Z",
+      "content": "Native skill tool loads some skills (git-mastery, prd-methodology) but not others (rfc-format, pepper-protocol). Need to check all installed skills vs discoverable skills."
+    },
+    {
+      "timestamp": "2026-01-31T22:33:11.190Z",
+      "content": "Complete skill test results:\n\nWORKING:\n- git-mastery ✅\n- prd-methodology ✅\n- frontend-philosophy ✅\n\nNOT WORKING:\n- rfc-format ❌\n- exploration-protocol ❌\n- code-philosophy ❌\n- pepper-protocol ❌\n\nPattern unclear - some executable and knowledge skills work, others don't. No clear correlation with skill type or content."
+    },
+    {
+      "timestamp": "2026-01-31T22:41:22.282Z",
+      "content": "Writing RFC-011 execution plan to .pepper/plan.md - Jalapeño has write permissions as the Coder."
+    },
+    {
+      "timestamp": "2026-01-31T22:50:16.172Z",
+      "content": "Documenting /Users/chili/.config/opencode structure BEFORE update:\n\nCurrent structure (as of 2026-01-31, pre-update):\n- Location: /Users/chili/.config/opencode/.opencode/plugin/pepper-plugin.js (weird nested path)\n- Skills installed at: /Users/chili/.config/opencode/skills/*\n- Available skills: git-mastery, prd-methodology, frontend-philosophy, exploration-protocol, code-philosophy, pepper-protocol, planning-workflow, prd-format, prd-versioning, rfc-format, rfc-generation, architecture-dialogue, code-review, docs-style (15 total)\n\nIssues noted:\n1. Plugin at .opencode/.opencode/plugin/ (nested, weird)\n2. Should be at profiles/default/plugin/ according to docs\n\nWill compare after user runs ocx update."
+    },
+    {
+      "timestamp": "2026-01-31T22:51:24.814Z",
+      "content": "Post-update check (2026-01-31): User ran ocx update --all and restarted OpenCode. Updated 11 skill components. Now checking if structure is correct and skills work."
+    },
+    {
+      "timestamp": "2026-01-31T23:21:16.486Z",
+      "content": "Issue: Have both registry.json and registry.jsonc. Build may be picking up wrong file. Suggest deleting registry.json and keeping only registry.jsonc."
+    },
+    {
+      "timestamp": "2026-01-31T23:38:40.884Z",
+      "content": "User performed Option A (deleted root skills/ folder, kept .opencode/skills/). After reload, skill(name=\"rfc-format\") still fails with \"Available skills: none\"."
     }
   ]
 }
