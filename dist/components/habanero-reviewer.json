@@ -8,7 +8,10 @@
       "files": [
         "agent/habanero-reviewer/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "code-review",
+        "code-philosophy"
+      ],
       "opencode": {
         "agent": {
           "habanero-reviewer": {

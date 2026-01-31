@@ -8,7 +8,9 @@
       "files": [
         "agent/sprout-execution-planner/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "planning-workflow"
+      ],
       "opencode": {
         "agent": {
           "sprout-execution-planner": {

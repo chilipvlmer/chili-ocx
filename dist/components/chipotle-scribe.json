@@ -8,7 +8,9 @@
       "files": [
         "agent/chipotle-scribe/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "docs-style"
+      ],
       "opencode": {
         "mcp": {
           "context7": "https://mcp.context7.com/mcp"

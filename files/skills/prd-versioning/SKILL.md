@@ -34,13 +34,13 @@ my-project-v2.0.0.md    # Major scope change or requirement overhaul
 
 ## RFC Versioning
 
-### Format: `.sisyphus/specs/rfc/v{PRD_VERSION}/RFC-{NNN}-{slug}.md`
+### Format: `.pepper/specs/rfc/v{PRD_VERSION}/RFC-{NNN}-{slug}.md`
 
 RFCs inherit the PRD version they implement. This creates clear traceability between requirements and implementation plans.
 
 **Example Directory Structure:**
 ```
-.sisyphus/specs/rfc/
+.pepper/specs/rfc/
 ├── v1.0.0/
 │   ├── RFC-001-authentication.md
 │   ├── RFC-002-api-design.md
@@ -51,7 +51,7 @@ RFCs inherit the PRD version they implement. This creates clear traceability bet
 
 ## RFC Status Tracking
 
-### Status File: `.sisyphus/rfc-status.json`
+### Status File: `.pepper/rfc-status.json`
 
 ```json
 {

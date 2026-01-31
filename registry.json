@@ -160,6 +160,7 @@
 			"type": "ocx:agent",
 			"description": "Orchestrator - coordinates work, delegates to specialized agents",
 			"files": ["agent/scoville-orchestrator/AGENT.md"],
+			"dependencies": ["pepper-protocol"],
 			"opencode": {
 				"agent": {
 					"scoville-orchestrator": {
@@ -178,6 +179,7 @@
 			"type": "ocx:agent",
 			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
 			"files": ["agent/sprout-execution-planner/AGENT.md"],
+			"dependencies": ["planning-workflow"],
 			"opencode": {
 				"agent": {
 					"sprout-execution-planner": {
@@ -204,6 +206,7 @@
 			"type": "ocx:agent",
 			"description": "Artifact Planner - creates and refines PRD and RFC documents",
 			"files": ["agent/seed-prd-rfc/AGENT.md"],
+			"dependencies": ["prd-methodology", "prd-format", "rfc-format", "prd-versioning"],
 			"opencode": {
 				"agent": {
 					"seed-prd-rfc": {
@@ -230,6 +233,7 @@
 			"type": "ocx:agent",
 			"description": "Coder - implements features, fixes bugs, writes tests",
 			"files": ["agent/jalapeno-coder/AGENT.md"],
+			"dependencies": ["code-philosophy"],
 			"opencode": {
 				"mcp": {
 					"shadcn": "https://mcp.shadcn.com"
@@ -254,6 +258,7 @@
 			"type": "ocx:agent",
 			"description": "Scribe - creates and maintains documentation, README files, and code comments",
 			"files": ["agent/chipotle-scribe/AGENT.md"],
+			"dependencies": ["docs-style"],
 			"opencode": {
 				"mcp": {
 					"context7": "https://mcp.context7.com/mcp"
@@ -278,6 +283,7 @@
 			"type": "ocx:agent",
 			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
 			"files": ["agent/ghost-explorer/AGENT.md"],
+			"dependencies": ["exploration-protocol"],
 			"opencode": {
 				"mcp": {
 					"context7": "https://mcp.context7.com/mcp",
@@ -320,6 +326,7 @@
 			"type": "ocx:agent",
 			"description": "Reviewer - reviews code for correctness, security, performance, and style",
 			"files": ["agent/habanero-reviewer/AGENT.md"],
+			"dependencies": ["code-review", "code-philosophy"],
 			"opencode": {
 				"agent": {
 					"habanero-reviewer": {
@@ -442,11 +449,21 @@
 				// Plugin (provides executable tools)
 				"pepper-plugin",
 
-				// Skills (agent knowledge)
-				"prd-methodology",
-				"prd-format",
+				// Skills (14 skills in alphabetical order)
+				"architecture-dialogue",
+				"code-philosophy",
+				"code-review",
+				"docs-style",
+				"exploration-protocol",
 				"frontend-philosophy",
+				"git-mastery",
 				"pepper-protocol",
+				"planning-workflow",
+				"prd-format",
+				"prd-methodology",
+				"prd-versioning",
+				"rfc-format",
+				"rfc-generation",
 
 				// Agents
 				"scoville-orchestrator",

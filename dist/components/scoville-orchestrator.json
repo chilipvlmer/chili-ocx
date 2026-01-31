@@ -8,7 +8,9 @@
       "files": [
         "agent/scoville-orchestrator/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "pepper-protocol"
+      ],
       "opencode": {
         "agent": {
           "scoville-orchestrator": {

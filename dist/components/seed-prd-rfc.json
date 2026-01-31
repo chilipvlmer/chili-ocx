@@ -8,7 +8,12 @@
       "files": [
         "agent/seed-prd-rfc/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "prd-methodology",
+        "prd-format",
+        "rfc-format",
+        "prd-versioning"
+      ],
       "opencode": {
         "agent": {
           "seed-prd-rfc": {

@@ -8,7 +8,9 @@
       "files": [
         "agent/jalapeno-coder/AGENT.md"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "code-philosophy"
+      ],
       "opencode": {
         "mcp": {
           "shadcn": "https://mcp.shadcn.com"
