@@ -1,0 +1,491 @@
+{
+	"$schema": "https://ocx.kdco.dev/schemas/registry.json",
+	"name": "Chili OCX Registry",
+	"namespace": "chili-ocx",
+	"version": "0.1.1",
+	"author": "chilipvlmer",
+
+	"opencode": "1.0.0",
+	"ocx": "1.4.6",
+
+	"components": [
+		{
+			"name": "pepper-plugin",
+			"type": "ocx:plugin",
+			"version": "1.1.0",
+			"description": "Pepper harness plugin - provides pepper_init, pepper_status, pepper_notepad_add, and skill tools",
+			"files": ["plugin/pepper-plugin.js"]
+		},
+		{
+			"name": "prd-methodology",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "10-phase PRD creation workflow",
+			"files": ["skills/prd-methodology/SKILL.md"]
+		},
+		{
+			"name": "prd-versioning",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "PRD/RFC versioning and status tracking with SemVer",
+			"files": ["skills/prd-versioning/SKILL.md"]
+		},
+		{
+			"name": "rfc-generation",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "12-section RFC structure and templates",
+			"files": ["skills/rfc-generation/SKILL.md"]
+		},
+		{
+			"name": "architecture-dialogue",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Technology decision and trade-off framework",
+			"files": ["skills/architecture-dialogue/SKILL.md"]
+		},
+		{
+			"name": "pepper-protocol",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Orchestration protocol for Scoville - state management, delegation patterns, and workflow",
+			"files": ["skills/pepper-protocol/SKILL.md"]
+		},
+		{
+			"name": "prd-format",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "PRD document structure, SemVer naming, and quality checklist for Seed",
+			"files": ["skills/prd-format/SKILL.md"]
+		},
+		{
+			"name": "rfc-format",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "RFC document structure with PRD version namespacing",
+			"files": ["skills/rfc-format/SKILL.md"]
+		},
+		{
+			"name": "planning-workflow",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Execution plan creation from PRDs/RFCs for Sprout",
+			"files": ["skills/planning-workflow/SKILL.md"]
+		},
+		{
+			"name": "code-philosophy",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
+			"files": ["skills/code-philosophy/SKILL.md"]
+		},
+		{
+			"name": "docs-style",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Documentation writing standards for Chipotle",
+			"files": ["skills/docs-style/SKILL.md"]
+		},
+		{
+			"name": "code-review",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "KDCO-style 4-layer review methodology with severity classification for Habanero",
+			"files": ["skills/code-review/SKILL.md"]
+		},
+		{
+			"name": "exploration-protocol",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Research and codebase exploration methodology for Ghost",
+			"files": ["skills/exploration-protocol/SKILL.md"]
+		},
+		{
+			"name": "git-mastery",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "Automated git workflow with safety checks, intelligent diffing, and conventional commits",
+			"files": ["skills/git-mastery/SKILL.md"]
+		},
+		{
+			"name": "frontend-philosophy",
+			"type": "ocx:skill",
+			"version": "1.0.2",
+			"description": "The 5 Pillars of Intentional UI - principles for creating distinctive, memorable interfaces (ported from kdco)",
+			"files": ["skills/frontend-philosophy/SKILL.md"]
+		},
+		{
+			"name": "state-management",
+			"type": "ocx:plugin",
+			"version": "1.0.1",
+			"description": "Manages .pepper/ state, context compaction recovery, and notepad integration",
+			"files": ["plugin/state-management.ts"]
+		},
+		{
+			"name": "agents-md-loader",
+			"type": "ocx:plugin",
+			"version": "1.0.1",
+			"description": "Loads AGENTS.md from project root and injects into agent context",
+			"files": ["plugin/agents-md-loader.ts"]
+		},
+		{
+			"name": "worktree-manager",
+			"type": "ocx:plugin",
+			"version": "1.0.1",
+			"description": "Git worktree isolation for parallel session development",
+			"files": ["plugin/worktree-manager.ts"]
+		},
+		{
+			"name": "toast-status",
+			"type": "ocx:plugin",
+			"version": "1.0.1",
+			"description": "Dynamic toast notifications for background delegation status",
+			"files": ["plugin/toast-status.ts"]
+		},
+		{
+			"name": "auto-review",
+			"type": "ocx:plugin",
+			"version": "1.0.1",
+			"description": "Automatically triggers Habanero review after Jalapeño completes a task",
+			"files": ["plugin/auto-review.ts"]
+		},
+		{
+			"name": "scoville-orchestrator",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Orchestrator - coordinates work, delegates to specialized agents",
+			"files": ["agent/scoville-orchestrator.md"],
+			"dependencies": ["pepper-protocol"],
+			"opencode": {
+				"agent": {
+					"scoville-orchestrator": {
+						"tools": {
+							"edit": false,
+							"write": false,
+							"bash": false,
+							"question": true
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "sprout-execution-planner",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
+			"files": ["agent/sprout-execution-planner.md"],
+			"dependencies": ["planning-workflow"],
+			"opencode": {
+				"agent": {
+					"sprout-execution-planner": {
+						"tools": {
+							"bash": false,
+							"question": true
+						},
+						"permission": {
+							"edit": {
+								".pepper/**": "allow",
+								"*": "deny"
+							},
+							"write": {
+								".pepper/**": "allow",
+								"*": "deny"
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "seed-prd-rfc",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Artifact Planner - creates and refines PRD and RFC documents",
+			"files": ["agent/seed-prd-rfc.md"],
+			"dependencies": ["prd-methodology", "prd-format", "rfc-format", "prd-versioning"],
+			"opencode": {
+				"agent": {
+					"seed-prd-rfc": {
+						"tools": {
+							"bash": false,
+							"question": true
+						},
+					"permission": {
+						"edit": {
+							".pepper/**": "allow",
+							"*": "deny"
+						},
+						"write": {
+							".pepper/**": "allow",
+							"*": "deny"
+						}
+					}
+					}
+				}
+			}
+		},
+		{
+			"name": "jalapeno-coder",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Coder - implements features, fixes bugs, writes tests",
+			"files": ["agent/jalapeno-coder.md"],
+			"dependencies": ["code-philosophy"],
+			"opencode": {
+				"mcp": {
+					"shadcn": "https://mcp.shadcn.com"
+				},
+				"permission": {
+					"shadcn_*": "deny"
+				},
+				"agent": {
+					"jalapeno-coder": {
+						"tools": {
+							"question": true
+						},
+						"permission": {
+							"shadcn_*": "allow"
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "chipotle-scribe",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Scribe - creates and maintains documentation, README files, and code comments",
+			"files": ["agent/chipotle-scribe.md"],
+			"dependencies": ["docs-style"],
+			"opencode": {
+				"mcp": {
+					"context7": "https://mcp.context7.com/mcp"
+				},
+				"permission": {
+					"context7_*": "deny"
+				},
+				"agent": {
+					"chipotle-scribe": {
+						"tools": {
+							"question": true
+						},
+						"permission": {
+							"context7_*": "allow"
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "ghost-explorer",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
+			"files": ["agent/ghost-explorer.md"],
+			"dependencies": ["exploration-protocol"],
+			"opencode": {
+				"mcp": {
+					"context7": "https://mcp.context7.com/mcp",
+					"exa": "https://mcp.exa.ai/mcp",
+					"gh_grep": "https://mcp.grep.app"
+				},
+				"permission": {
+					"context7_*": "deny",
+					"exa_*": "deny",
+					"gh_grep_*": "deny"
+				},
+				"agent": {
+					"ghost-explorer": {
+						"tools": {
+							"edit": false,
+							"write": false
+						},
+						"permission": {
+							"bash": {
+								"find*": "allow",
+								"grep*": "allow",
+								"rg*": "allow",
+								"cat*": "allow",
+								"head*": "allow",
+								"tail*": "allow",
+								"wc*": "allow",
+								"ls*": "allow",
+								"*": "deny"
+							},
+							"context7_*": "allow",
+							"exa_*": "allow",
+							"gh_grep_*": "allow"
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "habanero-reviewer",
+			"type": "ocx:agent",
+			"version": "1.0.1",
+			"description": "Reviewer - reviews code for correctness, security, performance, and style",
+			"files": ["agent/habanero-reviewer.md"],
+			"dependencies": ["code-review", "code-philosophy"],
+			"opencode": {
+				"agent": {
+					"habanero-reviewer": {
+						"tools": {
+							"edit": false,
+							"write": false
+						},
+						"permission": {
+							"bash": {
+								"git diff*": "allow",
+								"git log*": "allow",
+								"git status": "allow",
+								"*": "deny"
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "pepper-init",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Initialize .pepper/ directory structure",
+			"files": ["command/pepper-init/COMMAND.md"]
+		},
+		{
+			"name": "prd",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Create a new Product Requirements Document",
+			"files": ["command/prd/COMMAND.md"]
+		},
+		{
+			"name": "prd-refine",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Refine an existing PRD",
+			"files": ["command/prd-refine/COMMAND.md"]
+		},
+		{
+			"name": "prd-review",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Review PRD for completeness and quality",
+			"files": ["command/prd-review/COMMAND.md"]
+		},
+		{
+			"name": "rfc",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Create a new Request for Comments (technical design)",
+			"files": ["command/rfc/COMMAND.md"]
+		},
+		{
+			"name": "rfc-refine",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Refine an existing RFC",
+			"files": ["command/rfc-refine/COMMAND.md"]
+		},
+		{
+			"name": "rfc-review",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Review RFC for technical completeness",
+			"files": ["command/rfc-review/COMMAND.md"]
+		},
+		{
+			"name": "plan",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Generate execution plan from specs",
+			"files": ["command/plan/COMMAND.md"]
+		},
+		{
+			"name": "work",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Start or resume execution of current plan",
+			"files": ["command/work/COMMAND.md"]
+		},
+		{
+			"name": "review",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Review code changes",
+			"files": ["command/review/COMMAND.md"]
+		},
+		{
+			"name": "status",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Show current plan progress and state",
+			"files": ["command/status/COMMAND.md"]
+		},
+		{
+			"name": "notepad",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "View or add to notepad",
+			"files": ["command/notepad/COMMAND.md"]
+		},
+		{
+			"name": "resume",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Resume work after context compaction",
+			"files": ["command/resume/COMMAND.md"]
+		},
+		{
+			"name": "auto-continue",
+			"type": "ocx:command",
+			"version": "1.0.1",
+			"description": "Toggle auto-continue between tasks",
+			"files": ["command/auto-continue/COMMAND.md"]
+		},
+		{
+			"name": "pepper-harness",
+			"type": "ocx:bundle",
+			"version": "1.1.0",
+			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
+			"files": [],
+			"dependencies": [
+				"pepper-plugin",
+				"architecture-dialogue",
+				"code-philosophy",
+				"code-review",
+				"docs-style",
+				"exploration-protocol",
+				"frontend-philosophy",
+				"git-mastery",
+				"pepper-protocol",
+				"planning-workflow",
+				"prd-format",
+				"prd-methodology",
+				"prd-versioning",
+				"rfc-format",
+				"rfc-generation",
+				"scoville-orchestrator",
+				"seed-prd-rfc",
+				"sprout-execution-planner",
+				"jalapeno-coder",
+				"habanero-reviewer",
+				"ghost-explorer",
+				"pepper-init",
+				"prd",
+				"prd-refine",
+				"rfc",
+				"rfc-refine",
+				"plan",
+				"work",
+				"review",
+				"status",
+				"notepad",
+				"resume",
+				"auto-continue"
+			]
+		}
+	]
+}
