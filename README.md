@@ -118,6 +118,52 @@ ocx add chili-ocx/pepper-protocol --cwd ~/.config/opencode/profiles/my-profile
 6. /review          → Quality check
 ```
 
+## Troubleshooting
+
+### Installation Issues
+
+#### "Failed to add components" with --global
+
+If `ocx add chili-ocx/pepper-harness --global` fails, check:
+
+1. **Registry must be added to global config first**:
+   ```bash
+   # Check if chili-ocx is in your global config
+   cat ~/.config/opencode/ocx.jsonc
+   ```
+   
+   You should see:
+   ```json
+   "chili-ocx": {
+     "url": "https://chili-ocx.pages.dev"
+   }
+   ```
+
+2. **Common mistake: URL typo**:
+   - Wrong: `https://chili-ovx.pages.dev` (missing 'c')
+   - Correct: `https://chili-ocx.pages.dev`
+
+3. **Add registry globally if missing**:
+   ```bash
+   ocx registry add https://chili-ocx.pages.dev --name chili-ocx --global
+   ```
+
+#### Understanding --global vs local installation
+
+- `--global` flag: Installs to `~/.config/opencode/` (available in all projects)
+- Without flag: Installs to current project's `.opencode/` directory
+- **Important**: `--global` only works if the registry is configured in your global config
+
+#### Verify installation
+
+```bash
+# Check installed components
+ocx list --installed
+
+# Search for chili-ocx components
+ocx search chili-ocx
+```
+
 ## .pepper/ Directory
 
 ```
