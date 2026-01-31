@@ -13,7 +13,7 @@
 
 	// Compatibility versions
 	"opencode": "1.0.0", // Minimum OpenCode version required
-	"ocx": "1.0.16", // Minimum OCX CLI version required
+	"ocx": "1.4.6", // Minimum OCX CLI version required
 
 	"components": [
 		// ============================================================
@@ -35,79 +35,79 @@
 			"name": "prd-methodology",
 			"type": "ocx:skill",
 			"description": "10-phase PRD creation workflow",
-			"files": ["skill/prd-methodology/SKILL.md"]
+			"files": ["skills/prd-methodology/SKILL.md"]
 		},
 		{
 			"name": "prd-versioning",
 			"type": "ocx:skill",
 			"description": "PRD/RFC versioning and status tracking with SemVer",
-			"files": ["skill/prd-versioning/SKILL.md"]
+			"files": ["skills/prd-versioning/SKILL.md"]
 		},
 		{
 			"name": "rfc-generation",
 			"type": "ocx:skill",
 			"description": "12-section RFC structure and templates",
-			"files": ["skill/rfc-generation/SKILL.md"]
+			"files": ["skills/rfc-generation/SKILL.md"]
 		},
 		{
 			"name": "architecture-dialogue",
 			"type": "ocx:skill",
 			"description": "Technology decision and trade-off framework",
-			"files": ["skill/architecture-dialogue/SKILL.md"]
+			"files": ["skills/architecture-dialogue/SKILL.md"]
 		},
 		{
 			"name": "pepper-protocol",
 			"type": "ocx:skill",
 			"description": "Orchestration protocol for Scoville - state management, delegation patterns, and workflow",
-			"files": ["skill/pepper-protocol/SKILL.md"]
+			"files": ["skills/pepper-protocol/SKILL.md"]
 		},
 		{
 			"name": "prd-format",
 			"type": "ocx:skill",
 			"description": "PRD document structure, SemVer naming, and quality checklist for Seed",
-			"files": ["skill/prd-format/SKILL.md"]
+			"files": ["skills/prd-format/SKILL.md"]
 		},
 		{
 			"name": "rfc-format",
 			"type": "ocx:skill",
 			"description": "RFC document structure with PRD version namespacing",
-			"files": ["skill/rfc-format/SKILL.md"]
+			"files": ["skills/rfc-format/SKILL.md"]
 		},
 		{
 			"name": "planning-workflow",
 			"type": "ocx:skill",
 			"description": "Execution plan creation from PRDs/RFCs for Sprout",
-			"files": ["skill/planning-workflow/SKILL.md"]
+			"files": ["skills/planning-workflow/SKILL.md"]
 		},
 		{
 			"name": "code-philosophy",
 			"type": "ocx:skill",
 			"description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
-			"files": ["skill/code-philosophy/SKILL.md"]
+			"files": ["skills/code-philosophy/SKILL.md"]
 		},
 		{
 			"name": "docs-style",
 			"type": "ocx:skill",
 			"description": "Documentation writing standards for Chipotle",
-			"files": ["skill/docs-style/SKILL.md"]
+			"files": ["skills/docs-style/SKILL.md"]
 		},
 		{
 			"name": "code-review",
 			"type": "ocx:skill",
 			"description": "KDCO-style 4-layer review methodology with severity classification for Habanero",
-			"files": ["skill/code-review/SKILL.md"]
+			"files": ["skills/code-review/SKILL.md"]
 		},
 		{
 			"name": "exploration-protocol",
 			"type": "ocx:skill",
 			"description": "Research and codebase exploration methodology for Ghost",
-			"files": ["skill/exploration-protocol/SKILL.md"]
+			"files": ["skills/exploration-protocol/SKILL.md"]
 		},
 		{
 			"name": "git-mastery",
 			"type": "ocx:skill",
 			"description": "Automated git workflow with safety checks, intelligent diffing, and conventional commits",
-			"files": ["skill/git-mastery/SKILL.md"]
+			"files": ["skills/git-mastery/SKILL.md"]
 		},
 
 		// ============================================================

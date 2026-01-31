@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "Research and codebase exploration methodology for Ghost",
       "files": [
-        "skill/exploration-protocol/SKILL.md"
+        "skills/exploration-protocol/SKILL.md"
       ],
       "dependencies": []
     }

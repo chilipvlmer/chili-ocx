@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "Orchestration protocol for Scoville - state management, delegation patterns, and workflow",
       "files": [
-        "skill/pepper-protocol/SKILL.md"
+        "skills/pepper-protocol/SKILL.md"
       ],
       "dependencies": []
     }

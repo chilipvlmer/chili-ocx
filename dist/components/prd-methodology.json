@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "10-phase PRD creation workflow",
       "files": [
-        "skill/prd-methodology/SKILL.md"
+        "skills/prd-methodology/SKILL.md"
       ],
       "dependencies": []
     }

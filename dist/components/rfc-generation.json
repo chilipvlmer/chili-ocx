@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "12-section RFC structure and templates",
       "files": [
-        "skill/rfc-generation/SKILL.md"
+        "skills/rfc-generation/SKILL.md"
       ],
       "dependencies": []
     }

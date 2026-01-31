@@ -4,7 +4,7 @@
   "version": "0.1.1",
   "author": "chilipvlmer",
   "opencode": "1.0.0",
-  "ocx": "1.0.16",
+  "ocx": "1.4.6",
   "components": [
     {
       "name": "pepper-plugin",

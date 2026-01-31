@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "Technology decision and trade-off framework",
       "files": [
-        "skill/architecture-dialogue/SKILL.md"
+        "skills/architecture-dialogue/SKILL.md"
       ],
       "dependencies": []
     }

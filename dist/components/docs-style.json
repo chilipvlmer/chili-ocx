@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "Documentation writing standards for Chipotle",
       "files": [
-        "skill/docs-style/SKILL.md"
+        "skills/docs-style/SKILL.md"
       ],
       "dependencies": []
     }

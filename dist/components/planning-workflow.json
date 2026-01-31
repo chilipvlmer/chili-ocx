@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "Execution plan creation from PRDs/RFCs for Sprout",
       "files": [
-        "skill/planning-workflow/SKILL.md"
+        "skills/planning-workflow/SKILL.md"
       ],
       "dependencies": []
     }

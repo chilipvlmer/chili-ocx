@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "PRD document structure, SemVer naming, and quality checklist for Seed",
       "files": [
-        "skill/prd-format/SKILL.md"
+        "skills/prd-format/SKILL.md"
       ],
       "dependencies": []
     }

@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "KDCO-style 4-layer review methodology with severity classification for Habanero",
       "files": [
-        "skill/code-review/SKILL.md"
+        "skills/code-review/SKILL.md"
       ],
       "dependencies": []
     }

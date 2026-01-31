@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "PRD/RFC versioning and status tracking with SemVer",
       "files": [
-        "skill/prd-versioning/SKILL.md"
+        "skills/prd-versioning/SKILL.md"
       ],
       "dependencies": []
     }

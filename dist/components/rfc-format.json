@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "RFC document structure with PRD version namespacing",
       "files": [
-        "skill/rfc-format/SKILL.md"
+        "skills/rfc-format/SKILL.md"
       ],
       "dependencies": []
     }

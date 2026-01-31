@@ -6,7 +6,7 @@
       "type": "ocx:skill",
       "description": "The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño",
       "files": [
-        "skill/code-philosophy/SKILL.md"
+        "skills/code-philosophy/SKILL.md"
       ],
       "dependencies": []
     }
