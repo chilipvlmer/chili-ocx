@@ -1,65 +1,111 @@
 ---
-status: in-progress
+status: not-started
 phase: 1
 updated: 2026-01-31
 ---
 
-# Implementation Plan: RFC-009 - Remove Redundant Plugin File
+# Implementation Plan: RFC-010 - Skill Tool Implementation
 
 ## Goal
-Eliminate the redundant `executable-commands.js` plugin file from the registry distribution.
+Implement a custom `skill` tool in pepper-plugin that enables name-based loading of knowledge skills from Registry and Local directories, with automatic fallback to `pepper_skill` if registration fails.
 
 ## Context & Decisions
 
 | Decision | Rationale | Source |
 |----------|-----------|--------|
-| Remove `executable-commands.js` | File is identical to `pepper-plugin.js` and not referenced in registry.json | RFC-009 Section 2 |
-| Preserve profile-level distinction | OpenCode has hardcoded preference for local profile testing | AGENTS.md Appendix |
-| Version 1.1.1 (patch) | No functional changes, only cleanup | RFC-009 |
+| Registry > Local priority | Stability over development flexibility | RFC-010 Section 3.1 |
+| Auto-fallback to `pepper_skill` | Mitigates risk of host tool conflict | RFC-010 Section 3.3 |
+| Path traversal regex `/^[a-zA-Z0-9_-]+$/` | Security - only safe characters | RFC-010 Section 6 |
+| Include metadata header | Debugging and transparency | RFC-010 Section 3.4 |
 
-## Phase 1: File Removal [IN PROGRESS]
-- [ ] **1.1 Delete redundant plugin file** ← CURRENT
-  - Delete `files/plugin/executable-commands.js`
-  - Verify deletion
-  - Acceptance: Only `pepper-plugin.js` remains
+## Phase 1: Create SkillResolver Utility [PENDING]
+- [ ] **1.1 Create skill-resolver.ts file** ← CURRENT
+  - Create `plugin/src/utils/skill-resolver.ts`
+  - Implement `SkillResolver` class with:
+    - Constructor taking `ctxDirectory`
+    - `resolve(name)` method with Registry-first priority
+    - `sanitize(name)` with regex validation
+    - `listAvailable()` to scan directories
+  - Export `SkillResolver` class
+  - Reference: RFC-010 Section 3.4
+  - Acceptance: File compiles without errors
 
-## Phase 2: Build Script Update [PENDING]
-- [ ] **2.1 Update package.json build script**
-  - Remove `&& cp dist/bundle.js ../files/plugin/executable-commands.js`
-  - Acceptance: Build script generates only 2 copies, not 3
+- [ ] **1.2 Add necessary imports**
+  - Import `join` from `path`
+  - Import `existsSync`, `readFileSync`, `readdirSync` from `fs`
+  - Import types if needed
+  - Acceptance: No import errors
 
-## Phase 3: Documentation Updates [PENDING]
-- [ ] **3.1 Update AGENTS.md**
-  - Update lines 277-278, 336, 340, 353, 449, 464, 476, 488, 494, 497, 507, 510
-  - Preserve profile vs registry distinction
-  
-- [ ] **3.2 Update README.md**
-  - Update line 215
-  
-- [ ] **3.3 Update docs/PLUGIN-DEVELOPMENT.md**
-  - Update lines 91, 101, 297
-  
-- [ ] **3.4 Update docs/AUDIT-REPORT.md**
-  - Update lines 134, 136, 345, 368, 528, 591
+## Phase 2: Register Skill Tool [PENDING]
+- [ ] **2.1 Import SkillResolver in index.ts**
+  - Add import: `import { SkillResolver } from './utils/skill-resolver.js'`
+  - Reference: RFC-010 Section 3.4
+  - Acceptance: Import resolves
+
+- [ ] **2.2 Create skill tool definition**
+  - Define `skillTool` using `tool()` helper
+  - Args: `name: tool.schema.string()`
+  - Execute: Instantiate resolver, call resolve, format output
+  - Include metadata header in response
+  - Handle 'not-found' case with available skills list
+  - Acceptance: Tool definition is valid TypeScript
+
+- [ ] **2.3 Register with fallback logic**
+  - Try/catch around `tools["skill"] = skillTool`
+  - On error: Log warning, register as `tools["pepper_skill"]` instead
+  - Log success/failure to `/tmp/pepper-debug.log`
+  - Reference: RFC-010 Section 4.1
+  - Acceptance: Both registration paths compile
+
+## Phase 3: Build and Test [PENDING]
+- [ ] **3.1 Run plugin build**
+  - Execute: `npm run build:plugin`
+  - Verify no TypeScript errors
+  - Verify `files/plugin/pepper-plugin.js` is updated
+  - Acceptance: Build succeeds
+
+- [ ] **3.2 Run registry build**
+  - Execute: `npm run build:registry`
+  - Verify `dist/` contains updated plugin
+  - Acceptance: Registry builds successfully
+
+- [ ] **3.3 Verify skill tool exists in bundle**
+  - Check `files/plugin/pepper-plugin.js` contains "skill" tool definition
+  - Acceptance: Grep finds skill-related code
 
 ## Phase 4: Verification [PENDING]
-- [ ] **4.1 Verify build process**
-  - Run `npm run build:plugin`
-  - Verify only `pepper-plugin.js` generated
-  
-- [ ] **4.2 Verify registry build**
-  - Run `npm run build:registry`
-  - Verify dist/ builds correctly
+- [ ] **4.1 Test skill loading**
+  - Call `skill(name="rfc-format")` in OpenCode
+  - Verify content is returned with metadata header
+  - Acceptance: Returns Registry content
+
+- [ ] **4.2 Test error handling**
+  - Call `skill(name="invalid-skill-name")`
+  - Verify error message lists available skills
+  - Acceptance: Helpful error returned
+
+- [ ] **4.3 Test path traversal protection**
+  - Attempt: `skill(name="../../../etc/passwd")`
+  - Verify: Error "Invalid skill name" returned
+  - Acceptance: Security check works
+
+- [ ] **4.4 Verify fallback (if applicable)**
+  - If `skill` blocked by host, verify `pepper_skill` is available
+  - Acceptance: Fallback tool works
 
 ## Phase 5: Commit and Deploy [PENDING]
-- [ ] **5.1 Commit changes**
-  - Message: "chore: remove redundant executable-commands.js plugin file (RFC-009)"
-  
-- [ ] **5.2 Merge and deploy**
+- [ ] **5.1 Stage changes**
+  - Stage: `plugin/src/utils/skill-resolver.ts` (new)
+  - Stage: `plugin/src/index.ts` (modified)
+  - Acceptance: All changes staged
+
+- [ ] **5.2 Commit and push**
+  - Message: "feat: implement skill tool with name-based loading (RFC-010)"
   - Push to main
-  - Verify GitHub Actions succeeds
+  - Acceptance: Deployed successfully
 
 ## Notes
-- 2026-01-31: Implementation started by Jalapeño
-- Estimated effort: ~45 minutes
-- Risk: Low - no functional changes
+- 2026-01-31: Plan created based on RFC-010
+- Total estimated effort: 40 minutes
+- Dependencies: None (self-contained)
+- Risk: Low (fallback mitigates conflict risk)

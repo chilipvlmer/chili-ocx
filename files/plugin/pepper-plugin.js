@@ -813,8 +813,98 @@ async function loadSkills(dir) {
   }
 }
 
-// dist/index.js
+// dist/utils/skill-resolver.js
 import { join as join4 } from "path";
+import { existsSync as existsSync2, readFileSync as readFileSync2, readdirSync as readdirSync2, statSync } from "fs";
+var SkillResolver = class {
+  registryPath;
+  localPath;
+  constructor(ctxDirectory) {
+    this.registryPath = join4(ctxDirectory, "files/skills");
+    this.localPath = join4(ctxDirectory, ".opencode/skills");
+  }
+  async resolve(name) {
+    try {
+      const safeName = this.sanitize(name);
+      const registryFile = join4(this.registryPath, safeName, "SKILL.md");
+      if (existsSync2(registryFile)) {
+        return {
+          name,
+          content: readFileSync2(registryFile, "utf-8"),
+          source: "registry",
+          path: registryFile
+        };
+      }
+      const localFile = join4(this.localPath, `${safeName}.md`);
+      if (existsSync2(localFile)) {
+        return {
+          name,
+          content: readFileSync2(localFile, "utf-8"),
+          source: "local",
+          path: localFile
+        };
+      }
+      const available = await this.listAvailable();
+      return {
+        name,
+        content: "",
+        source: "not-found",
+        path: "",
+        availableSkills: available
+      };
+    } catch (error) {
+      if (error instanceof Error && error.message === "Invalid skill name") {
+        throw error;
+      }
+      const available = await this.listAvailable();
+      return {
+        name,
+        content: "",
+        source: "not-found",
+        path: "",
+        availableSkills: available
+      };
+    }
+  }
+  sanitize(name) {
+    if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
+      throw new Error("Invalid skill name. Use alphanumeric, hyphens, and underscores only.");
+    }
+    return name;
+  }
+  async listAvailable() {
+    const skills = /* @__PURE__ */ new Set();
+    if (existsSync2(this.registryPath)) {
+      try {
+        const files = readdirSync2(this.registryPath);
+        for (const file of files) {
+          const fullPath = join4(this.registryPath, file);
+          if (statSync(fullPath).isDirectory()) {
+            if (existsSync2(join4(fullPath, "SKILL.md"))) {
+              skills.add(file);
+            }
+          }
+        }
+      } catch (e) {
+      }
+    }
+    if (existsSync2(this.localPath)) {
+      try {
+        const files = readdirSync2(this.localPath);
+        for (const file of files) {
+          if (file.endsWith(".md")) {
+            skills.add(file.replace(".md", ""));
+          }
+        }
+      } catch (e) {
+      }
+    }
+    return Array.from(skills).sort();
+  }
+};
+
+// dist/index.js
+import { join as join5 } from "path";
 import * as fs2 from "fs";
 function logToTmp(msg) {
   try {
@@ -829,10 +919,39 @@ var ChiliOcxPlugin = async (ctx) => {
     logToTmp("Plugin initializing...");
     logInfo("\u{1F336}\uFE0F chili-ocx plugin initializing...");
     logInfo(`  Context directory: ${ctx.directory}`);
+    const skillToolDef = tool2({
+      description: "Load a knowledge skill (instructions) by name. Use this to access standard protocols like 'prd-methodology', 'rfc-format', etc.",
+      args: {
+        name: tool2.schema.string().describe("The name of the skill to load (e.g., 'prd-methodology', 'rfc-format')")
+      },
+      execute: async (args, context) => {
+        try {
+          const resolver = new SkillResolver(ctx.directory);
+          const result = await resolver.resolve(args.name);
+          if (result.source === "not-found") {
+            const available = result.availableSkills ? result.availableSkills.join(", ") : "none";
+            const msg = `Skill '${args.name}' not found. Available skills: ${available}`;
+            logInfo(`\u26A0\uFE0F ${msg}`);
+            return msg;
+          }
+          logInfo(`\u{1F4D6} Loaded skill: ${args.name} (Source: ${result.source})`);
+          const metadata = `<!-- Skill: ${result.name} | Source: ${result.source} | Path: ${result.path} -->
+
+`;
+          return metadata + result.content;
+        } catch (error) {
+          const msg = `Failed to load skill ${args.name}: ${error.message}`;
+          logInfo(`\u274C ${msg}`);
+          throw new Error(msg);
+        }
+      }
+    });
     const tools = {
       "pepper_init": tool2({
         description: "Initialize the Pepper harness .pepper/ directory structure in the current project",
-        args: {},
+        args: {
+          reason: tool2.schema.string().describe("Brief explanation of why you are calling this tool")
+        },
         execute: async (args, context) => {
           logInfo("\u{1F527} pepper_init tool executing");
           const result = initPepperStructure(ctx.directory);
@@ -842,7 +961,9 @@ var ChiliOcxPlugin = async (ctx) => {
       }),
       "pepper_status": tool2({
         description: "Get the current status of the Pepper harness including PRDs, RFCs, plans, and state",
-        args: {},
+        args: {
+          reason: tool2.schema.string().describe("Brief explanation of why you are calling this tool")
+        },
         execute: async (args, context) => {
           logInfo("\u{1F527} pepper_status tool executing");
           const result = getPepperStatus(ctx.directory);
@@ -864,8 +985,10 @@ var ChiliOcxPlugin = async (ctx) => {
         }
       })
     };
+    tools["skill"] = skillToolDef;
+    tools["pepper_skill"] = skillToolDef;
     const skillsDirs = [
-      join4(ctx.directory, ".opencode/skills")
+      join5(ctx.directory, ".opencode/skills")
     ];
     logInfo(`\u{1F50D} Scanning for skills in: ${skillsDirs.join(", ")}`);
     let allSkills = [];

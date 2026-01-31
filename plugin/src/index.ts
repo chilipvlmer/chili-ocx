@@ -1,10 +1,10 @@
 import type { Plugin } from "@opencode-ai/plugin";
 import { tool } from "@opencode-ai/plugin";
 import { initPepperStructure, getPepperStatus, addNotepadEntry } from "./utils/pepper-io";
-import { readSkill } from "./utils/skill-reader";
 import { logInfo } from "./utils/logger.js";
 import { SkillRegistry } from "./skills/registry.js";
 import { loadSkills } from "./skills/loader.js";
+import { SkillResolver } from "./utils/skill-resolver.js";
 import { join } from "path";
 import * as fs from "fs";
 
@@ -23,7 +23,7 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
     logInfo("🌶️ chili-ocx plugin initializing...");
     logInfo(`  Context directory: ${ctx.directory}`);
     
-    // Define the Skill Loading tool
+    // --- RFC-010: Skill Tool ---
     const skillToolDef = tool({
       description: "Load a knowledge skill (instructions) by name. Use this to access standard protocols like 'prd-methodology', 'rfc-format', etc.",
       args: {
@@ -31,12 +31,25 @@ const ChiliOcxPlugin: Plugin = async (ctx) => {
       },
       execute: async (args, context) => {
         try {
-          logInfo(`📖 Loading skill: ${args.name}`);
-          const content = await readSkill(args.name, ctx.directory);
-          return content;
+          const resolver = new SkillResolver(ctx.directory);
+          const result = await resolver.resolve(args.name);
+          
+          if (result.source === 'not-found') {
+            const available = result.availableSkills ? result.availableSkills.join(', ') : 'none';
+            const msg = `Skill '${args.name}' not found. Available skills: ${available}`;
+            logInfo(`⚠️ ${msg}`);
+            return msg;
+          }
+          
+          logInfo(`📖 Loaded skill: ${args.name} (Source: ${result.source})`);
+          
+          // Prepend metadata header
+          const metadata = `<!-- Skill: ${result.name} | Source: ${result.source} | Path: ${result.path} -->\n\n`;
+          return metadata + result.content;
         } catch (error: any) {
-          logInfo(`❌ Failed to load skill ${args.name}: ${error.message}`);
-          throw new Error(`Failed to load skill: ${error.message}`);
+          const msg = `Failed to load skill ${args.name}: ${error.message}`;
+          logInfo(`❌ ${msg}`);
+          throw new Error(msg);
         }
       }
     });
