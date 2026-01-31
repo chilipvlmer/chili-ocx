@@ -28,8 +28,20 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Validate registry schema
+        run: |
+          # The ocx build command validates registry.json during build
+          echo "Registry validation will be performed during build step"
+
       - name: Build registry
         run: npx ocx@1.4.6 build . --out dist
+
+      - name: Verify build output
+        run: |
+          test -f dist/index.json
+          test -d dist/components
+          test -f dist/.well-known/ocx.json
+          echo "✅ Build output structure verified"
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

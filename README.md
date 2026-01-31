@@ -156,6 +156,16 @@ See **[Agent Skills Documentation](docs/SKILLS.md)** for details on creating and
 | worktree-manager | Git worktree isolation for parallel work |
 | toast-status | Dynamic delegation status display |
 
+### Plugin File Notes
+
+The `pepper-plugin` is distributed in two locations due to OpenCode's hardcoded file loading preference:
+- `files/plugin/pepper-plugin.js` - Registry reference
+- `files/plugin/executable-commands.js` - OpenCode default (loaded preferentially)
+
+Both files contain identical content. The build script (`npm run build:plugin`) automatically copies the bundle to both locations. This ensures compatibility with OpenCode's plugin loading behavior.
+
+See [AGENTS.md line 507-512](../AGENTS.md) for technical details on this behavior.
+
 ## Development
 
 ### Documentation

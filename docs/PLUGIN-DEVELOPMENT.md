@@ -296,6 +296,18 @@ The plugin is deployed as part of the Chili-OCX bundle:
 | `files/plugin/pepper-plugin.js` | **Main plugin** (used by registry) |
 | `files/plugin/executable-commands.js` | Command plugin variant |
 
+### Work-in-Progress Plugins
+
+The following TypeScript plugin sources exist but are not yet registered in the registry:
+
+- `state-management.ts` - Manages `.pepper/` state
+- `agents-md-loader.ts` - Loads AGENTS.md context
+- `worktree-manager.ts` - Git worktree operations
+- `toast-status.ts` - Status notifications
+- `auto-review.ts` - Automated code review
+
+These are under development and will be available in future releases. The currently registered plugin is `pepper-plugin` (JavaScript bundle).
+
 ### Registry References
 
 The registry.json references the plugin:

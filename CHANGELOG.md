@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2026-01-31
+
+### Breaking Changes
+- **Skill Directory Rename**: Changed from `skill/` to `skills/` for OCX v1.4.6 compliance (PR #115)
+  - All 13 skill paths updated in registry.json
+  - Physical directory renamed from `files/skill/` to `files/skills/`
+
+### Changed
+- Updated OCX CLI version requirement from 1.0.16 to 1.4.6
+- Updated GitHub Actions workflow to use `npx ocx@1.4.6`
+- Build now validates against OCX v1.4.6 schema
+
+### Added
+- Comprehensive audit report (docs/AUDIT-REPORT.md)
+- Bundle documentation (docs/BUNDLES.md)
+- Plugin file duplication notes in README.md
+
+### Migration Guide
+To migrate existing installations:
+1. Re-install the registry: `ocx registry remove chili-ocx && ocx registry add https://chili-ocx.pages.dev`
+2. Re-install components: `ocx add chili-ocx/pepper-harness`
+3. Skills will now install to `.opencode/skills/` (plural)
+
+### Fixed
+- CF-001: Skill directory mismatch for OCX v1.4.6
+- CF-002: OCX CLI version alignment
+- MF-001: Documented plugin file duplication
+- MF-002: Added bundle dependency documentation
+
 ## [Unreleased]
 
 ### Fixed
