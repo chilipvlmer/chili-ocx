@@ -1,36 +1,20 @@
 {
-	// OCX Registry for chili-ocx
-	// Component registry for OpenCode AI assistant
-	//
-	// Schema reference: https://ocx.kdco.dev/schemas/registry.json
-	// Documentation: https://github.com/kdcokenny/ocx
-
 	"$schema": "https://ocx.kdco.dev/schemas/registry.json",
 	"name": "Chili OCX Registry",
 	"namespace": "chili-ocx",
 	"version": "0.1.1",
 	"author": "chilipvlmer",
 
-	// Compatibility versions
-	"opencode": "1.0.0", // Minimum OpenCode version required
-	"ocx": "1.4.6", // Minimum OCX CLI version required
+	"opencode": "1.0.0",
+	"ocx": "1.4.6",
 
 	"components": [
-		// ============================================================
-		// === PLUGIN ===
-		// ============================================================
-
 		{
 			"name": "pepper-plugin",
 			"type": "ocx:plugin",
 			"description": "Pepper harness plugin - provides pepper_init, pepper_status, and pepper_notepad_add tools",
 			"files": ["plugin/pepper-plugin.js"]
 		},
-
-		// ============================================================
-		// === SKILLS ===
-		// ============================================================
-
 		{
 			"name": "prd-methodology",
 			"type": "ocx:skill",
@@ -115,11 +99,6 @@
 			"description": "The 5 Pillars of Intentional UI - principles for creating distinctive, memorable interfaces (ported from kdco)",
 			"files": ["skills/frontend-philosophy/SKILL.md"]
 		},
-
-		// ============================================================
-		// === PLUGINS ===
-		// ============================================================
-
 		{
 			"name": "state-management",
 			"type": "ocx:plugin",
@@ -150,11 +129,6 @@
 			"description": "Automatically triggers Habanero review after Jalapeño completes a task",
 			"files": ["plugin/auto-review.ts"]
 		},
-
-		// ============================================================
-		// === AGENTS ===
-		// ============================================================
-
 		{
 			"name": "scoville-orchestrator",
 			"type": "ocx:agent",
@@ -346,11 +320,6 @@
 				}
 			}
 		},
-
-		// ============================================================
-		// === COMMANDS ===
-		// ============================================================
-
 		{
 			"name": "pepper-init",
 			"type": "ocx:command",
@@ -435,21 +404,13 @@
 			"description": "Toggle auto-continue between tasks",
 			"files": ["command/auto-continue/COMMAND.md"]
 		},
-
-		// ============================================================
-		// === BUNDLES ===
-		// ============================================================
-
 		{
 			"name": "pepper-harness",
 			"type": "ocx:bundle",
 			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
 			"files": [],
 			"dependencies": [
-				// Plugin (provides executable tools)
 				"pepper-plugin",
-
-				// Skills (14 skills in alphabetical order)
 				"architecture-dialogue",
 				"code-philosophy",
 				"code-review",
@@ -464,16 +425,12 @@
 				"prd-versioning",
 				"rfc-format",
 				"rfc-generation",
-
-				// Agents
 				"scoville-orchestrator",
 				"seed-prd-rfc",
 				"sprout-execution-planner",
 				"jalapeno-coder",
 				"habanero-reviewer",
 				"ghost-explorer",
-
-				// Commands
 				"pepper-init",
 				"prd",
 				"prd-refine",
