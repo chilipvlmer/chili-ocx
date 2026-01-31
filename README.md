@@ -7,7 +7,7 @@ A pepper-themed AI coding harness for OpenCode. Specialized agents, structured p
 A **bundle** — a curated collection of components that work together:
 
 - 7 agents (Scoville, Seed, Sprout, Jalapeño, Chipotle, Habanero, Ghost)
-- 12 skills (orchestration, planning, review protocols)
+- 13 skills (orchestration, planning, review protocols)
 - 5 plugins (state management, worktrees, notifications)
 - 14 commands (PRD, RFC, planning, execution workflow)
 
@@ -56,7 +56,7 @@ See the [OCX repository](https://github.com/kdcokenny/ocx) for installation inst
 
 ### 2. Add and Install Components
 
-You can add the Chili-OCX components to either your global/project configuration or a specific Ghost Mode profile.
+You can add the Chili-OCX components to either your global/project configuration or a specific OCX Profile.
 
 #### A) Global / Project Installation
 
@@ -69,23 +69,29 @@ ocx add chili-ocx/pepper-harness
 
 This installs the `pepper-harness` bundle and its dependencies into the current project's `.opencode` directory or your global OCX config.
 
-#### B) Ghost Mode Profile Installation
+#### B) Profile Installation (Global)
 
-To install into a specific Ghost Mode profile (e.g., `my-profile`):
+To install Chili-OCX into a global profile (so it's available in any project using that profile):
 
 ```bash
-# If the profile doesn't exist, create it:
-ocx ghost profile add my-profile
-ocx ghost profile use my-profile
+# 1. Create the profile (if it doesn't exist)
+ocx profile add my-profile
 
-# Add the registry to the profile:
-ocx ghost registry add https://chili-ocx.pages.dev --name chili-ocx --profile my-profile
+# 2. Add the registry to the profile
+ocx registry add https://chili-ocx.pages.dev --name chili-ocx --profile my-profile
 
-# Add the bundle to the profile:
-ocx ghost add chili-ocx/pepper-harness --profile my-profile
+# 3. Install the harness into the profile directory
+# Note: We must explicitly target the profile directory
+ocx add chili-ocx/pepper-harness --cwd ~/.config/opencode/profiles/my-profile
 ```
 
-If you want to add it to your currently active profile, you can omit `--profile my-profile`.
+To use this profile, run OpenCode with:
+```bash
+ocx opencode -p my-profile
+# or
+export OCX_PROFILE=my-profile
+ocx opencode
+```
 
 #### Installing Individual Components
 
@@ -96,9 +102,9 @@ Instead of the `pepper-harness` bundle, you can install individual components:
 ocx add chili-ocx/scoville
 ocx add chili-ocx/pepper-protocol
 
-# Ghost Mode (active profile)
-ocx ghost add chili-ocx/scoville
-ocx ghost add chili-ocx/pepper-protocol
+# Profile (global)
+ocx add chili-ocx/scoville --cwd ~/.config/opencode/profiles/my-profile
+ocx add chili-ocx/pepper-protocol --cwd ~/.config/opencode/profiles/my-profile
 ```
 
 ## Workflow
