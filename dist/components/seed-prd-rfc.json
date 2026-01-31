@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Artifact Planner - creates and refines PRD and RFC documents",
       "files": [
-        "agent/seed-prd-rfc/AGENT.md"
+        "agent/seed-prd-rfc.md"
       ],
       "dependencies": [
         "prd-methodology",

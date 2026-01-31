@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Explorer - researches codebases, finds patterns, navigates complex systems",
       "files": [
-        "agent/ghost-explorer/AGENT.md"
+        "agent/ghost-explorer.md"
       ],
       "dependencies": [
         "exploration-protocol"

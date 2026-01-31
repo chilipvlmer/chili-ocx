@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Coder - implements features, fixes bugs, writes tests",
       "files": [
-        "agent/jalapeno-coder/AGENT.md"
+        "agent/jalapeno-coder.md"
       ],
       "dependencies": [
         "code-philosophy"

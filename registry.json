@@ -154,7 +154,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Orchestrator - coordinates work, delegates to specialized agents",
-			"files": ["agent/scoville-orchestrator/AGENT.md"],
+			"files": ["agent/scoville-orchestrator.md"],
 			"dependencies": ["pepper-protocol"],
 			"opencode": {
 				"agent": {
@@ -174,7 +174,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Execution Planner - creates actionable plans from PRDs and RFCs",
-			"files": ["agent/sprout-execution-planner/AGENT.md"],
+			"files": ["agent/sprout-execution-planner.md"],
 			"dependencies": ["planning-workflow"],
 			"opencode": {
 				"agent": {
@@ -202,7 +202,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Artifact Planner - creates and refines PRD and RFC documents",
-			"files": ["agent/seed-prd-rfc/AGENT.md"],
+			"files": ["agent/seed-prd-rfc.md"],
 			"dependencies": ["prd-methodology", "prd-format", "rfc-format", "prd-versioning"],
 			"opencode": {
 				"agent": {
@@ -230,7 +230,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Coder - implements features, fixes bugs, writes tests",
-			"files": ["agent/jalapeno-coder/AGENT.md"],
+			"files": ["agent/jalapeno-coder.md"],
 			"dependencies": ["code-philosophy"],
 			"opencode": {
 				"mcp": {
@@ -256,7 +256,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Scribe - creates and maintains documentation, README files, and code comments",
-			"files": ["agent/chipotle-scribe/AGENT.md"],
+			"files": ["agent/chipotle-scribe.md"],
 			"dependencies": ["docs-style"],
 			"opencode": {
 				"mcp": {
@@ -282,7 +282,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Explorer - researches codebases, finds patterns, navigates complex systems",
-			"files": ["agent/ghost-explorer/AGENT.md"],
+			"files": ["agent/ghost-explorer.md"],
 			"dependencies": ["exploration-protocol"],
 			"opencode": {
 				"mcp": {
@@ -326,7 +326,7 @@
 			"type": "ocx:agent",
 			"version": "1.0.1",
 			"description": "Reviewer - reviews code for correctness, security, performance, and style",
-			"files": ["agent/habanero-reviewer/AGENT.md"],
+			"files": ["agent/habanero-reviewer.md"],
 			"dependencies": ["code-review", "code-philosophy"],
 			"opencode": {
 				"agent": {

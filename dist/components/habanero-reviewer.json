@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Reviewer - reviews code for correctness, security, performance, and style",
       "files": [
-        "agent/habanero-reviewer/AGENT.md"
+        "agent/habanero-reviewer.md"
       ],
       "dependencies": [
         "code-review",

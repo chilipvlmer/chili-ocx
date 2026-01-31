@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Execution Planner - creates actionable plans from PRDs and RFCs",
       "files": [
-        "agent/sprout-execution-planner/AGENT.md"
+        "agent/sprout-execution-planner.md"
       ],
       "dependencies": [
         "planning-workflow"

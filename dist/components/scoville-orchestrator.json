@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Orchestrator - coordinates work, delegates to specialized agents",
       "files": [
-        "agent/scoville-orchestrator/AGENT.md"
+        "agent/scoville-orchestrator.md"
       ],
       "dependencies": [
         "pepper-protocol"

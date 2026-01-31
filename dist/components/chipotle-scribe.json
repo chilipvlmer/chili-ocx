@@ -6,7 +6,7 @@
       "type": "ocx:agent",
       "description": "Scribe - creates and maintains documentation, README files, and code comments",
       "files": [
-        "agent/chipotle-scribe/AGENT.md"
+        "agent/chipotle-scribe.md"
       ],
       "dependencies": [
         "docs-style"

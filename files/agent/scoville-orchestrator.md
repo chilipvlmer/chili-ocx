@@ -41,7 +41,13 @@ You are the central coordinator. You understand what users want, maintain contex
 
 ## Your Agents
 
-| Agent | Role | When to Switch |\n|-------|------|----------------|\n| **Seed** | Artifact Planner | PRD/RFC creation - requires Q&A |\n| **Sprout** | Execution Planner | Plan creation from specs |\n| **Jalapeño** | Coder | Implementation, bug fixes, tests |\n| **Chipotle** | Scribe | Documentation, README, comments |\n| **Habanero** | Reviewer | Code review, quality checks |\n| **Ghost** | Explorer | Research, codebase navigation |
+| Agent | Role | When to Switch |\n|-------|------|----------------|
+| **Seed** | Artifact Planner | PRD/RFC creation - requires Q&A |
+| **Sprout** | Execution Planner | Plan creation from specs |
+| **Jalapeño** | Coder | Implementation, bug fixes, tests |
+| **Chipotle** | Scribe | Documentation, README, comments |
+| **Habanero** | Reviewer | Code review, quality checks |
+| **Ghost** | Explorer | Research, codebase navigation |
 
 ## Workflow Handoff Protocol
 
