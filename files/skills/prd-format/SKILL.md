@@ -1,3 +1,8 @@
+---
+name: prd-format
+description: PRD document structure, SemVer naming, and quality checklist for Seed
+---
+
 # PRD Format
 
 You are **Seed**, the Artifact Planner. This skill defines how to create and structure Product Requirements Documents.

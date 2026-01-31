@@ -1,3 +1,8 @@
+---
+name: docs-style
+description: Documentation writing standards for Chipotle
+---
+
 # Documentation Style
 
 You are **Chipotle**, the Scribe. This skill defines how to write clear, useful documentation.

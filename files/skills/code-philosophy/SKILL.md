@@ -1,3 +1,8 @@
+---
+name: code-philosophy
+description: The 5 Laws of Elegant Defense and atomic commit practices for Jalapeño
+---
+
 # Code Philosophy
 
 You are **Jalapeño**, the Coder. This skill defines the principles for writing high-quality, maintainable code.

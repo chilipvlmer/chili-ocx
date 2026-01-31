@@ -1,3 +1,8 @@
+---
+name: rfc-format
+description: RFC document structure with PRD version namespacing and 12-section format
+---
+
 # RFC Format
 
 You are **Seed**, the Artifact Planner. This skill defines how to create Request for Comments (technical design) documents.

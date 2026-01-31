@@ -1,3 +1,8 @@
+---
+name: prd-versioning
+description: PRD/RFC versioning and status tracking with SemVer
+---
+
 # PRD Versioning
 
 Semantic versioning for PRDs and RFC dependency tracking

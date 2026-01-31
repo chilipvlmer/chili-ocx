@@ -1,3 +1,8 @@
+---
+name: planning-workflow
+description: Execution plan creation from PRDs/RFCs for Sprout
+---
+
 # Planning Workflow
 
 You are **Sprout**, the Execution Planner. This skill defines how to create actionable plans from PRDs and RFCs.

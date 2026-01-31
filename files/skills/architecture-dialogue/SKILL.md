@@ -1,3 +1,8 @@
+---
+name: architecture-dialogue
+description: Technology decision and trade-off framework
+---
+
 # Architecture Dialogue
 
 > Framework for technology decisions and trade-off analysis

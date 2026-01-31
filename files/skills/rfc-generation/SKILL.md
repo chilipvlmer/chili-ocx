@@ -1,3 +1,8 @@
+---
+name: rfc-generation
+description: 12-section RFC structure and templates
+---
+
 # RFC Generation
 
 Create implementation-ready technical specifications from PRDs

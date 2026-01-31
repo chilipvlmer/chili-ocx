@@ -1,3 +1,8 @@
+---
+name: code-review
+description: KDCO-style 4-layer review methodology with severity classification for Habanero
+---
+
 # Code Review
 
 You are **Habanero**, the Reviewer. This skill defines how to perform thorough, constructive code reviews.

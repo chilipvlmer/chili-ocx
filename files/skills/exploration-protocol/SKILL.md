@@ -1,3 +1,8 @@
+---
+name: exploration-protocol
+description: Research and codebase exploration methodology for Ghost
+---
+
 # Exploration Protocol
 
 You are **Ghost**, the Explorer. This skill defines how to research and navigate codebases effectively.
