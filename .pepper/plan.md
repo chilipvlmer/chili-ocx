@@ -1,78 +1,65 @@
 ---
-status: completed
-phase: 4
-updated: 2026-01-25
+status: in-progress
+phase: 1
+updated: 2026-01-31
 ---
 
-# Implementation Plan: Agent Skills & Git Mastery
+# Implementation Plan: RFC-009 - Remove Redundant Plugin File
 
 ## Goal
-Implement the Agent Skill Framework (RFC-006) and the Git Mastery Skill (RFC-007) to standardize agent workflows.
+Eliminate the redundant `executable-commands.js` plugin file from the registry distribution.
 
 ## Context & Decisions
+
 | Decision | Rationale | Source |
 |----------|-----------|--------|
-| MD -> JSON Parsing | Load-time conversion for speed and robustness | RFC-006 |
-| Dynamic Tools | Each skill becomes `skill_<name>` for agent visibility | RFC-006 |
-| One-shot Execution | Interactive Execution (Proposal -> Confirm) | v1.1.0 |
-| Internal LLM | Skill runner generates commit messages internally | RFC-007 |
-| Safety First | Secret scanning and diff chunking added to RFC-007 | User Request |
+| Remove `executable-commands.js` | File is identical to `pepper-plugin.js` and not referenced in registry.json | RFC-009 Section 2 |
+| Preserve profile-level distinction | OpenCode has hardcoded preference for local profile testing | AGENTS.md Appendix |
+| Version 1.1.1 (patch) | No functional changes, only cleanup | RFC-009 |
 
-## Phase 1: Framework Foundation (RFC-006) [COMPLETED]
-- [x] **1.1 Scaffold plugin structure**
-  - Create `plugin/src/skills/` directory
-  - Create `plugin/src/skills/loader.ts` (empty)
-  - Create `plugin/src/skills/registry.ts` (empty)
-  - Create `plugin/src/skills/runner.ts` (empty)
-- [x] **1.2 Implement Markdown Loader**
-  - Implement parsing logic in `loader.js` (Frontmatter + content)
-  - Test parsing with a dummy skill
-- [x] **1.3 Implement Skill Registry**
-  - Implement `registry.js` to manage loaded skills
-  - Add logic to generate tool definitions (`skill_*`) from skill metadata
-- [x] **1.4 Implement Skill Runner**
-  - Implement `runner.js` to execute steps
-  - Support 'regex_scan' step type in runner
-  - Add "Internal LLM" capability stub (mocked for now)
-- [x] **1.5 Wire up to Main Entry Point**
-  - Update `index.js` (or equivalent) to load skills on startup
+## Phase 1: File Removal [IN PROGRESS]
+- [ ] **1.1 Delete redundant plugin file** ← CURRENT
+  - Delete `files/plugin/executable-commands.js`
+  - Verify deletion
+  - Acceptance: Only `pepper-plugin.js` remains
 
-## Phase 2: Git Mastery Skill (RFC-007) [COMPLETED]
-- [x] **2.1 Create Skill Definition**
-  - Create `.opencode/skills/git-mastery.md`
-  - Write steps as defined in RFC-007 (Status, Diff, Msg, Commit)
-- [x] **2.2 Implement Step Logic**
-  - Update `runner.js` to handle:
-    - Shell execution (`git status`, `git add`)
-    - LLM generation (Message creation)
-- [x] **2.3 Bind "Smart Tool" Logic**
-  - Ensure `runner.js` can parse the specific "Stage All" vs "Stage Files" logic
-- [x] **2.4 Implement Secret Scanner**
-  - Add logic to scan staged files for high-entropy strings (AWS, Keys)
-- [x] **2.5 Implement Diff Chunking**
-  - Add logic to summarize diffs > 10k chars
-- [x] **2.6 Implement Interactive Step**
-  - Update `runner.ts` to support `interactive` steps (pause and return proposal)
-- [x] **2.7 Update Git Mastery Definition**
-  - Update `.opencode/skills/git-mastery.md` to use the new v1.1.0 flow (Verify -> Prop -> Confirm)
-- [x] **2.8 Fix Glob & Regex**
-  - Updated regex to handle unquoted secrets
-  - Implemented `git ls-files` with `--others --exclude-standard` for robust scanning
-  - Fixed variable substitution to handle empty/default values (`||`)
-- [x] **2.9 Permission Check**
-  - Add permission check to `shell` steps (Mock/Stub for now)
+## Phase 2: Build Script Update [PENDING]
+- [ ] **2.1 Update package.json build script**
+  - Remove `&& cp dist/bundle.js ../files/plugin/executable-commands.js`
+  - Acceptance: Build script generates only 2 copies, not 3
 
-## Phase 3: Testing & Verification [COMPLETED]
-- [x] **3.1 Test Framework Loading**
-  - Verify `skill_git_mastery` appears in agent tool list
-- [x] **3.2 Test Dry Run**
-  - Execute skill in a dirty repo (dry run mode if available, or verify logs)
-- [x] **3.3 Verify Conventional Commits**
-  - Check if generated messages match standard
+## Phase 3: Documentation Updates [PENDING]
+- [ ] **3.1 Update AGENTS.md**
+  - Update lines 277-278, 336, 340, 353, 449, 464, 476, 488, 494, 497, 507, 510
+  - Preserve profile vs registry distinction
+  
+- [ ] **3.2 Update README.md**
+  - Update line 215
+  
+- [ ] **3.3 Update docs/PLUGIN-DEVELOPMENT.md**
+  - Update lines 91, 101, 297
+  
+- [ ] **3.4 Update docs/AUDIT-REPORT.md**
+  - Update lines 134, 136, 345, 368, 528, 591
 
-## Phase 4: Documentation [COMPLETED]
-- [x] **4.1 Update README**
-  - Document new Skill Framework
-  - Add "Skills" section
-- [x] **4.2 Create SKILLS.md**
-  - Guide for users to create their own skills
+## Phase 4: Verification [PENDING]
+- [ ] **4.1 Verify build process**
+  - Run `npm run build:plugin`
+  - Verify only `pepper-plugin.js` generated
+  
+- [ ] **4.2 Verify registry build**
+  - Run `npm run build:registry`
+  - Verify dist/ builds correctly
+
+## Phase 5: Commit and Deploy [PENDING]
+- [ ] **5.1 Commit changes**
+  - Message: "chore: remove redundant executable-commands.js plugin file (RFC-009)"
+  
+- [ ] **5.2 Merge and deploy**
+  - Push to main
+  - Verify GitHub Actions succeeds
+
+## Notes
+- 2026-01-31: Implementation started by Jalapeño
+- Estimated effort: ~45 minutes
+- Risk: Low - no functional changes

@@ -122,26 +122,31 @@ Option B: Pin workflow to registry.json version (not recommended, locks out impr
 
 ## Major Findings 🟠
 
-### MF-001: Plugin File Duplication
+### MF-001: Plugin File Duplication (RESOLVED)
 
 **Severity**: Major  
 **Location**: `files/plugin/`
 
 **Issue**: Two plugin files exist with identical content
 
+**Resolution**: 
+- Removed `files/plugin/executable-commands.js` in v1.1.1 cleanup
+- Build script now only generates `pepper-plugin.js`
+- Documentation updated to reflect `pepper-plugin.js` as the single authoritative file
+
 **Details**:
 - `files/plugin/pepper-plugin.js` (8.5 KB, registry reference)
-- `files/plugin/executable-commands.js` (8.5 KB, OpenCode default)
+- `files/plugin/executable-commands.js` (REMOVED)
 
-Per AGENTS.md documentation, OpenCode has a hardcoded preference for `executable-commands.js` that overrides profile configuration. Both files contain the same bundle.
+Per AGENTS.md documentation, OpenCode has a hardcoded preference for `executable-commands.js` that overrides profile configuration. This file is still used for *local profile testing* but is no longer distributed in the registry.
 
 **Impact**:
-- Potential confusion about which file is authoritative
-- Updates must be made to both files to ensure consistency
-- Risk of drift between the two files over time
+- Reduced confusion
+- Single source of truth maintained
+- Cleaner build process
 
 **Recommendation**:
-Maintain both files as the build script already handles this (`build:plugin` copies to both locations). Document this behavior in README.md to prevent future confusion.
+Resolved in v1.1.1.
 
 ---
 
@@ -363,12 +368,11 @@ All 14 commands exist in `files/command/` and follow the COMMAND.md template:
 | Zod version | ^3.24.1 | ✅ Valid |
 
 **Build Process Analysis**:
-The `build:plugin` script copies the built bundle to three locations:
+The `build:plugin` script copies the built bundle to two locations:
 1. `plugin/pepper-plugin.js` (source location)
-2. `files/plugin/executable-commands.js` (OpenCode default)
-3. `files/plugin/pepper-plugin.js` (registry reference)
+2. `files/plugin/pepper-plugin.js` (registry reference)
 
-This ensures the plugin is available in all required locations.
+This ensures the plugin is available for distribution. For local testing, developers manually copy to `executable-commands.js` in their profile.
 
 ---
 
@@ -588,7 +592,6 @@ All 7 agents include OpenCode configuration blocks that define:
 | plugin | worktree-manager | plugin/worktree-manager.ts | ❌ | ✅ |
 | plugin | toast-status | plugin/toast-status.ts | ❌ | ✅ |
 | plugin | auto-review | plugin/auto-review.ts | ❌ | ✅ |
-| plugin | executable-commands | plugin/executable-commands.js | ❌ | ✅ |
 | command | pepper-init | command/pepper-init/COMMAND.md | ✅ | ✅ |
 | command | prd | command/prd/COMMAND.md | ✅ | ✅ |
 | command | prd-refine | command/prd-refine/COMMAND.md | ✅ | ✅ |

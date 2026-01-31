@@ -88,7 +88,6 @@ npm run rebuild
 ```bash
 cd plugin && npm install && npm run build && \
 cp dist/bundle.js ../plugin/pepper-plugin.js && \
-cp dist/bundle.js ../files/plugin/executable-commands.js && \
 cp dist/bundle.js ../files/plugin/pepper-plugin.js
 ```
 
@@ -96,9 +95,8 @@ cp dist/bundle.js ../files/plugin/pepper-plugin.js
 1. `cd plugin` - Enter plugin directory
 2. `npm install` - Install plugin dependencies (@opencode-ai/plugin, zod)
 3. `npm run build` - TypeScript → bundled JavaScript (uses esbuild/tsup)
-4. Copy bundle to **three locations**:
+4. Copy bundle to **two locations**:
    - `plugin/pepper-plugin.js` - Legacy location
-   - `files/plugin/executable-commands.js` - Command plugin location
    - `files/plugin/pepper-plugin.js` - Main plugin location (used by registry)
 
 ### Build Output
@@ -199,12 +197,12 @@ npm run build:plugin
 
 ### 3. Reload OpenCode
 
-**In Ghost Mode (recommended):**
+**In Profile Mode (recommended):**
 - Changes are picked up automatically in new conversations
-- OR: Exit Ghost mode and re-enter to force reload
+- OR: Exit profile mode and re-enter to force reload
 
 **In OpenCode Extension:**
-- Reload VS Code window (Cmd/Ctrl + Shift + P → "Reload Window")
+- Reload VS Code window (Cmd/Ctrl + Shift + P → "Developer: Reload Window")
 - OR: Restart OpenCode server
 
 ### 4. Test in Conversation
@@ -294,7 +292,6 @@ The plugin is deployed as part of the Chili-OCX bundle:
 | `plugin/dist/bundle.js` | Original build output |
 | `plugin/pepper-plugin.js` | Legacy location |
 | `files/plugin/pepper-plugin.js` | **Main plugin** (used by registry) |
-| `files/plugin/executable-commands.js` | Command plugin variant |
 
 ### Work-in-Progress Plugins
 
@@ -376,9 +373,9 @@ execute: async (args, context) => {
 }
 ```
 
-### Workspace Path Issues (Ghost Mode)
+### Workspace Path Issues (Profile Mode)
 
-If working in Ghost mode (symlinked workspace), always use resolved paths:
+If working in profile mode (symlinked workspace), always use resolved paths:
 
 ```typescript
 import { getWorkspaceInfo } from './workspace.js';
@@ -387,7 +384,7 @@ import { getWorkspaceInfo } from './workspace.js';
 const workspaceInfo = getWorkspaceInfo(ctx.directory);
 const realPath = workspaceInfo.real;  // Use this for file operations
 
-// Don't use ctx.directory directly for file I/O in Ghost mode
+// Don't use ctx.directory directly for file I/O in profile mode
 ```
 
 See `plugin/src/utils/workspace.ts` for workspace resolution utilities.
@@ -493,7 +490,7 @@ Next steps:
 
 ### 6. Use Workspace Resolution
 
-In Ghost mode or symlinked environments:
+In profile mode or symlinked environments:
 
 ```typescript
 import { getWorkspaceInfo } from './workspace.js';

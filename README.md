@@ -87,10 +87,10 @@ ocx add chili-ocx/pepper-harness --cwd ~/.config/opencode/profiles/my-profile
 
 To use this profile, run OpenCode with:
 ```bash
-ocx opencode -p my-profile
+ocx oc -p my-profile
 # or
 export OCX_PROFILE=my-profile
-ocx opencode
+ocx oc
 ```
 
 #### Installing Individual Components
@@ -208,15 +208,14 @@ See **[Agent Skills Documentation](docs/SKILLS.md)** for details on creating and
 | worktree-manager | Git worktree isolation for parallel work |
 | toast-status | Dynamic delegation status display |
 
-### Plugin File Notes
+### Plugin File
 
-The `pepper-plugin` is distributed in two locations due to OpenCode's hardcoded file loading preference:
-- `files/plugin/pepper-plugin.js` - Registry reference
-- `files/plugin/executable-commands.js` - OpenCode default (loaded preferentially)
+The `pepper-plugin` is distributed as a single file in the registry:
+- `files/plugin/pepper-plugin.js` - Registry plugin bundle
 
-Both files contain identical content. The build script (`npm run build:plugin`) automatically copies the bundle to both locations. This ensures compatibility with OpenCode's plugin loading behavior.
+The build script (`npm run build:plugin`) copies the bundle from `plugin/dist/bundle.js` to this location. This is the authoritative plugin file referenced by `registry.json`.
 
-See [AGENTS.md line 507-512](../AGENTS.md) for technical details on this behavior.
+**Note:** For local profile testing, OpenCode has a hardcoded preference for `executable-commands.js`. See [AGENTS.md](../AGENTS.md#plugin-development--deployment) for details on profile-level plugin deployment.
 
 ## Development
 
