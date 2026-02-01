@@ -101,10 +101,10 @@
 		"playwright_*": "deny"
 	},
 	"mcp": {
-		"_shadcn": {
+		"shadcn": {
 			"type": "local",
-			"command": ["npx", "-y", "shadcn@latest", "mcp"],
-			"enabled": false
+			"command": ["npx", "shadcn@latest", "mcp"],
+			"enabled": true
 		},
 		"context7": {
 			"type": "remote",
