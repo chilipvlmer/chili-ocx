@@ -123,8 +123,7 @@
 		},
 		"playwright": {
 			"type": "local",
-			"command": "npx",
-			"args": ["@playwright/mcp@latest"],
+			"command": ["npx", "-y", "@playwright/mcp@latest"],
 			"enabled": true
 		}
 	}
