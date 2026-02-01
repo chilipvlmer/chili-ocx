@@ -131,37 +131,32 @@ ocx add chili-ocx/pepper-protocol --cwd ~/.config/opencode/profiles/my-profile
 
 The pepper profile includes pre-configured MCP (Model Context Protocol) servers:
 
-| MCP | Type | Purpose |
-|-----|------|---------|
-| shadcn | local | Browse and install shadcn/ui components |
-| context7 | remote | Search documentation |
-| exa | remote | Web search and content extraction |
-| gh_grep | remote | Search GitHub code examples |
-| playwright | local | Browser automation |
+| MCP | Type | Purpose | Status |
+|-----|------|---------|--------|
+| ~~shadcn~~ | ~~local~~ | ~~Browse and install shadcn/ui components~~ | ❌ **Disabled** - OpenCode bug |
+| context7 | remote | Search documentation | ✅ Active |
+| exa | remote | Web search and content extraction | ✅ Active |
+| gh_grep | remote | Search GitHub code examples | ✅ Active |
+| playwright | local | Browser automation | ✅ Active |
 
-### Windows Compatibility
+### Shadcn MCP - Currently Disabled
 
-**Note:** The shadcn MCP uses a Unix shell command by default. For Windows users:
+**Note:** The shadcn MCP is currently disabled due to an OpenCode validation bug. Even with the officially supported format (`["npx", "shadcn@latest", "mcp"]`), OpenCode rejects it with "Invalid input mcp.shadcn".
 
-**Option 1: Use Git Bash or WSL** (Recommended)
-- Install Git for Windows (includes Git Bash) or enable Windows Subsystem for Linux (WSL)
-- The default configuration will work automatically
+**Workaround:** Use shadcn CLI directly:
+```bash
+npx shadcn@latest add button
+npx shadcn@latest add card dialog
+```
 
-**Option 2: Edit your local profile config**
-After installing the profile, change the shadcn MCP command in `~/.config/opencode/profiles/pepper/opencode.jsonc`:
-
+**To enable manually** (may not work due to OpenCode bug):
+Add to your local profile config at `~/.config/opencode/profiles/pepper/opencode.jsonc`:
 ```json
 "shadcn": {
     "type": "local",
-    "command": ["cmd.exe", "/c", "npx -y shadcn@latest mcp"],
+    "command": ["npx", "shadcn@latest", "mcp"],
     "enabled": true
 }
-```
-
-**Option 3: Disable shadcn MCP**
-If you don't need shadcn component management, disable it in your local config:
-```json
-"shadcn": { "enabled": false }
 ```
 
 ## Workflow
