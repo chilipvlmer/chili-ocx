@@ -149,7 +149,7 @@ npx shadcn@latest mcp init --client opencode
 
 This creates `.opencode.json` in your project with shadcn MCP configured.
 
-**Note:** The shadcn MCP may show as "failed" in OpenCode's `/mcps` command. This is a known issue with the shadcn MCP server initialization. Despite showing "failed", you can still use shadcn functionality via the CLI:
+**Note:** The shadcn MCP may show as "failed" in OpenCode's `/mcps` command. Our testing shows the shadcn MCP server exits immediately when started, suggesting it may have initialization or compatibility issues with OpenCode. Despite showing "failed", you can still use shadcn functionality via the CLI:
 
 ```bash
 npx shadcn@latest add button
