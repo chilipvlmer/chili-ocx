@@ -139,7 +139,14 @@ The pepper profile includes pre-configured MCP (Model Context Protocol) servers:
 | gh_grep | remote | Search GitHub code examples |
 | playwright | local | Browser automation |
 
-**Note on Shadcn MCP:** Uses the community `@jpisnice/shadcn-ui-mcp-server` package instead of the official shadcn MCP, which has compatibility issues with OpenCode. The community server provides the same functionality and works reliably.
+**Note on Shadcn MCP:** Uses the `shadcn-mcp` package (v1.0.0+) instead of the official shadcn MCP, which has compatibility issues with OpenCode. 
+
+**Setup required:**
+```bash
+npm install -g shadcn-mcp
+```
+
+This provides the `shadcn-mcp-server` command that the profile uses.
 
 ## Workflow
 
