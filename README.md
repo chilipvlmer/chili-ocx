@@ -111,6 +111,8 @@ ocx profile remove pepper && ocx profile add pepper --from chili-ocx/pepper
 - ✅ **Global availability** - Use in any project with `-p pepper`
 - ✅ **Isolated config** - Profile-specific tool permissions and MCP servers
 
+**Migrating from Bundle?** See [MIGRATION.md](MIGRATION.md) for step-by-step instructions.
+
 #### Installing Individual Components
 
 Instead of the `pepper-harness` bundle, you can install individual components:
