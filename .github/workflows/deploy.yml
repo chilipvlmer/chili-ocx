@@ -43,6 +43,15 @@ jobs:
           test -f dist/.well-known/ocx.json
           echo "✅ Build output structure verified"
 
+      - name: Add cache-busting headers
+        run: |
+          # Create _headers file to disable caching on registry files
+          printf '/index.json\n  Cache-Control: no-cache, no-store, must-revalidate\n  Pragma: no-cache\n  Expires: 0\n\n' > dist/_headers
+          printf '/components/*\n  Cache-Control: no-cache, no-store, must-revalidate\n  Pragma: no-cache\n  Expires: 0\n\n' >> dist/_headers
+          printf '/profiles/*\n  Cache-Control: no-cache, no-store, must-revalidate\n  Pragma: no-cache\n  Expires: 0\n' >> dist/_headers
+          echo "✅ Added cache-busting headers"
+          cat dist/_headers
+
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
