@@ -820,7 +820,7 @@ var SkillResolver = class {
   registryPath;
   localPath;
   constructor(ctxDirectory) {
-    this.registryPath = join4(ctxDirectory, "files/skills");
+    this.registryPath = join4(ctxDirectory, "skills");
     this.localPath = join4(ctxDirectory, ".opencode/skills");
   }
   async resolve(name) {

@@ -14,8 +14,8 @@ export class SkillResolver {
   private localPath: string;
 
   constructor(ctxDirectory: string) {
-    // Registry path: files/skills/{name}/SKILL.md
-    this.registryPath = join(ctxDirectory, 'files/skills');
+    // Registry path: skills/{name}/SKILL.md (OCX installs skills here)
+    this.registryPath = join(ctxDirectory, 'skills');
     
     // Local path: .opencode/skills/{name}.md
     this.localPath = join(ctxDirectory, '.opencode/skills');
