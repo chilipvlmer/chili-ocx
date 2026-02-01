@@ -491,7 +491,7 @@
 		{
 		"name": "pepper",
 		"type": "ocx:profile",
-		"version": "1.0.2",
+		"version": "1.0.3",
 			"description": "Pepper Harness profile for structured AI development workflow - clean install with 5-second refresh",
 			"files": [
 				{
@@ -502,11 +502,11 @@
 					"path": "profiles/pepper/opencode.jsonc",
 					"target": "opencode.jsonc"
 				},
-			{
-				"path": "profiles/pepper/AGENTS.md",
-				"target": "AGENTS.md"
-			}
-		],
+				{
+					"path": "profiles/pepper/AGENTS.md",
+					"target": "AGENTS.md"
+				}
+			],
 			"dependencies": ["pepper-harness"]
 		}
 	]
