@@ -101,10 +101,11 @@
 		"playwright_*": "deny"
 	},
 	"mcp": {
-		"shadcn": {
+		"// shadcn": {
+			"// note": "shadcn MCP disabled - OpenCode doesn't support npx subcommand format. Use 'npx shadcn@latest mcp' manually",
 			"type": "local",
 			"command": ["npx", "-y", "shadcn@latest", "mcp"],
-			"enabled": true
+			"enabled": false
 		},
 		"context7": {
 			"type": "remote",
