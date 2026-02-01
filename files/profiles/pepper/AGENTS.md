@@ -63,5 +63,41 @@ You are operating with the **Pepper Harness** - a structured AI development work
 
 ---
 
+## MCP Servers
+
+The pepper profile includes several MCP (Model Context Protocol) servers:
+
+- **shadcn** - Browse and install shadcn/ui components
+- **context7** - Search documentation
+- **exa** - Web search and content extraction
+- **gh_grep** - Search GitHub code examples
+- **playwright** - Browser automation
+
+### Windows Compatibility Note
+
+The **shadcn MCP** uses a Unix shell command by default. For Windows users:
+
+**Option 1: Use Git Bash or WSL** (Recommended)
+- Install Git for Windows (includes Git Bash) or enable WSL
+- The default configuration will work automatically
+
+**Option 2: Edit your local profile config**
+Change the shadcn MCP command in `~/.config/opencode/profiles/pepper/opencode.jsonc`:
+
+```json
+"shadcn": {
+    "type": "local",
+    "command": ["cmd.exe", "/c", "npx -y shadcn@latest mcp"],
+    "enabled": true
+}
+```
+
+Or disable it if you don't need shadcn component management:
+```json
+"shadcn": { "enabled": false }
+```
+
+---
+
 *Profile Version: 1.1.2*
 *Part of the chili-ocx Pepper Harness*

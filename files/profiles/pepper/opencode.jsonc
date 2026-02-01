@@ -103,6 +103,7 @@
 	"mcp": {
 		"shadcn": {
 			"type": "local",
+			"// Windows users": "Replace with: ['cmd.exe', '/c', 'npx -y shadcn@latest mcp'] or install Git Bash/WSL",
 			"command": ["sh", "-c", "exec npx -y shadcn@latest mcp"],
 			"enabled": true
 		},
