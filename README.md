@@ -4,12 +4,20 @@ A pepper-themed AI coding harness for OpenCode. Specialized agents, structured p
 
 ## What This Is
 
-A **bundle** — a curated collection of components that work together:
+A **profile** and **bundle** — a complete AI coding harness available in two installation methods:
 
+**Pepper Profile** (Recommended):
 - 7 agents (Scoville, Seed, Sprout, Jalapeño, Chipotle, Habanero, Ghost)
-- 13 skills (orchestration, planning, review protocols)
-- 5 plugins (state management, worktrees, notifications)
+- 14 skills (orchestration, planning, review protocols)
+- 1 plugin (Pepper custom tools)
 - 14 commands (PRD, RFC, planning, execution workflow)
+- Fast 2-second refresh for updates
+- Global availability across all projects
+
+**Pepper-Harness Bundle** (Alternative):
+- Same components as profile
+- Install into project or global config
+- Traditional OCX bundle installation
 
 ## Architecture
 
@@ -69,29 +77,39 @@ ocx add chili-ocx/pepper-harness
 
 This installs the `pepper-harness` bundle and its dependencies into the current project's `.opencode` directory or your global OCX config.
 
-#### B) Profile Installation (Global)
+#### B) Profile Installation (Recommended - Global)
 
-To install Chili-OCX into a global profile (so it's available in any project using that profile):
+**NEW:** As of version 1.0.1, Chili-OCX provides a dedicated **profile** for easy installation and updates:
 
 ```bash
-# 1. Create the profile (if it doesn't exist)
-ocx profile add my-profile
+# 1. Add the registry (one-time setup)
+ocx registry add https://chili-ocx.pages.dev --name chili-ocx --global
 
-# 2. Add the registry to the profile
-ocx registry add https://chili-ocx.pages.dev --name chili-ocx --profile my-profile
-
-# 3. Install the harness into the profile directory
-# Note: We must explicitly target the profile directory
-ocx add chili-ocx/pepper-harness --cwd ~/.config/opencode/profiles/my-profile
+# 2. Install the pepper profile
+ocx profile add pepper --from chili-ocx/pepper
 ```
 
-To use this profile, run OpenCode with:
+This installs all 35 components (7 agents, 14 skills, 14 commands) into `~/.config/opencode/profiles/pepper/`.
+
+To use the profile:
 ```bash
-ocx oc -p my-profile
+ocx oc -p pepper
 # or
-export OCX_PROFILE=my-profile
+export OCX_PROFILE=pepper
 ocx oc
 ```
+
+**🚀 Fast Updates:** The profile method enables 5-second refresh:
+```bash
+# Update to latest version (< 2 seconds!)
+ocx profile remove pepper && ocx profile add pepper --from chili-ocx/pepper
+```
+
+**Why use profiles?**
+- ✅ **Instant updates** - No re-downloading 14 skills on every update
+- ✅ **Clean installs** - Complete refresh in under 2 seconds
+- ✅ **Global availability** - Use in any project with `-p pepper`
+- ✅ **Isolated config** - Profile-specific tool permissions and MCP servers
 
 #### Installing Individual Components
 
