@@ -127,6 +127,43 @@ ocx add chili-ocx/scoville --cwd ~/.config/opencode/profiles/my-profile
 ocx add chili-ocx/pepper-protocol --cwd ~/.config/opencode/profiles/my-profile
 ```
 
+## MCP Servers
+
+The pepper profile includes pre-configured MCP (Model Context Protocol) servers:
+
+| MCP | Type | Purpose |
+|-----|------|---------|
+| shadcn | local | Browse and install shadcn/ui components |
+| context7 | remote | Search documentation |
+| exa | remote | Web search and content extraction |
+| gh_grep | remote | Search GitHub code examples |
+| playwright | local | Browser automation |
+
+### Windows Compatibility
+
+**Note:** The shadcn MCP uses a Unix shell command by default. For Windows users:
+
+**Option 1: Use Git Bash or WSL** (Recommended)
+- Install Git for Windows (includes Git Bash) or enable Windows Subsystem for Linux (WSL)
+- The default configuration will work automatically
+
+**Option 2: Edit your local profile config**
+After installing the profile, change the shadcn MCP command in `~/.config/opencode/profiles/pepper/opencode.jsonc`:
+
+```json
+"shadcn": {
+    "type": "local",
+    "command": ["cmd.exe", "/c", "npx -y shadcn@latest mcp"],
+    "enabled": true
+}
+```
+
+**Option 3: Disable shadcn MCP**
+If you don't need shadcn component management, disable it in your local config:
+```json
+"shadcn": { "enabled": false }
+```
+
 ## Workflow
 
 ```
