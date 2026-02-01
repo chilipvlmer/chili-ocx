@@ -1,7 +1,7 @@
 {
   "name": "chipotle-scribe",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "chipotle-scribe",
       "type": "ocx:agent",
       "description": "Scribe - creates and maintains documentation, README files, and code comments",
@@ -32,6 +32,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

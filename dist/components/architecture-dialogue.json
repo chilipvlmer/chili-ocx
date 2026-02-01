@@ -1,7 +1,7 @@
 {
   "name": "architecture-dialogue",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "architecture-dialogue",
       "type": "ocx:skill",
       "description": "Technology decision and trade-off framework",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

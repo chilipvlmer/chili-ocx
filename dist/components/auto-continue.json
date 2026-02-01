@@ -1,7 +1,7 @@
 {
   "name": "auto-continue",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "auto-continue",
       "type": "ocx:command",
       "description": "Toggle auto-continue between tasks",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

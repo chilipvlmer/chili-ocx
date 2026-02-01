@@ -1,7 +1,7 @@
 {
   "name": "Chili OCX Registry",
   "namespace": "chili-ocx",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "chilipvlmer",
   "opencode": "1.0.0",
   "ocx": "1.4.6",
@@ -215,6 +215,11 @@
       "name": "pepper-harness",
       "type": "ocx:bundle",
       "description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow"
+    },
+    {
+      "name": "pepper",
+      "type": "ocx:profile",
+      "description": "Pepper Harness profile for structured AI development workflow - clean install with 5-second refresh"
     }
   ]
 }

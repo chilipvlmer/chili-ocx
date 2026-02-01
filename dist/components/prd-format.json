@@ -1,7 +1,7 @@
 {
   "name": "prd-format",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "prd-format",
       "type": "ocx:skill",
       "description": "PRD document structure, SemVer naming, and quality checklist for Seed",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ocx.kdco.dev/schemas/ocx.json",
+  "registries": {
+    "chili-ocx": {
+      "url": "https://chili-ocx.pages.dev"
+    }
+  },
+  "exclude": [
+    "**/CLAUDE.md",
+    "**/CONTEXT.md"
+  ],
+  "include": [
+    "**/AGENTS.md"
+  ]
+}

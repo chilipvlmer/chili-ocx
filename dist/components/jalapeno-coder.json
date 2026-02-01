@@ -1,7 +1,7 @@
 {
   "name": "jalapeno-coder",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "jalapeno-coder",
       "type": "ocx:agent",
       "description": "Coder - implements features, fixes bugs, writes tests",
@@ -32,6 +32,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "name": "Pepper Harness",
+  "agents": [
+    "scoville-orchestrator",
+    "seed-prd-rfc",
+    "sprout-execution-planner",
+    "jalapeno-coder",
+    "habanero-reviewer",
+    "ghost-explorer",
+    "chipotle-scribe"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "planning-workflow",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "planning-workflow",
       "type": "ocx:skill",
       "description": "Execution plan creation from PRDs/RFCs for Sprout",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

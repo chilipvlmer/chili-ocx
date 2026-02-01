@@ -1,7 +1,7 @@
 {
   "name": "habanero-reviewer",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "habanero-reviewer",
       "type": "ocx:agent",
       "description": "Reviewer - reviews code for correctness, security, performance, and style",
@@ -33,6 +33,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

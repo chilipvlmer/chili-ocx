@@ -1,7 +1,7 @@
 {
   "name": "exploration-protocol",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "exploration-protocol",
       "type": "ocx:skill",
       "description": "Research and codebase exploration methodology for Ghost",
@@ -12,6 +12,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }

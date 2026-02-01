@@ -188,6 +188,14 @@
     {
       "timestamp": "2026-01-31T23:38:40.884Z",
       "content": "User performed Option A (deleted root skills/ folder, kept .opencode/skills/). After reload, skill(name=\"rfc-format\") still fails with \"Available skills: none\"."
+    },
+    {
+      "timestamp": "2026-02-01T00:04:45.308Z",
+      "content": "Discovered workflow discrepancy: GitHub Actions uses 'npx ocx@1.4.6' while documentation and package.json use 'bunx ocx'. This version pinning might be causing the build to behave differently. Also, documentation shows 'bun run build' as the standard approach."
+    },
+    {
+      "timestamp": "2026-02-01T00:15:34.931Z",
+      "content": "RFC-012 implementation planning started by Sprout. Creating atomic tasks for converting bundle to profile."
     }
   ]
 }

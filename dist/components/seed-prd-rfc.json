@@ -1,7 +1,7 @@
 {
   "name": "seed-prd-rfc",
   "versions": {
-    "0.1.1": {
+    "0.2.0": {
       "name": "seed-prd-rfc",
       "type": "ocx:agent",
       "description": "Artifact Planner - creates and refines PRD and RFC documents",
@@ -37,6 +37,6 @@
     }
   },
   "dist-tags": {
-    "latest": "0.1.1"
+    "latest": "0.2.0"
   }
 }
