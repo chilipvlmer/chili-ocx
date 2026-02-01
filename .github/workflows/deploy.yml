@@ -34,7 +34,7 @@ jobs:
           echo "Registry validation will be performed during build step"
 
       - name: Build registry
-        run: npx ocx@1.4.6 build . --out dist
+        run: bunx ocx build . --out dist
 
       - name: Verify build output
         run: |
