@@ -302,6 +302,44 @@ git push origin main  # ← THIS TRIGGERS DEPLOYMENT
 2. Verify TypeScript syntax is valid
 3. Check `satisfies Plugin` type assertion
 
+### Deployed Code Doesn't Match Source (CRITICAL)
+
+**Symptom:** Profile installs successfully but has old/corrupted configuration (e.g., "Invalid input mcp.shadcn" errors despite fixes in source).
+
+**Root Cause:** The `dist/` folder was committed to git despite being in `.gitignore`. GitHub Actions deploys the committed dist/ instead of building fresh.
+
+**Why this happens:**
+- `.gitignore` only prevents NEW untracked files from being added
+- If files are already tracked in git, `.gitignore` won't remove them
+- Someone may have used `git add -f dist/` to force-add
+- Files committed before `.gitignore` was added remain tracked
+
+**Prevention:**
+```bash
+# If dist/ is accidentally committed, remove it from git:
+git rm -r --cached dist/
+git commit -m "chore: remove dist/ from git (should be built fresh by CI)"
+
+# Verify it's not tracked:
+git ls-files | grep "^dist/"  # Should return nothing
+```
+
+**Detection:**
+```bash
+# Check if dist files are tracked
+git ls-files | grep "^dist/" | head -5
+
+# If you see output, dist/ is in git and will override CI builds!
+```
+
+**Fix:**
+```bash
+# Nuclear option - remove all dist files from git
+git rm -rf dist/
+git commit -m "chore: remove dist/ from git (CI should build fresh)"
+git push origin main
+```
+
 ---
 
 ## Plugin Development & Deployment
