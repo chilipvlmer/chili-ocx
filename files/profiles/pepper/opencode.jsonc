@@ -43,9 +43,6 @@
 		"jalapeno-coder": {
 			"tools": {
 				"question": true
-			},
-			"permission": {
-				"shadcn_*": "allow"
 			}
 		},
 		"habanero-reviewer": {
@@ -94,18 +91,12 @@
 		}
 	},
 	"permission": {
-		"shadcn_*": "deny",
 		"context7_*": "deny",
 		"exa_*": "deny",
 		"gh_grep_*": "deny",
 		"playwright_*": "deny"
 	},
 	"mcp": {
-		"__shadcn_disabled": {
-			"type": "local",
-			"command": ["npx", "shadcn@latest", "mcp"],
-			"enabled": false
-		},
 		"context7": {
 			"type": "remote",
 			"url": "https://mcp.context7.com/mcp",

@@ -502,15 +502,11 @@
 					"path": "profiles/pepper/opencode.jsonc",
 					"target": "opencode.jsonc"
 				},
-				{
-					"path": "profiles/pepper/AGENTS.md",
-					"target": "AGENTS.md"
-				},
-				{
-					"path": "profiles/pepper/shadcn-mcp-wrapper.sh",
-					"target": "shadcn-mcp-wrapper.sh"
-				}
-			],
+			{
+				"path": "profiles/pepper/AGENTS.md",
+				"target": "AGENTS.md"
+			}
+		],
 			"dependencies": ["pepper-harness"]
 		}
 	]

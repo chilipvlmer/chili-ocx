@@ -131,32 +131,28 @@ ocx add chili-ocx/pepper-protocol --cwd ~/.config/opencode/profiles/my-profile
 
 The pepper profile includes pre-configured MCP (Model Context Protocol) servers:
 
-| MCP | Type | Purpose | Status |
-|-----|------|---------|--------|
-| ~~shadcn~~ | ~~local~~ | ~~Browse and install shadcn/ui components~~ | ❌ **Disabled** - OpenCode bug |
-| context7 | remote | Search documentation | ✅ Active |
-| exa | remote | Web search and content extraction | ✅ Active |
-| gh_grep | remote | Search GitHub code examples | ✅ Active |
-| playwright | local | Browser automation | ✅ Active |
+| MCP | Type | Purpose |
+|-----|------|---------|
+| context7 | remote | Search documentation |
+| exa | remote | Web search and content extraction |
+| gh_grep | remote | Search GitHub code examples |
+| playwright | local | Browser automation |
 
-### Shadcn MCP - Currently Disabled
+### Adding Shadcn MCP (Project-Level)
 
-**Note:** The shadcn MCP is currently disabled due to an OpenCode validation bug. Even with the officially supported format (`["npx", "shadcn@latest", "mcp"]`), OpenCode rejects it with "Invalid input mcp.shadcn".
+Shadcn MCP is **not included** in the pepper profile due to OpenCode validation issues with npx subcommands. However, you can add it at the **project level**:
 
-**Workaround:** Use shadcn CLI directly:
+```bash
+# In your project directory
+npx shadcn@latest mcp init --client opencode
+```
+
+This creates `.opencode.json` in your project with shadcn MCP configured. When you use `ocx oc -p pepper` in that project, you'll have access to shadcn tools.
+
+**Or use shadcn CLI directly:**
 ```bash
 npx shadcn@latest add button
 npx shadcn@latest add card dialog
-```
-
-**To enable manually** (may not work due to OpenCode bug):
-Add to your local profile config at `~/.config/opencode/profiles/pepper/opencode.jsonc`:
-```json
-"shadcn": {
-    "type": "local",
-    "command": ["npx", "shadcn@latest", "mcp"],
-    "enabled": true
-}
 ```
 
 ## Workflow
