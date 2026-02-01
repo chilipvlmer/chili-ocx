@@ -147,13 +147,16 @@ Shadcn MCP is **not included** in the pepper profile due to OpenCode validation 
 npx shadcn@latest mcp init --client opencode
 ```
 
-This creates `.opencode.json` in your project with shadcn MCP configured. When you use `ocx oc -p pepper` in that project, you'll have access to shadcn tools.
+This creates `.opencode.json` in your project with shadcn MCP configured.
 
-**Or use shadcn CLI directly:**
+**Note:** The shadcn MCP may show as "failed" in OpenCode's `/mcps` command. This is a known issue with the shadcn MCP server initialization. Despite showing "failed", you can still use shadcn functionality via the CLI:
+
 ```bash
 npx shadcn@latest add button
 npx shadcn@latest add card dialog
 ```
+
+The shadcn CLI works perfectly even when the MCP server shows as failed.
 
 ## Workflow
 
