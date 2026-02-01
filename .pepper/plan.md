@@ -1,5 +1,5 @@
 ---
-status: not-started
+status: in-progress
 phase: 1
 updated: 2026-02-01
 ---
@@ -18,31 +18,35 @@ Convert the pepper-harness bundle to an ocx:profile for better update workflow, 
 | Clean profile location | ~/.config/opencode/profiles/pepper/ vs messy .opencode/.opencode/ | User requirement |
 | 4-phase implementation | Logical progression: files → registry → build → test | RFC-012 Section 4 |
 
-## Phase 1: Create Profile Files [PENDING]
-- [ ] **1.1 Create profiles/pepper/ directory** ← CURRENT
+## Phase 1: Create Profile Files [COMPLETED]
+- [x] **1.1 Create profiles/pepper/ directory**
   - Create `files/profiles/pepper/` directory structure
   - Reference: RFC-012 Section 3.3
   - Acceptance: Directory exists and is git-tracked
+  - ✅ COMPLETED: Directory exists and committed to git
 
-- [ ] **1.2 Create ocx.jsonc profile config**
+- [x] **1.2 Create ocx.jsonc profile config**
   - File: `files/profiles/pepper/ocx.jsonc`
   - Content: Registry URL, exclude/include patterns for AGENTS.md
   - Reference: RFC-012 Section 3.3 (ocx.jsonc example)
   - Acceptance: Valid JSONC, proper schema reference
+  - ✅ COMPLETED: File matches RFC-012 specification exactly
 
-- [ ] **1.3 Create opencode.jsonc profile settings**
+- [x] **1.3 Create opencode.jsonc profile settings**
   - File: `files/profiles/pepper/opencode.jsonc`
   - Content: Profile name, all 7 agent names
   - Reference: RFC-012 Section 3.3 (opencode.jsonc example)
   - Acceptance: Valid JSONC, all agents listed
+  - ✅ COMPLETED: File matches RFC-012 specification exactly
 
-- [ ] **1.4 Create AGENTS.md profile instructions**
+- [x] **1.4 Create AGENTS.md profile instructions**
   - File: `files/profiles/pepper/AGENTS.md`
   - Content: Profile overview, agent descriptions, workflow steps
   - Reference: RFC-012 Section 3.3 (AGENTS.md example)
   - Acceptance: Markdown format, comprehensive instructions
+  - ✅ COMPLETED: Enhanced version with detailed workflow and tips
 
-## Phase 2: Update Registry [PENDING]
+## Phase 2: Update Registry [PENDING] ← CURRENT
 - [ ] **2.1 Add pepper profile component to registry.jsonc**
   - Add new component entry with type "ocx:profile"
   - Include all 3 file references (ocx.jsonc, opencode.jsonc, AGENTS.md)
@@ -118,6 +122,7 @@ Convert the pepper-harness bundle to an ocx:profile for better update workflow, 
 
 ## Notes
 - 2026-02-01: Plan created based on RFC-012
+- 2026-02-01: Phase 1 completed - All profile files exist and are git-tracked
 - Estimated effort: 40-60 minutes
 - Critical path: Phase 3 deployment wait time (2-3 min)
 - Dependencies: None (self-contained)
