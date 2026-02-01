@@ -148,6 +148,23 @@ npm install -g shadcn-mcp
 
 This provides the `shadcn-mcp-server` command that the profile uses.
 
+### Troubleshooting Profile Updates
+
+**Profile not updating correctly?**
+
+The standard `remove && add` workflow sometimes preserves old configuration files instead of replacing them cleanly. If you see "Invalid input mcp.shadcn" errors or mixed configurations:
+
+**Nuclear option** - Complete profile wipe and reinstall:
+```bash
+# 1. Manually delete the profile directory
+rm -rf ~/.config/opencode/profiles/pepper
+
+# 2. Fresh install
+ocx profile add pepper --from chili-ocx/pepper
+```
+
+This ensures you get a completely clean installation with no leftover corrupted configs.
+
 ## Workflow
 
 ```
