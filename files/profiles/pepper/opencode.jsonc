@@ -102,8 +102,8 @@
 	},
 	"mcp": {
 		"shadcn": {
-			"type": "remote",
-			"url": "https://mcp.shadcn.com",
+			"type": "local",
+			"command": ["npx", "shadcn@latest", "mcp"],
 			"enabled": true
 		},
 		"context7": {
