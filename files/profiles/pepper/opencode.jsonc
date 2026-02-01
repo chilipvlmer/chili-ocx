@@ -38,7 +38,8 @@
 				"write": {
 					".pepper/**": "allow",
 					"*": "deny"
-				}
+				},
+				"shadcn_*": "allow"
 			}
 		},
 		"jalapeno-coder": {
