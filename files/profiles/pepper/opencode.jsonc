@@ -5,69 +5,69 @@
         "edit": false,
         "write": false,
         "bash": false,
-        "question": true,
-      },
+        "question": true
+      }
     },
     "seed-prd-rfc": {
       "tools": {
         "bash": false,
-        "question": true,
+        "question": true
       },
       "permission": {
         "edit": {
           ".pepper/**": "allow",
-          "*": "deny",
+          "*": "deny"
         },
         "write": {
           ".pepper/**": "allow",
-          "*": "deny",
+          "*": "deny"
         },
-        "shadcn_*": "allow",
-      },
+        "shadcn_*": "allow"
+      }
     },
     "sprout-execution-planner": {
       "tools": {
         "bash": false,
-        "question": true,
+        "question": true
       },
       "permission": {
         "edit": {
           ".pepper/**": "allow",
-          "*": "deny",
+          "*": "deny"
         },
         "write": {
           ".pepper/**": "allow",
-          "*": "deny",
+          "*": "deny"
         },
-        "shadcn_*": "allow",
-      },
+        "shadcn_*": "allow"
+      }
     },
     "jalapeno-coder": {
       "tools": {
-        "question": true,
+        "question": true
       },
       "permission": {
-        "shadcn_*": "allow",
-      },
+        "shadcn_*": "allow"
+      }
     },
     "habanero-reviewer": {
       "tools": {
         "edit": false,
-        "write": false,
+        "write": false
       },
       "permission": {
         "bash": {
           "git diff*": "allow",
           "git log*": "allow",
           "git status": "allow",
-          "*": "deny",
-        },
-      },
+          "*": "deny"
+        }
+      }
     },
     "ghost-explorer": {
       "tools": {
         "edit": false,
-        "write": false,
+        "write": false
       },
       "permission": {
         "bash": {
@@ -79,54 +79,54 @@
           "tail*": "allow",
           "wc*": "allow",
           "ls*": "allow",
-          "*": "deny",
+          "*": "deny"
         },
         "context7_*": "allow",
         "exa_*": "allow",
-        "gh_grep_*": "allow",
-      },
+        "gh_grep_*": "allow"
+      }
     },
     "chipotle-scribe": {
       "tools": {
-        "question": true,
+        "question": true
       },
       "permission": {
-        "context7_*": "allow",
-      },
-    },
+        "context7_*": "allow"
+      }
+    }
   },
   "permission": {
     "shadcn_*": "deny",
     "context7_*": "deny",
     "exa_*": "deny",
     "gh_grep_*": "deny",
-    "playwright_*": "deny",
+    "playwright_*": "deny"
   },
   "mcp": {
     "shadcn": {
       "type": "local",
       "command": ["shadcn-mcp-server"],
-      "enabled": true,
+      "enabled": true
     },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
-      "enabled": true,
+      "enabled": true
     },
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp",
-      "enabled": true,
+      "enabled": true
     },
     "gh_grep": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true,
+      "enabled": true
     },
     "playwright": {
       "type": "local",
       "command": ["playwright-mcp"],
-      "enabled": true,
-    },
-  },
+      "enabled": true
+    }
+  }
 }
