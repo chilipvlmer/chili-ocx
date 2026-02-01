@@ -446,9 +446,9 @@
 			"files": ["command/auto-continue/COMMAND.md"]
 		},
 		{
-			"name": "pepper-harness",
-			"type": "ocx:bundle",
-			"version": "1.1.0",
+		"name": "pepper-harness",
+		"type": "ocx:bundle",
+		"version": "1.1.1",
 			"description": "Complete Pepper harness - all agents, skills, and commands for structured AI development workflow",
 			"files": [],
 			"dependencies": [
@@ -471,9 +471,10 @@
 				"seed-prd-rfc",
 				"sprout-execution-planner",
 				"jalapeno-coder",
-				"habanero-reviewer",
-				"ghost-explorer",
-				"pepper-init",
+			"habanero-reviewer",
+			"ghost-explorer",
+			"chipotle-scribe",
+			"pepper-init",
 				"prd",
 				"prd-refine",
 				"rfc",
@@ -488,9 +489,9 @@
 			]
 		},
 		{
-			"name": "pepper",
-			"type": "ocx:profile",
-			"version": "1.0.0",
+		"name": "pepper",
+		"type": "ocx:profile",
+		"version": "1.0.1",
 			"description": "Pepper Harness profile for structured AI development workflow - clean install with 5-second refresh",
 			"files": [
 				{
