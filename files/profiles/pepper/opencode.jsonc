@@ -101,11 +101,10 @@
 		"playwright_*": "deny"
 	},
 	"mcp": {
-		"// shadcn": {
-			"// note": "shadcn MCP disabled - OpenCode doesn't support npx subcommand format. Use 'npx shadcn@latest mcp' manually",
+		"shadcn": {
 			"type": "local",
-			"command": ["npx", "-y", "shadcn@latest", "mcp"],
-			"enabled": false
+			"command": ["bash", "~/.config/opencode/profiles/pepper/shadcn-mcp-wrapper.sh"],
+			"enabled": true
 		},
 		"context7": {
 			"type": "remote",

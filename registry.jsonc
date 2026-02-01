@@ -505,6 +505,10 @@
 				{
 					"path": "profiles/pepper/AGENTS.md",
 					"target": "AGENTS.md"
+				},
+				{
+					"path": "profiles/pepper/shadcn-mcp-wrapper.sh",
+					"target": "shadcn-mcp-wrapper.sh"
 				}
 			],
 			"dependencies": ["pepper-harness"]
