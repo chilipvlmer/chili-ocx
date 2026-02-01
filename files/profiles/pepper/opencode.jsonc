@@ -122,8 +122,9 @@
 			"enabled": true
 		},
 		"playwright": {
-			"type": "remote",
-			"url": "https://mcp.microsoft.com/playwright-mcp",
+			"type": "local",
+			"command": "npx",
+			"args": ["@playwright/mcp@latest"],
 			"enabled": true
 		}
 	}
