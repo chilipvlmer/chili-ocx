@@ -105,7 +105,7 @@
 	"mcp": {
 		"shadcn": {
 			"type": "local",
-			"command": ["npx", "-y", "@jpisnice/shadcn-ui-mcp-server"],
+			"command": ["shadcn-mcp-server"],
 			"enabled": true
 		},
 		"context7": {
