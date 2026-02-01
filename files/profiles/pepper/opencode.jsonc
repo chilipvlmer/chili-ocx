@@ -21,7 +21,8 @@
 				"write": {
 					".pepper/**": "allow",
 					"*": "deny"
-				}
+				},
+				"shadcn_*": "allow"
 			}
 		},
 		"sprout-execution-planner": {
@@ -43,6 +44,9 @@
 		"jalapeno-coder": {
 			"tools": {
 				"question": true
+			},
+			"permission": {
+				"shadcn_*": "allow"
 			}
 		},
 		"habanero-reviewer": {
@@ -91,12 +95,18 @@
 		}
 	},
 	"permission": {
+		"shadcn_*": "deny",
 		"context7_*": "deny",
 		"exa_*": "deny",
 		"gh_grep_*": "deny",
 		"playwright_*": "deny"
 	},
 	"mcp": {
+		"shadcn": {
+			"type": "local",
+			"command": ["npx", "-y", "@jpisnice/shadcn-ui-mcp-server"],
+			"enabled": true
+		},
 		"context7": {
 			"type": "remote",
 			"url": "https://mcp.context7.com/mcp",

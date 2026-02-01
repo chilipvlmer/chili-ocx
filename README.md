@@ -133,30 +133,13 @@ The pepper profile includes pre-configured MCP (Model Context Protocol) servers:
 
 | MCP | Type | Purpose |
 |-----|------|---------|
+| shadcn | local | Browse and install shadcn/ui components |
 | context7 | remote | Search documentation |
 | exa | remote | Web search and content extraction |
 | gh_grep | remote | Search GitHub code examples |
 | playwright | local | Browser automation |
 
-### Adding Shadcn MCP (Project-Level)
-
-Shadcn MCP is **not included** in the pepper profile due to OpenCode validation issues with npx subcommands. However, you can add it at the **project level**:
-
-```bash
-# In your project directory
-npx shadcn@latest mcp init --client opencode
-```
-
-This creates `.opencode.json` in your project with shadcn MCP configured.
-
-**Note:** The shadcn MCP may show as "failed" in OpenCode's `/mcps` command. Our testing shows the shadcn MCP server exits immediately when started, suggesting it may have initialization or compatibility issues with OpenCode. Despite showing "failed", you can still use shadcn functionality via the CLI:
-
-```bash
-npx shadcn@latest add button
-npx shadcn@latest add card dialog
-```
-
-The shadcn CLI works perfectly even when the MCP server shows as failed.
+**Note on Shadcn MCP:** Uses the community `@jpisnice/shadcn-ui-mcp-server` package instead of the official shadcn MCP, which has compatibility issues with OpenCode. The community server provides the same functionality and works reliably.
 
 ## Workflow
 
