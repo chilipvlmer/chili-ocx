@@ -2,7 +2,7 @@
 	"$schema": "https://ocx.kdco.dev/schemas/registry.json",
 	"name": "Chili OCX Registry",
 	"namespace": "chili-ocx",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"author": "chilipvlmer",
 
 	"opencode": "1.0.0",
@@ -491,7 +491,7 @@
 		{
 		"name": "pepper",
 		"type": "ocx:profile",
-		"version": "1.0.1",
+		"version": "1.0.2",
 			"description": "Pepper Harness profile for structured AI development workflow - clean install with 5-second refresh",
 			"files": [
 				{

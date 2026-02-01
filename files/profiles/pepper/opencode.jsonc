@@ -8,5 +8,15 @@
     "habanero-reviewer",
     "ghost-explorer",
     "chipotle-scribe"
-  ]
+  ],
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn-mcp-server"]
+    }
+  }
 }
