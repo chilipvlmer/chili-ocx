@@ -103,7 +103,7 @@
 	"mcp": {
 		"shadcn": {
 			"type": "local",
-			"command": ["bash", "~/.config/opencode/profiles/pepper/shadcn-mcp-wrapper.sh"],
+			"command": ["sh", "-c", "exec npx -y shadcn@latest mcp"],
 			"enabled": true
 		},
 		"context7": {
