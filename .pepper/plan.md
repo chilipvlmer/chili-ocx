@@ -60,30 +60,34 @@ Convert the pepper-harness bundle to an ocx:profile for better update workflow, 
   - Reference: RFC-012 Section 4
   - Acceptance: Version bumped in registry.jsonc line 5
 
-## Phase 3: Build and Deploy [PENDING]
-- [ ] **3.1 Run plugin build**
+## Phase 3: Build and Deploy [COMPLETED]
+- [x] **3.1 Run plugin build**
   - Execute: `npm run build:plugin`
   - Verify pepper-plugin.js is updated
   - Acceptance: Build succeeds, no errors
+  - ✅ COMPLETED: Plugin built successfully (32.6kb)
 
-- [ ] **3.2 Run registry build**
+- [x] **3.2 Run registry build**
   - Execute: `npm run build:registry`
   - Verify dist/ contains profile files
   - Check dist/components/pepper/ exists with profile files
   - Acceptance: Build succeeds, profile component in dist/
+  - ✅ COMPLETED: Registry built with 43 components, pepper profile verified
 
-- [ ] **3.3 Commit changes**
+- [x] **3.3 Commit changes**
   - Stage: New profile files, updated registry.jsonc
   - Message: "feat: add pepper profile component (RFC-012)"
   - Acceptance: Clean commit, all changes staged
+  - ✅ COMPLETED: Commit 0b135c9 - Added AGENTS.md, bumped version to 0.3.0
 
-- [ ] **3.4 Push and verify deployment**
+- [x] **3.4 Push and verify deployment**
   - Push to main branch
   - Wait for GitHub Actions to complete (2-3 minutes)
   - Verify Cloudflare Pages deployment
   - Acceptance: Deployed successfully, workflow #83+ passes
+  - ✅ COMPLETED: Workflow #21553920025 succeeded in 31s, deployed to https://chili-ocx.pages.dev
 
-## Phase 4: Test and Document [PENDING]
+## Phase 4: Test and Document [PENDING] ← CURRENT
 - [ ] **4.1 Test profile installation**
   - Execute: `ocx registry add https://chili-ocx.pages.dev --name chili-ocx --global` (if not already)
   - Execute: `ocx profile add pepper --from chili-ocx/pepper`
@@ -123,6 +127,11 @@ Convert the pepper-harness bundle to an ocx:profile for better update workflow, 
 ## Notes
 - 2026-02-01: Plan created based on RFC-012
 - 2026-02-01: Phase 1 completed - All profile files exist and are git-tracked
+- 2026-02-01: Phase 2 completed - Registry updated, version bumped to 0.3.0
+- 2026-02-01: Phase 3 completed - Built, committed (0b135c9), and deployed successfully
+  - GitHub Actions workflow #21553920025 succeeded in 31s
+  - Deployment URL: https://chili-ocx.pages.dev
+  - All 3 profile files verified accessible
 - Estimated effort: 40-60 minutes
 - Critical path: Phase 3 deployment wait time (2-3 min)
 - Dependencies: None (self-contained)
