@@ -1,6 +1,7 @@
 {
   "agent": {
     "scoville-orchestrator": {
+      "temperature": 1.0,
       "tools": {
         "edit": false,
         "write": false,
@@ -9,7 +10,10 @@
       }
     },
     "seed-prd-rfc": {
+      "temperature": 1.0,
       "tools": {
+        "edit": true,
+        "write": true,
         "bash": false,
         "question": true
       },
@@ -26,7 +30,10 @@
       }
     },
     "sprout-execution-planner": {
+      "temperature": 1.0,
       "tools": {
+        "edit": true,
+        "write": true,
         "bash": false,
         "question": true
       },
@@ -43,6 +50,7 @@
       }
     },
     "jalapeno-coder": {
+      "temperature": 1.0,
       "tools": {
         "question": true
       },
@@ -51,6 +59,7 @@
       }
     },
     "habanero-reviewer": {
+      "temperature": 1.0,
       "tools": {
         "edit": false,
         "write": false
@@ -65,6 +74,7 @@
       }
     },
     "ghost-explorer": {
+      "temperature": 1.0,
       "tools": {
         "edit": false,
         "write": false
@@ -87,6 +97,7 @@
       }
     },
     "chipotle-scribe": {
+      "temperature": 1.0,
       "tools": {
         "question": true
       },
@@ -127,6 +138,12 @@
       "type": "local",
       "command": ["playwright-mcp"],
       "enabled": true
+    },
+    "basecoat": {
+      "type": "local",
+      "command": ["npx", "-y", "basecoat-ui-mcp"],
+      "enabled": true
     }
-  }
+  },
+  "$schema": "https://opencode.ai/config.json"
 }
